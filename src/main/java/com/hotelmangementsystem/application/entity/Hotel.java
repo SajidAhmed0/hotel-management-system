@@ -23,7 +23,7 @@ public class Hotel {
 
     private ArrayList<String> images;
 
-    //TODO: create contract
+    //TODO: create contract, supplements
     public Hotel() {
     }
 

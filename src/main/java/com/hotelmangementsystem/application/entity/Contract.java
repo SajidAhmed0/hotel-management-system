@@ -24,7 +24,7 @@ public class Contract {
 
     private Double markup;
 
-    //TODO: hotel entity
+    //TODO: hotel entity, discounts, roomTypes, seasons
 
 
     public Contract() {
