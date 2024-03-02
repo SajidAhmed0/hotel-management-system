@@ -15,28 +15,28 @@ public class ContractController {
     private ContractService contractService;
 
     @GetMapping
-    public ArrayList<Contract> getAllContract(){
+    public ArrayList<Contract> getAllContracts(){
         return contractService.getAllContracts();
     }
 
-    @GetMapping("/{contractId}")
-    public Contract getHotel(@PathVariable("contractId") Long contractId) {
-        return contractService.getContract(contractId);
+    @GetMapping("/{id}")
+    public Contract getContract(@PathVariable("id") Long id) {
+        return contractService.getContract(id);
     }
 
     @PostMapping
-    public Contract addHotel(@RequestBody Contract contract){
+    public Contract addContract(@RequestBody Contract contract){
         return contractService.addContract(contract);
     }
 
-    @PutMapping("/{contractId}")
-    public Contract updateHotel(@PathVariable("contractId") Long contractId, @RequestBody Contract contract){
-        return contractService.updateContract(contractId, contract);
+    @PutMapping("/{id}")
+    public Contract updateContract(@PathVariable("id") Long id, @RequestBody Contract contract){
+        return contractService.updateContract(id, contract);
     }
 
-    @DeleteMapping("/{contractId}")
-    public String deleteHotel(@PathVariable("contractId") Long contractId){
-        return contractService.deleteContract(contractId);
+    @DeleteMapping("/{id}")
+    public String deleteContract(@PathVariable("id") Long id){
+        return contractService.deleteContract(id);
     }
 
 }

@@ -6,7 +6,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
-import java.util.List;
 
 @RestController
 @RequestMapping("/hotels")
@@ -20,9 +19,9 @@ public class HotelController {
         return hotelService.getAllHotels();
     }
 
-    @GetMapping("/{hotelId}")
-    public Hotel getHotel(@PathVariable("hotelId") Long hotelId) {
-        return hotelService.getHotel(hotelId);
+    @GetMapping("/{id}")
+    public Hotel getHotel(@PathVariable("id") Long id) {
+        return hotelService.getHotel(id);
     }
 
     @PostMapping
@@ -30,13 +29,13 @@ public class HotelController {
         return hotelService.addHotel(hotel);
     }
 
-    @PutMapping("/{hotelId}")
-    public Hotel updateHotel(@PathVariable("hotelId") Long hotelId, @RequestBody Hotel hotel){
-        return hotelService.updateHotel(hotelId, hotel);
+    @PutMapping("/{id}")
+    public Hotel updateHotel(@PathVariable("id") Long id, @RequestBody Hotel hotel){
+        return hotelService.updateHotel(id, hotel);
     }
 
-    @DeleteMapping("/{hotelId}")
-    public String deleteHotel(@PathVariable("hotelId") Long hotelId){
-        return hotelService.deleteHotel(hotelId);
+    @DeleteMapping("/{id}")
+    public String deleteHotel(@PathVariable("id") Long id){
+        return hotelService.deleteHotel(id);
     }
 }
