@@ -30,6 +30,14 @@ public class Contract {
     public Contract() {
     }
 
+    public Contract(Date startDate, Date endDate, String cancellationPolicy, String paymentPolicy, Double markup) {
+        this.startDate = startDate;
+        this.endDate = endDate;
+        this.cancellationPolicy = cancellationPolicy;
+        this.paymentPolicy = paymentPolicy;
+        this.markup = markup;
+    }
+
     public Contract(Long id, Date startDate, Date endDate, String cancellationPolicy, String paymentPolicy, Double markup) {
         this.id = id;
         this.startDate = startDate;

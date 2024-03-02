@@ -24,6 +24,12 @@ public class Supplement {
     public Supplement() {
     }
 
+    public Supplement(String name, String description, Double price) {
+        this.name = name;
+        this.description = description;
+        this.price = price;
+    }
+
     public Supplement(Long id, String name, String description, Double price) {
         this.id = id;
         this.name = name;

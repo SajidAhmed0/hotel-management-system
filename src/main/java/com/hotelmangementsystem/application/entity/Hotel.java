@@ -27,18 +27,6 @@ public class Hotel {
     public Hotel() {
     }
 
-    public Hotel(Long id, String name, String country, String district, String street, String description, String contact, ArrayList<String> facilities, ArrayList<String> images) {
-        this.id = id;
-        this.name = name;
-        this.country = country;
-        this.district = district;
-        this.street = street;
-        this.description = description;
-        this.contact = contact;
-        this.facilities = facilities;
-        this.images = images;
-    }
-
     public Hotel(String name, String country, String district, String street, String description, String contact, ArrayList<String> facilities, ArrayList<String> images) {
         this.name = name;
         this.country = country;
@@ -50,6 +38,17 @@ public class Hotel {
         this.images = images;
     }
 
+    public Hotel(Long id, String name, String country, String district, String street, String description, String contact, ArrayList<String> facilities, ArrayList<String> images) {
+        this.id = id;
+        this.name = name;
+        this.country = country;
+        this.district = district;
+        this.street = street;
+        this.description = description;
+        this.contact = contact;
+        this.facilities = facilities;
+        this.images = images;
+    }
 
     public Long getId() {
         return id;
