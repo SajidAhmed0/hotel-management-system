@@ -2,6 +2,7 @@ package com.hotelmangementsystem.application.service;
 
 import com.hotelmangementsystem.application.entity.Season;
 import com.hotelmangementsystem.application.repository.SeasonRepository;
+import jakarta.persistence.EntityNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -20,7 +21,7 @@ public class SeasonServiceImpl implements SeasonService{
 
     @Override
     public Season getSeason(Long id) {
-        return seasonRepository.findById(id).get();
+        return seasonRepository.findById(id).orElse(null);
     }
 
     @Override
@@ -30,13 +31,24 @@ public class SeasonServiceImpl implements SeasonService{
 
     @Override
     public Season updateSeason(Long id, Season season) {
-        Season seasonDB = seasonRepository.findById(id).get();
-        seasonDB.setName(season.getName());
-        return seasonRepository.save(seasonDB);
+        Season seasonDB = seasonRepository.findById(id).orElseThrow(() -> new EntityNotFoundException("Season with id " + id + " does not exists"));
+
+        if(season != null){
+            seasonDB.setName(season.getName());
+            seasonDB.setStartDate(season.getStartDate());
+            seasonDB.setEndDate(season.getEndDate());
+            return seasonRepository.save(seasonDB);
+        }
+        return null;
+
     }
 
     @Override
     public String deleteSeason(Long id) {
+        boolean exists = seasonRepository.existsById(id);
+        if(!exists) {
+            throw new EntityNotFoundException("Season with id " + id + " does not exists");
+        }
         seasonRepository.deleteById(id);
         return "deleted";
     }

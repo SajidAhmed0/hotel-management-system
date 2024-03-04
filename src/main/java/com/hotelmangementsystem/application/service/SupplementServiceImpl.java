@@ -2,6 +2,7 @@ package com.hotelmangementsystem.application.service;
 
 import com.hotelmangementsystem.application.entity.Supplement;
 import com.hotelmangementsystem.application.repository.SupplementRepository;
+import jakarta.persistence.EntityNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -20,7 +21,7 @@ public class SupplementServiceImpl implements SupplementService{
 
     @Override
     public Supplement getSupplement(Long id) {
-        return supplementRepository.findById(id).get();
+        return supplementRepository.findById(id).orElse(null);
     }
 
     @Override
@@ -30,13 +31,23 @@ public class SupplementServiceImpl implements SupplementService{
 
     @Override
     public Supplement updateSupplement(Long id, Supplement supplement) {
-        Supplement supplementDB = supplementRepository.findById(id).get();
-        supplementDB.setName(supplement.getName());
-        return supplementRepository.save(supplementDB);
+        Supplement supplementDB = supplementRepository.findById(id).orElseThrow(() -> new EntityNotFoundException("Supplement with id " + id + " does not exists"));
+
+        if(supplement != null){
+            supplementDB.setName(supplement.getName());
+            supplementDB.setDescription(supplement.getDescription());
+            supplementDB.setPrice(supplement.getPrice());
+            return supplementRepository.save(supplementDB);
+        }
+        return null;
     }
 
     @Override
     public String deleteSupplement(Long id) {
+        boolean exists = supplementRepository.existsById(id);
+        if(!exists){
+            throw new EntityNotFoundException("Supplement with id " + id + " does not exists");
+        }
         supplementRepository.deleteById(id);
         return "delete";
     }

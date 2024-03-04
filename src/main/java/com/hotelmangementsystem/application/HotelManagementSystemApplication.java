@@ -11,3 +11,5 @@ public class HotelManagementSystemApplication {
 	}
 
 }
+
+//TODO: make application hadle 404, 200, 500 etc..
