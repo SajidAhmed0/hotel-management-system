@@ -1,5 +1,8 @@
 package com.hotelmangementsystem.application.entity;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 
 import java.util.ArrayList;
@@ -17,20 +20,26 @@ public class Hotel {
     private String street;
     private String description;
     private String contact;
+
+    //TODO: create facility class
     private List<String> facilities;
 
+    //TODO: create image class
     private List<String> images;
 
     //TODO: create contract, supplements
+
+
     @OneToMany(
+            cascade = CascadeType.ALL,
             mappedBy = "hotel"
     )
-    private List<Contract> contracts;
+    private List<Contract> contracts = new ArrayList<>();
 
     public Hotel() {
     }
 
-    public Hotel(String name, String country, String district, String street, String description, String contact, ArrayList<String> facilities, ArrayList<String> images) {
+    public Hotel(String name, String country, String district, String street, String description, String contact, List<String> facilities, List<String> images) {
         this.name = name;
         this.country = country;
         this.district = district;
@@ -41,7 +50,7 @@ public class Hotel {
         this.images = images;
     }
 
-    public Hotel(Long id, String name, String country, String district, String street, String description, String contact, ArrayList<String> facilities, ArrayList<String> images) {
+    public Hotel(Long id, String name, String country, String district, String street, String description, String contact, List<String> facilities, List<String> images) {
         this.id = id;
         this.name = name;
         this.country = country;
@@ -123,5 +132,21 @@ public class Hotel {
 
     public void setImages(List<String> images) {
         this.images = images;
+    }
+
+    public List<Contract> getContracts() {
+        return contracts;
+    }
+
+    public void setContracts(List<Contract> contracts) {
+        this.contracts = contracts;
+    }
+
+    public void addContract(Contract contract) {
+        this.contracts.add(contract);
+    }
+
+    public void removeContract(Contract contract){
+        this.contracts.remove(contract);
     }
 }

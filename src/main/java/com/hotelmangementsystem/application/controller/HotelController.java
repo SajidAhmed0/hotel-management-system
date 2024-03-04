@@ -1,11 +1,11 @@
 package com.hotelmangementsystem.application.controller;
 
+import com.hotelmangementsystem.application.entity.Contract;
 import com.hotelmangementsystem.application.entity.Hotel;
 import com.hotelmangementsystem.application.service.HotelService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.ArrayList;
 import java.util.List;
 
 @RestController
@@ -38,5 +38,20 @@ public class HotelController {
     @DeleteMapping("/{id}")
     public String deleteHotel(@PathVariable("id") Long id){
         return hotelService.deleteHotel(id);
+    }
+
+    @PutMapping("/{hotelId}/contracts/{contractId}")
+    public Hotel addContractFromHotel(@PathVariable("hotelId") Long hotelId, @PathVariable("contractId") Long contractId){
+        return hotelService.addContractToHotel(hotelId, contractId);
+    }
+
+    @DeleteMapping("/{hotelId}/contracts/{contractId}")
+    public Hotel removeContractFromHotel(@PathVariable("hotelId") Long hotelId, @PathVariable("contractId") Long contractId){
+        return hotelService.removeContractFromHotel(hotelId, contractId);
+    }
+
+    @GetMapping("/{id}/contracts")
+    public List<Contract> getAllContractsOfHotel(@PathVariable("id") Long id) {
+        return hotelService.getAllContractsOfHotel(id);
     }
 }

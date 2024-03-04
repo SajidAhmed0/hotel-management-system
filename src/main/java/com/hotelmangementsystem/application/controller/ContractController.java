@@ -1,11 +1,10 @@
 package com.hotelmangementsystem.application.controller;
 
-import com.hotelmangementsystem.application.entity.Contract;
+import com.hotelmangementsystem.application.entity.*;
 import com.hotelmangementsystem.application.service.ContractService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.ArrayList;
 import java.util.List;
 
 @RestController
@@ -35,9 +34,76 @@ public class ContractController {
         return contractService.updateContract(id, contract);
     }
 
+//    @PutMapping("/{contractId}/hotels/{hotelId}")
+//    public Hotel addContractFromHotel(@PathVariable("hotelId") Long hotelId, @PathVariable("contractId") Long contractId){
+//        return contractService.addContractToHotel(contractId, hotelId);
+//    }
+//    @DeleteMapping("/{contractId}/hotels/{hotelId}")
+//    public Hotel removeContractFromHotel(@PathVariable("hotelId") Long hotelId, @PathVariable("contractId") Long contractId){
+//        return contractService.addContractToHotel(contractId, hotelId);
+//    }
+
+
     @DeleteMapping("/{id}")
     public String deleteContract(@PathVariable("id") Long id){
         return contractService.deleteContract(id);
+    }
+
+
+    @PutMapping("/{contractId}/supplements/{supplementId}")
+    public Contract addSupplementToContract(@PathVariable("contractId") Long contractId, @PathVariable("supplementId") Long supplementId){
+        return contractService.addSupplementToContract(contractId, supplementId);
+    }
+    @DeleteMapping("/{contractId}/supplements/{supplementId}")
+    public Contract removeSupplementFromContract(@PathVariable("contractId") Long contractId, @PathVariable("supplementId") Long supplementId){
+        return contractService.removeSupplementToContract(contractId, supplementId);
+    }
+
+    @PutMapping("/{contractId}/seasons/{seasonId}")
+    public Contract addSeasonToContract(@PathVariable("contractId") Long contractId, @PathVariable("seasonId") Long seasonId){
+        return contractService.addSeasonToContract(contractId, seasonId);
+    }
+    @DeleteMapping("/{contractId}/seasons/{seasonId}")
+    public Contract removeSeasonFromContract(@PathVariable("contractId") Long contractId, @PathVariable("seasonId") Long seasonId){
+        return contractService.removeSeasonToContract(contractId, seasonId);
+    }
+
+    @PutMapping("/{contractId}/roomtypes/{roomtypeId}")
+    public Contract addRoomTypeToContract(@PathVariable("contractId") Long contractId, @PathVariable("roomtypeId") Long roomtypeId){
+        return contractService.addRoomTypeToContract(contractId, roomtypeId);
+    }
+    @DeleteMapping("/{contractId}/roomtypes/{roomtypeId}")
+    public Contract removeRoomTypeFromContract(@PathVariable("contractId") Long contractId, @PathVariable("roomtypeId") Long roomtypeId){
+        return contractService.removeRoomTypeToContract(contractId, roomtypeId);
+    }
+
+    @PutMapping("/{contractId}/discounts/{discountId}")
+    public Contract addDiscountToContract(@PathVariable("contractId") Long contractId, @PathVariable("discountId") Long discountId){
+        return contractService.addDiscountToContract(contractId, discountId);
+    }
+    @DeleteMapping("/{contractId}/discounts/{discountId}")
+    public Contract removeDiscountFromContract(@PathVariable("contractId") Long contractId, @PathVariable("discountId") Long discountId){
+        return contractService.removeDiscountToContract(contractId, discountId);
+    }
+
+    @GetMapping("/{id}/supplements")
+    public List<Supplement> getAllSupplementsOfContract(@PathVariable("id") Long id) {
+        return contractService.getAllSupplementsOfContract(id);
+    }
+
+    @GetMapping("/{id}/seasons")
+    public List<Season> getAllSeasonsOfContract(@PathVariable("id") Long id) {
+        return contractService.getAllSeasonsOfContract(id);
+    }
+
+    @GetMapping("/{id}/roomtypes")
+    public List<RoomType> getAllRoomTypesOfContract(@PathVariable("id") Long id) {
+        return contractService.getAllRoomTypesOfContract(id);
+    }
+
+    @GetMapping("/{id}/discounts")
+    public List<Discount> getAllDisocuntsOfContract(@PathVariable("id") Long id) {
+        return contractService.getAllDiscountsOfContract(id);
     }
 
 }

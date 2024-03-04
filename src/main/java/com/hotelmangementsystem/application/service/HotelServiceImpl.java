@@ -1,12 +1,14 @@
 package com.hotelmangementsystem.application.service;
 
+import com.hotelmangementsystem.application.entity.Contract;
 import com.hotelmangementsystem.application.entity.Hotel;
+import com.hotelmangementsystem.application.repository.ContractRepository;
 import com.hotelmangementsystem.application.repository.HotelRepository;
 import jakarta.persistence.EntityNotFoundException;
+import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -15,6 +17,10 @@ public class HotelServiceImpl implements HotelService{
 
     @Autowired
     private HotelRepository hotelRepository;
+
+    @Autowired
+    private ContractRepository contractRepository;
+
     @Override
     public List<Hotel> getAllHotels() {
         return hotelRepository.findAll();
@@ -64,6 +70,43 @@ public class HotelServiceImpl implements HotelService{
         }
         hotelRepository.deleteById(id);
         return "deleted";
+    }
+
+
+    @Transactional
+    @Override
+    public Hotel addContractToHotel(Long hotelId, Long contractId) {
+        Hotel hotel = getHotel(hotelId);
+        Contract contract = contractRepository.findById(contractId).orElse(null);
+
+        if(hotel != null && contract != null) {
+            hotel.addContract(contract);
+            contract.setHotel(hotel);
+            return hotel;
+        }
+        return null;
+    }
+
+    @Transactional
+    @Override
+    public Hotel removeContractFromHotel(Long hotelId, Long contractId) {
+        Hotel hotel = getHotel(hotelId);
+        Contract contract = contractRepository.findById(contractId).orElse(null);
+
+        if(hotel != null && contract != null) {
+            hotel.removeContract(contract);
+            contract.setHotel(null);
+            return hotel;
+        }
+
+        return hotel;
+    }
+
+    @Override
+    public List<Contract> getAllContractsOfHotel(Long id) {
+        Hotel hotel = getHotel(id);
+
+        return  hotel.getContracts();
     }
 
 }

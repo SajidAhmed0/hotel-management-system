@@ -1,9 +1,7 @@
 package com.hotelmangementsystem.application.entity;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import jakarta.persistence.*;
 
 @Entity
 public class Supplement {
@@ -19,6 +17,16 @@ public class Supplement {
     private Double price;
 
     //TODO: create contract and season
+
+    @JsonIgnore
+    @ManyToOne(
+            cascade = CascadeType.ALL
+    )
+    @JoinColumn(
+            name = "contract_id",
+            referencedColumnName = "id"
+    )
+    private Contract contract;
 
 
     public Supplement() {
@@ -67,5 +75,13 @@ public class Supplement {
 
     public void setPrice(Double price) {
         this.price = price;
+    }
+
+    public Contract getContract() {
+        return contract;
+    }
+
+    public void setContract(Contract contract) {
+        this.contract = contract;
     }
 }

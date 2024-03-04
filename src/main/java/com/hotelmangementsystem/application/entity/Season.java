@@ -1,9 +1,7 @@
 package com.hotelmangementsystem.application.entity;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import jakarta.persistence.*;
 
 import java.sql.Date;
 
@@ -22,6 +20,15 @@ public class Season {
 
     //TODO: create supplements and contracts
 
+    @JsonIgnore
+    @ManyToOne(
+            cascade = CascadeType.ALL
+    )
+    @JoinColumn(
+            name = "contract_id",
+            referencedColumnName = "id"
+    )
+    private Contract contract;
 
     public Season() {
     }
@@ -69,5 +76,13 @@ public class Season {
 
     public void setEndDate(Date endDate) {
         this.endDate = endDate;
+    }
+
+    public Contract getContract() {
+        return contract;
+    }
+
+    public void setContract(Contract contract) {
+        this.contract = contract;
     }
 }
