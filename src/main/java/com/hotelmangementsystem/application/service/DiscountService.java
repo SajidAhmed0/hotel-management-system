@@ -3,9 +3,10 @@ package com.hotelmangementsystem.application.service;
 import com.hotelmangementsystem.application.entity.Discount;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public interface DiscountService {
-    public ArrayList<Discount> getAllDiscounts();
+    public List<Discount> getAllDiscounts();
 
     public Discount getDiscount(Long id);
 

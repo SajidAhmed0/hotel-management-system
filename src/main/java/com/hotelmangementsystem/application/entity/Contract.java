@@ -1,9 +1,6 @@
 package com.hotelmangementsystem.application.entity;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 
 import java.sql.Date;
 
@@ -25,26 +22,36 @@ public class Contract {
     private Double markup;
 
     //TODO: hotel entity, discounts, roomTypes, seasons
+    @ManyToOne(
+            cascade = CascadeType.ALL
+    )
+    @JoinColumn(
+            name = "hotel_id",
+            referencedColumnName = "id"
+    )
+    private Hotel hotel;
 
 
     public Contract() {
     }
 
-    public Contract(Date startDate, Date endDate, String cancellationPolicy, String paymentPolicy, Double markup) {
+    public Contract(Date startDate, Date endDate, String cancellationPolicy, String paymentPolicy, Double markup, Hotel hotel) {
         this.startDate = startDate;
         this.endDate = endDate;
         this.cancellationPolicy = cancellationPolicy;
         this.paymentPolicy = paymentPolicy;
         this.markup = markup;
+        this.hotel = hotel;
     }
 
-    public Contract(Long id, Date startDate, Date endDate, String cancellationPolicy, String paymentPolicy, Double markup) {
+    public Contract(Long id, Date startDate, Date endDate, String cancellationPolicy, String paymentPolicy, Double markup, Hotel hotel) {
         this.id = id;
         this.startDate = startDate;
         this.endDate = endDate;
         this.cancellationPolicy = cancellationPolicy;
         this.paymentPolicy = paymentPolicy;
         this.markup = markup;
+        this.hotel = hotel;
     }
 
     public Long getId() {
@@ -93,5 +100,13 @@ public class Contract {
 
     public void setMarkup(Double markup) {
         this.markup = markup;
+    }
+
+    public Hotel getHotel() {
+        return hotel;
+    }
+
+    public void setHotel(Hotel hotel) {
+        this.hotel = hotel;
     }
 }

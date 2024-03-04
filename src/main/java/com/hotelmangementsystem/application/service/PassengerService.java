@@ -3,9 +3,10 @@ package com.hotelmangementsystem.application.service;
 import com.hotelmangementsystem.application.entity.Passenger;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public interface PassengerService {
-    public ArrayList<Passenger> getAllPassengers();
+    public List<Passenger> getAllPassengers();
 
     public Passenger getPassenger(Long id);
 

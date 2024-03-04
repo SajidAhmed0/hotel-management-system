@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
+import java.util.List;
 
 @RestController
 @RequestMapping("/payments")
@@ -15,7 +16,7 @@ public class PaymentController {
     private PaymentService paymentService;
 
     @GetMapping
-    public ArrayList<Payment> getAllPayments(){
+    public List<Payment> getAllPayments(){
         return paymentService.getAllPayments();
     }
 

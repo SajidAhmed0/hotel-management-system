@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
+import java.util.List;
 
 @Service
 public class DiscountServiceImpl implements DiscountService{
@@ -15,8 +16,8 @@ public class DiscountServiceImpl implements DiscountService{
     private DiscountRepository discountRepository;
 
     @Override
-    public ArrayList<Discount> getAllDiscounts() {
-        return (ArrayList<Discount>) discountRepository.findAll();
+    public List<Discount> getAllDiscounts() {
+        return discountRepository.findAll();
     }
 
     @Override

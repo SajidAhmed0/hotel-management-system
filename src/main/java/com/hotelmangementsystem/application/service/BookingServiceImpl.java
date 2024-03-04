@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
+import java.util.List;
 
 @Service
 public class BookingServiceImpl implements BookingService{
@@ -15,8 +16,8 @@ public class BookingServiceImpl implements BookingService{
     private BookingRepository bookingRepository;
 
     @Override
-    public ArrayList<Booking> getAllBookings() {
-        return (ArrayList<Booking>) bookingRepository.findAll();
+    public List<Booking> getAllBookings() {
+        return bookingRepository.findAll();
     }
 
     @Override

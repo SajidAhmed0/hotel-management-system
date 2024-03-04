@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
+import java.util.List;
 
 @RestController
 @RequestMapping("/discounts")
@@ -15,7 +16,7 @@ public class DiscountController {
     private DiscountService discountService;
 
     @GetMapping
-    public ArrayList<Discount> getAllDiscounts(){
+    public List<Discount> getAllDiscounts(){
         return discountService.getAllDiscounts();
     }
 

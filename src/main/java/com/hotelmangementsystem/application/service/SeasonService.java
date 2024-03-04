@@ -3,9 +3,10 @@ package com.hotelmangementsystem.application.service;
 import com.hotelmangementsystem.application.entity.Season;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public interface SeasonService {
-    public ArrayList<Season> getAllSeasons();
+    public List<Season> getAllSeasons();
 
     public Season getSeason(Long id);
 

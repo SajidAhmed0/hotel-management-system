@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
+import java.util.List;
 
 @RestController
 @RequestMapping("/hotels")
@@ -15,7 +16,7 @@ public class HotelController {
     private HotelService hotelService;
 
     @GetMapping
-    public ArrayList<Hotel> getAllHotels(){
+    public List<Hotel> getAllHotels(){
         return hotelService.getAllHotels();
     }
 

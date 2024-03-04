@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
+import java.util.List;
 
 @Service
 public class RoomTypeServiceImpl implements RoomTypeService{
@@ -15,8 +16,8 @@ public class RoomTypeServiceImpl implements RoomTypeService{
     private RoomTypeRepository roomTypeRepository;
 
     @Override
-    public ArrayList<RoomType> getAllRoomTypes() {
-        return (ArrayList<RoomType>) roomTypeRepository.findAll();
+    public List<RoomType> getAllRoomTypes() {
+        return roomTypeRepository.findAll();
     }
 
     @Override

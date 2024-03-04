@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
+import java.util.List;
 
 @Service
 public class BookedPriceServiceImpl implements BookedPriceService{
@@ -15,8 +16,8 @@ public class BookedPriceServiceImpl implements BookedPriceService{
     private BookedPriceRepository bookedPriceRepository;
 
     @Override
-    public ArrayList<BookedPrice> getAllBookedPrices() {
-        return (ArrayList<BookedPrice>) bookedPriceRepository.findAll();
+    public List<BookedPrice> getAllBookedPrices() {
+        return bookedPriceRepository.findAll();
     }
 
     @Override

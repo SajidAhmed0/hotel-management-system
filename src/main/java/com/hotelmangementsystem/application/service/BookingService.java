@@ -3,9 +3,10 @@ package com.hotelmangementsystem.application.service;
 import com.hotelmangementsystem.application.entity.Booking;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public interface BookingService {
-    public ArrayList<Booking> getAllBookings();
+    public List<Booking> getAllBookings();
 
     public Booking getBooking(Long id);
 

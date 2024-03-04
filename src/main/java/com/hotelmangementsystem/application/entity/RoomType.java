@@ -6,6 +6,7 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 
 import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 public class RoomType {
@@ -22,7 +23,7 @@ public class RoomType {
 
     private String description;
 
-    private ArrayList<String> facilities;
+    private List<String> facilities;
 
     private Double price;
 
@@ -31,7 +32,7 @@ public class RoomType {
     public RoomType() {
     }
 
-    public RoomType(String name, Integer noOfRooms, Integer maxAdult, String description, ArrayList<String> facilities, Double price) {
+    public RoomType(String name, Integer noOfRooms, Integer maxAdult, String description, List<String> facilities, Double price) {
         this.name = name;
         this.noOfRooms = noOfRooms;
         this.maxAdult = maxAdult;
@@ -40,7 +41,7 @@ public class RoomType {
         this.price = price;
     }
 
-    public RoomType(Long id, String name, Integer noOfRooms, Integer maxAdult, String description, ArrayList<String> facilities, Double price) {
+    public RoomType(Long id, String name, Integer noOfRooms, Integer maxAdult, String description, List<String> facilities, Double price) {
         this.id = id;
         this.name = name;
         this.noOfRooms = noOfRooms;
@@ -90,11 +91,11 @@ public class RoomType {
         this.description = description;
     }
 
-    public ArrayList<String> getFacilities() {
+    public List<String> getFacilities() {
         return facilities;
     }
 
-    public void setFacilities(ArrayList<String> facilities) {
+    public void setFacilities(List<String> facilities) {
         this.facilities = facilities;
     }
 

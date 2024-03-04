@@ -3,9 +3,10 @@ package com.hotelmangementsystem.application.service;
 import com.hotelmangementsystem.application.entity.Supplement;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public interface SupplementService {
-    public ArrayList<Supplement> getAllSupplements();
+    public List<Supplement> getAllSupplements();
 
     public Supplement getSupplement(Long id);
 

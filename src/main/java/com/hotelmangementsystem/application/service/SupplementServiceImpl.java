@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
+import java.util.List;
 
 @Service
 public class SupplementServiceImpl implements SupplementService{
@@ -15,8 +16,8 @@ public class SupplementServiceImpl implements SupplementService{
     private SupplementRepository supplementRepository;
 
     @Override
-    public ArrayList<Supplement> getAllSupplements() {
-        return (ArrayList<Supplement>) supplementRepository.findAll();
+    public List<Supplement> getAllSupplements() {
+        return supplementRepository.findAll();
     }
 
     @Override

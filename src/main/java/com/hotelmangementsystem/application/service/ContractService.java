@@ -3,9 +3,10 @@ package com.hotelmangementsystem.application.service;
 import com.hotelmangementsystem.application.entity.Contract;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public interface ContractService {
-    public ArrayList<Contract> getAllContracts();
+    public List<Contract> getAllContracts();
 
     public Contract getContract(Long id);
 

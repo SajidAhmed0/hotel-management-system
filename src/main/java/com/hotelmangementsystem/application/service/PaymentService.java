@@ -3,9 +3,10 @@ package com.hotelmangementsystem.application.service;
 import com.hotelmangementsystem.application.entity.Payment;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public interface PaymentService {
-    public ArrayList<Payment> getAllPayments();
+    public List<Payment> getAllPayments();
 
     public Payment getPayment(Long id);
 

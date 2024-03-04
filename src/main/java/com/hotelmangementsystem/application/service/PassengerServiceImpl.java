@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
+import java.util.List;
 
 @Service
 public class PassengerServiceImpl implements PassengerService{
@@ -15,8 +16,8 @@ public class PassengerServiceImpl implements PassengerService{
     private PassengerRepository passengerRepository;
 
     @Override
-    public ArrayList<Passenger> getAllPassengers() {
-        return (ArrayList<Passenger>) passengerRepository.findAll();
+    public List<Passenger> getAllPassengers() {
+        return passengerRepository.findAll();
     }
 
     @Override

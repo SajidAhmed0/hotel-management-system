@@ -3,9 +3,10 @@ package com.hotelmangementsystem.application.service;
 import com.hotelmangementsystem.application.entity.BookedPrice;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public interface BookedPriceService {
-    public ArrayList<BookedPrice> getAllBookedPrices();
+    public List<BookedPrice> getAllBookedPrices();
 
     public BookedPrice getBookedPrice(Long id);
 

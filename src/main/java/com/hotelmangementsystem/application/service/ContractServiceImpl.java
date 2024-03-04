@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
+import java.util.List;
 
 @Service
 public class ContractServiceImpl implements ContractService{
@@ -15,8 +16,8 @@ public class ContractServiceImpl implements ContractService{
     private ContractRepository contractRepository;
 
     @Override
-    public ArrayList<Contract> getAllContracts() {
-        return (ArrayList<Contract>) contractRepository.findAll();
+    public List<Contract> getAllContracts() {
+        return contractRepository.findAll();
     }
 
     @Override
@@ -26,6 +27,7 @@ public class ContractServiceImpl implements ContractService{
 
     @Override
     public Contract addContract(Contract contract) {
+        System.out.println(contract.getHotel());
         return contractRepository.save(contract);
     }
 

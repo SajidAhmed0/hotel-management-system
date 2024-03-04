@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
+import java.util.List;
 
 @RestController
 @RequestMapping("/roomtypes")
@@ -15,7 +16,7 @@ public class RoomTypeController {
     private RoomTypeService roomTypeService;
 
     @GetMapping
-    public ArrayList<RoomType> getAllRoomTypes(){
+    public List<RoomType> getAllRoomTypes(){
         return roomTypeService.getAllRoomTypes();
     }
 

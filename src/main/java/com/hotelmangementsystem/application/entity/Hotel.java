@@ -1,11 +1,9 @@
 package com.hotelmangementsystem.application.entity;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 
 import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 public class Hotel {
@@ -19,11 +17,16 @@ public class Hotel {
     private String street;
     private String description;
     private String contact;
-    private ArrayList<String> facilities;
+    private List<String> facilities;
 
-    private ArrayList<String> images;
+    private List<String> images;
 
     //TODO: create contract, supplements
+    @OneToMany(
+            mappedBy = "hotel"
+    )
+    private List<Contract> contracts;
+
     public Hotel() {
     }
 
@@ -106,19 +109,19 @@ public class Hotel {
         this.contact = contact;
     }
 
-    public ArrayList<String> getFacilities() {
+    public List<String> getFacilities() {
         return facilities;
     }
 
-    public void setFacilities(ArrayList<String> facilities) {
+    public void setFacilities(List<String> facilities) {
         this.facilities = facilities;
     }
 
-    public ArrayList<String> getImages() {
+    public List<String> getImages() {
         return images;
     }
 
-    public void setImages(ArrayList<String> images) {
+    public void setImages(List<String> images) {
         this.images = images;
     }
 }
