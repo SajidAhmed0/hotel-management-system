@@ -1,9 +1,13 @@
 package com.hotelmangementsystem.application.service;
 
 import com.hotelmangementsystem.application.entity.Contract;
+import com.hotelmangementsystem.application.entity.Facility;
 import com.hotelmangementsystem.application.entity.Hotel;
+import com.hotelmangementsystem.application.entity.Image;
 import com.hotelmangementsystem.application.repository.ContractRepository;
+import com.hotelmangementsystem.application.repository.FacilityRepository;
 import com.hotelmangementsystem.application.repository.HotelRepository;
+import com.hotelmangementsystem.application.repository.ImageRepository;
 import jakarta.persistence.EntityNotFoundException;
 import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,6 +24,12 @@ public class HotelServiceImpl implements HotelService{
 
     @Autowired
     private ContractRepository contractRepository;
+
+    @Autowired
+    private FacilityRepository facilityRepository;
+
+    @Autowired
+    private ImageRepository imageRepository;
 
     @Override
     public List<Hotel> getAllHotels() {
@@ -104,6 +114,80 @@ public class HotelServiceImpl implements HotelService{
         Hotel hotel = getHotel(id);
 
         return  hotel.getContracts();
+    }
+
+    @Transactional
+    @Override
+    public Hotel addFacilityToHotel(Long hotelId, Long facilityId) {
+        Hotel hotel = getHotel(hotelId);
+        Facility facility = facilityRepository.findById(facilityId).orElse(null);
+
+        if(hotel != null && facility != null){
+//            hotel.addFacility(facility);
+            facility.setHotel(hotel);
+            return hotel;
+        }
+        return null;
+    }
+
+    @Transactional
+    @Override
+    public Hotel removeFacilityFromHotel(Long hotelId, Long facilityId) {
+        Hotel hotel = getHotel(hotelId);
+        Facility facility = facilityRepository.findById(facilityId).orElse(null);
+
+        if(hotel != null && facility != null){
+//            hotel.removeFacility(facility);
+            facility.setHotel(null);
+            return hotel;
+        }
+        return null;
+    }
+
+    @Override
+    public List<Facility> getAllFacilitiesOfHotel(Long id) {
+        Hotel hotel = getHotel(id);
+        if(hotel != null){
+            return hotel.getFacilities();
+        }
+        return null;
+    }
+
+    @Transactional
+    @Override
+    public Hotel addImageToHotel(Long hotelId, Long imageId) {
+        Hotel hotel = getHotel(hotelId);
+        Image image = imageRepository.findById(imageId).orElse(null);
+
+        if(hotel != null && image != null){
+//            hotel.addImage(image);
+            image.setHotel(hotel);
+            return hotel;
+        }
+        return null;
+    }
+
+    @Transactional
+    @Override
+    public Hotel removeImageFromHotel(Long hotelId, Long imageId) {
+        Hotel hotel = getHotel(hotelId);
+        Image image = imageRepository.findById(imageId).orElse(null);
+
+        if(hotel != null && image != null){
+//            hotel.removeImage(image);
+            image.setHotel(null);
+            return hotel;
+        }
+        return null;
+    }
+
+    @Override
+    public List<Image> getAllImagesOfHotel(Long id) {
+        Hotel hotel = getHotel(id);
+        if(hotel != null){
+            return hotel.getImages();
+        }
+        return null;
     }
 
 }
