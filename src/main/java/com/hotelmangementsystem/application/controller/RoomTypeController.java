@@ -1,5 +1,7 @@
 package com.hotelmangementsystem.application.controller;
 
+import com.hotelmangementsystem.application.entity.Booking;
+import com.hotelmangementsystem.application.entity.Passenger;
 import com.hotelmangementsystem.application.entity.RoomType;
 import com.hotelmangementsystem.application.service.RoomTypeService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -38,5 +40,19 @@ public class RoomTypeController {
     @DeleteMapping("/{id}")
     public String deleteRoomType(@PathVariable("id") Long id){
         return roomTypeService.deleteRoomType(id);
+    }
+
+    @PutMapping("/{roomtypeId}/bookings/{bookingId}")
+    public RoomType addBookingToRoomType(@PathVariable("roomtypeId") Long roomtypeId, @PathVariable("bookingId") Long bookingId){
+        return roomTypeService.addBookingToRoomType(roomtypeId, bookingId);
+    }
+    @DeleteMapping("/{roomtypeId}/bookings/{bookingId}")
+    public RoomType removeBookingFromRoomType(@PathVariable("roomtypeId") Long roomtypeId, @PathVariable("bookingId") Long bookingId){
+        return roomTypeService.removeBookingFromRoomType(roomtypeId, bookingId);
+    }
+
+    @GetMapping("/{id}/bookings")
+    public List<Booking> getAllBookingsOfRoomType(@PathVariable("id") Long id) {
+        return roomTypeService.getAllBookingsOfRoomType(id);
     }
 }

@@ -1,8 +1,11 @@
 package com.hotelmangementsystem.application.service;
 
+import com.hotelmangementsystem.application.entity.Booking;
 import com.hotelmangementsystem.application.entity.RoomType;
+import com.hotelmangementsystem.application.repository.BookingRepository;
 import com.hotelmangementsystem.application.repository.RoomTypeRepository;
 import jakarta.persistence.EntityNotFoundException;
+import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -14,6 +17,9 @@ public class RoomTypeServiceImpl implements RoomTypeService{
 
     @Autowired
     private RoomTypeRepository roomTypeRepository;
+
+    @Autowired
+    private BookingRepository bookingRepository;
 
     @Override
     public List<RoomType> getAllRoomTypes() {
@@ -55,5 +61,43 @@ public class RoomTypeServiceImpl implements RoomTypeService{
         }
         roomTypeRepository.deleteById(id);
         return "deleted";
+    }
+
+    @Transactional
+    @Override
+    public RoomType addBookingToRoomType(Long roomtypeId, Long bookingId) {
+        RoomType roomType = getRoomType(roomtypeId);
+        Booking booking = bookingRepository.findById(bookingId).orElse(null);
+
+        if(roomType != null && booking != null){
+            roomType.addBooking(booking);
+            return roomType;
+        }
+
+        return null;
+    }
+
+    @Transactional
+    @Override
+    public RoomType removeBookingFromRoomType(Long roomtypeId, Long bookingId) {
+        RoomType roomType = getRoomType(roomtypeId);
+        Booking booking = bookingRepository.findById(bookingId).orElse(null);
+
+        if(roomType != null && booking != null){
+            roomType.removeBooking(booking);
+            return roomType;
+        }
+
+        return null;
+    }
+
+    @Override
+    public List<Booking> getAllBookingsOfRoomType(Long id) {
+        RoomType roomType = getRoomType(id);
+
+        if(roomType != null){
+            return roomType.getBookings();
+        }
+        return null;
     }
 }

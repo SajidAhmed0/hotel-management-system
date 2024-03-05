@@ -47,6 +47,12 @@ public class Booking {
     )
     private User user;
 
+    @JsonIgnore
+    @ManyToMany(
+            mappedBy = "bookings"
+    )
+    private List<RoomType> roomTypes;
+
     public Booking() {
     }
 
@@ -153,5 +159,21 @@ public class Booking {
 
     public void setUser(User user) {
         this.user = user;
+    }
+
+    public List<RoomType> getRoomTypes() {
+        return roomTypes;
+    }
+
+    public void setRoomTypes(List<RoomType> roomTypes) {
+        this.roomTypes = roomTypes;
+    }
+
+    public void addRoomType(RoomType roomType){
+        this.roomTypes.add(roomType);
+    }
+
+    public void removeRoomType(RoomType roomType){
+        this.roomTypes.remove(roomType);
     }
 }
