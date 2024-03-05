@@ -1,7 +1,11 @@
 package com.hotelmangementsystem.application.entity;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.hotelmangementsystem.application.entity.pricing.SeasonSupplementPricing;
 import jakarta.persistence.*;
+
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 public class Supplement {
@@ -27,6 +31,12 @@ public class Supplement {
             referencedColumnName = "id"
     )
     private Contract contract;
+
+    @JsonIgnore
+    @OneToMany(
+            mappedBy = "supplement"
+    )
+    private List<SeasonSupplementPricing> seasonSupplementPricings = new ArrayList<>();
 
 
     public Supplement() {
@@ -83,5 +93,21 @@ public class Supplement {
 
     public void setContract(Contract contract) {
         this.contract = contract;
+    }
+
+    public List<SeasonSupplementPricing> getSeasonSupplementPricings() {
+        return seasonSupplementPricings;
+    }
+
+    public void setSeasonSupplementPricings(List<SeasonSupplementPricing> seasonSupplementPricings) {
+        this.seasonSupplementPricings = seasonSupplementPricings;
+    }
+
+    public void addSeasonSupplementPricing(SeasonSupplementPricing seasonSupplementPricing){
+        this.seasonSupplementPricings.add(seasonSupplementPricing);
+    }
+
+    public void removeSeasonSupplementPricing(SeasonSupplementPricing seasonSupplementPricing){
+        this.seasonSupplementPricings.remove(seasonSupplementPricing);
     }
 }
