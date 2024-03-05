@@ -1,6 +1,7 @@
 package com.hotelmangementsystem.application.entity;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.hotelmangementsystem.application.entity.pricing.SeasonRoomTypePricing;
 import com.hotelmangementsystem.application.entity.pricing.SeasonSupplementPricing;
 import jakarta.persistence.*;
 
@@ -37,6 +38,11 @@ public class Season {
             mappedBy = "season"
     )
     private List<SeasonSupplementPricing> seasonSupplementPricings = new ArrayList<>();
+
+    @OneToMany(
+            mappedBy = "season"
+    )
+    private List<SeasonRoomTypePricing> seasonRoomTypePricings = new ArrayList<>();
 
     public Season() {
     }
@@ -108,5 +114,21 @@ public class Season {
 
     public void removeSeasonSupplementPricing(SeasonSupplementPricing seasonSupplementPricing){
         this.seasonSupplementPricings.remove(seasonSupplementPricing);
+    }
+
+    public List<SeasonRoomTypePricing> getSeasonRoomTypePricings() {
+        return seasonRoomTypePricings;
+    }
+
+    public void setSeasonRoomTypePricings(List<SeasonRoomTypePricing> seasonRoomTypePricings) {
+        this.seasonRoomTypePricings = seasonRoomTypePricings;
+    }
+
+    public void addSeasonRoomTypePricing(SeasonRoomTypePricing seasonRoomTypePricing){
+        this.seasonRoomTypePricings.add(seasonRoomTypePricing);
+    }
+
+    public void removeSeasonRoomTypePricing(SeasonRoomTypePricing seasonRoomTypePricing){
+        this.seasonRoomTypePricings.remove(seasonRoomTypePricing);
     }
 }

@@ -40,7 +40,6 @@ public class SeasonSupplementPricingServiceImpl implements SeasonSupplementPrici
             seasonSupplementPricing.setPrice(price);
             seasonSupplementPricing.setId(new SeasonSupplementKey(seasonId, supplementId));
             return seasonSupplementPricingRepository.save(seasonSupplementPricing);
-//            return seasonSupplementPricing;
         }
         return null;
     }

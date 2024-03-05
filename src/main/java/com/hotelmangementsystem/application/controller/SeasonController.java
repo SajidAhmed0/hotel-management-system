@@ -1,9 +1,12 @@
 package com.hotelmangementsystem.application.controller;
 
+import com.hotelmangementsystem.application.entity.RoomType;
 import com.hotelmangementsystem.application.entity.Season;
 import com.hotelmangementsystem.application.entity.Supplement;
+import com.hotelmangementsystem.application.entity.pricing.SeasonRoomTypePricing;
 import com.hotelmangementsystem.application.entity.pricing.SeasonSupplementPricing;
 import com.hotelmangementsystem.application.service.SeasonService;
+import com.hotelmangementsystem.application.service.pricing.SeasonRoomTypePricingService;
 import com.hotelmangementsystem.application.service.pricing.SeasonSupplementPricingService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -20,6 +23,9 @@ public class SeasonController {
 
     @Autowired
     private SeasonSupplementPricingService seasonSupplementPricingService;
+
+    @Autowired
+    private SeasonRoomTypePricingService seasonRoomTypePricingService;
 
     @GetMapping
     public List<Season> getAllSeasons(){
@@ -47,7 +53,7 @@ public class SeasonController {
     }
 
 
-    // FOR: pricing
+    // FOR: pricing supplement
     @PostMapping("/{seasonId}/supplements/{supplementId}")
     public SeasonSupplementPricing addSeasonSupplementPricing(@PathVariable("seasonId") Long seasonId, @PathVariable("supplementId") Long supplementId, @RequestBody SeasonSupplementPricing price){
         return seasonSupplementPricingService.addSeasonSupplementPricing(seasonId, supplementId, price.getPrice());
@@ -66,5 +72,26 @@ public class SeasonController {
     @GetMapping("/{seasonId}/supplements")
     public List<Supplement> getAllSupplementsOfSeason(@PathVariable("seasonId") Long id){
         return seasonSupplementPricingService.getAllSupplementsOfSeason(id);
+    }
+
+    // FOR: pricing roomtype
+    @PostMapping("/{seasonId}/roomtypes/{roomtypeId}")
+    public SeasonRoomTypePricing addSeasonRoomTypePricing(@PathVariable("seasonId") Long seasonId, @PathVariable("roomtypeId") Long roomtypeId, @RequestBody SeasonRoomTypePricing price){
+        return seasonRoomTypePricingService.addSeasonRoomTypePricing(seasonId, roomtypeId, price.getPrice());
+    }
+
+    @PutMapping("/{seasonId}/roomtypes/{roomtypeId}")
+    public SeasonRoomTypePricing updateSeasonRoomTypePricing(@PathVariable("seasonId") Long seasonId, @PathVariable("roomtypeId") Long roomtypeId, @RequestBody SeasonRoomTypePricing price){
+        return seasonRoomTypePricingService.updateRoomTypePricing(seasonId, roomtypeId, price.getPrice());
+    }
+
+    @DeleteMapping("/{seasonId}/roomtypes/{roomtypeId}")
+    public String deleteSeasonRoomTypePricing(@PathVariable("seasonId") Long seasonId, @PathVariable("roomtypeId") Long roomtypeId){
+        return seasonRoomTypePricingService.deleteSeasonRoomTypePricing(seasonId, roomtypeId);
+    }
+
+    @GetMapping("/{seasonId}/roomtypes")
+    public List<RoomType> getAllRoomTypesOfSeason(@PathVariable("seasonId") Long id){
+        return seasonRoomTypePricingService.getAllRoomTypesOfSeason(id);
     }
 }
