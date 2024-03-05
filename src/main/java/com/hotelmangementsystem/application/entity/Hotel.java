@@ -22,10 +22,18 @@ public class Hotel {
     private String contact;
 
     //TODO: create facility class
-    private List<String> facilities;
+    @OneToMany(
+            mappedBy = "hotel",
+            orphanRemoval = true
+    )
+    private List<Facility> facilities = new ArrayList<>();
 
     //TODO: create image class
-    private List<String> images;
+    @OneToMany(
+            mappedBy = "hotel",
+            orphanRemoval = true
+    )
+    private List<Image> images = new ArrayList<>();
 
     //TODO: create contract, supplements
 
@@ -33,24 +41,23 @@ public class Hotel {
     @OneToMany(
             cascade = CascadeType.ALL,
             mappedBy = "hotel"
+//            orphanRemoval = true
     )
     private List<Contract> contracts = new ArrayList<>();
 
     public Hotel() {
     }
 
-    public Hotel(String name, String country, String district, String street, String description, String contact, List<String> facilities, List<String> images) {
+    public Hotel(String name, String country, String district, String street, String description, String contact) {
         this.name = name;
         this.country = country;
         this.district = district;
         this.street = street;
         this.description = description;
         this.contact = contact;
-        this.facilities = facilities;
-        this.images = images;
     }
 
-    public Hotel(Long id, String name, String country, String district, String street, String description, String contact, List<String> facilities, List<String> images) {
+    public Hotel(Long id, String name, String country, String district, String street, String description, String contact) {
         this.id = id;
         this.name = name;
         this.country = country;
@@ -58,8 +65,6 @@ public class Hotel {
         this.street = street;
         this.description = description;
         this.contact = contact;
-        this.facilities = facilities;
-        this.images = images;
     }
 
     public Long getId() {
@@ -118,19 +123,19 @@ public class Hotel {
         this.contact = contact;
     }
 
-    public List<String> getFacilities() {
+    public List<Facility> getFacilities() {
         return facilities;
     }
 
-    public void setFacilities(List<String> facilities) {
+    public void setFacilities(List<Facility> facilities) {
         this.facilities = facilities;
     }
 
-    public List<String> getImages() {
+    public List<Image> getImages() {
         return images;
     }
 
-    public void setImages(List<String> images) {
+    public void setImages(List<Image> images) {
         this.images = images;
     }
 
@@ -148,5 +153,21 @@ public class Hotel {
 
     public void removeContract(Contract contract){
         this.contracts.remove(contract);
+    }
+
+    public void addFacility(Facility facility){
+        this.facilities.add(facility);
+    }
+
+    public void removeFacility(Facility facility){
+        this.facilities.remove(facility);
+    }
+
+    public void addImage(Image image){
+        this.images.add(image);
+    }
+
+    public void removeImage(Image image){
+        this.images.remove(image);
     }
 }

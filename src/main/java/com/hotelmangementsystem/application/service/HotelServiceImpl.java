@@ -51,9 +51,6 @@ public class HotelServiceImpl implements HotelService{
             hotelDB.setStreet(updatedHotel.getStreet());
             hotelDB.setDescription(updatedHotel.getDescription());
             hotelDB.setContact(updatedHotel.getContact());
-            // Assuming facilities and images can be updated without additional validation
-            hotelDB.setFacilities(updatedHotel.getFacilities());
-            hotelDB.setImages(updatedHotel.getImages());
 
             return hotelRepository.save(hotelDB);
         }
@@ -80,7 +77,7 @@ public class HotelServiceImpl implements HotelService{
         Contract contract = contractRepository.findById(contractId).orElse(null);
 
         if(hotel != null && contract != null) {
-            hotel.addContract(contract);
+//            hotel.addContract(contract);
             contract.setHotel(hotel);
             return hotel;
         }
@@ -94,7 +91,7 @@ public class HotelServiceImpl implements HotelService{
         Contract contract = contractRepository.findById(contractId).orElse(null);
 
         if(hotel != null && contract != null) {
-            hotel.removeContract(contract);
+//            hotel.removeContract(contract);
             contract.setHotel(null);
             return hotel;
         }

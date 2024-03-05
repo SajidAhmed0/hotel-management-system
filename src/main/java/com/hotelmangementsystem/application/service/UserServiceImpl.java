@@ -83,7 +83,7 @@ public class UserServiceImpl implements UserService{
         Booking booking = bookingRepository.findById(bookingId).orElse(null);
 
         if(user != null && booking != null){
-            user.addBooking(booking);
+//            user.addBooking(booking);
             booking.setUser(user);
             return user;
         }
@@ -98,7 +98,7 @@ public class UserServiceImpl implements UserService{
         Booking booking = bookingRepository.findById(bookingId).orElse(null);
 
         if(user != null && booking != null){
-            user.removeBooking(booking);
+//            user.removeBooking(booking);
             booking.setUser(null);
             return user;
         }
@@ -122,7 +122,7 @@ public class UserServiceImpl implements UserService{
         Payment payment = paymentRepository.findById(paymentId).orElse(null);
 
         if(user != null && payment != null){
-            user.addPayment(payment);
+//            user.addPayment(payment);
             payment.setUser(user);
 
             return user;
@@ -138,7 +138,7 @@ public class UserServiceImpl implements UserService{
         Payment payment = paymentRepository.findById(paymentId).orElse(null);
 
         if(user != null && payment != null){
-            user.removePayment(payment);
+//            user.removePayment(payment);
             payment.setUser(null);
 
             return user;

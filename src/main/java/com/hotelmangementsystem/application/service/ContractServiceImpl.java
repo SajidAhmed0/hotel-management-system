@@ -78,7 +78,7 @@ public class ContractServiceImpl implements ContractService{
         Supplement supplement = supplementRepository.findById(supplementId).orElse(null);
 
         if(contract != null && supplement != null){
-            contract.addSupplement(supplement);
+//            contract.addSupplement(supplement);
             supplement.setContract(contract);
             return contract;
         }
@@ -93,7 +93,7 @@ public class ContractServiceImpl implements ContractService{
         Supplement supplement = supplementRepository.findById(supplementId).orElse(null);
 
         if(contract != null && supplement != null){
-            contract.removeSupplement(supplement);
+//            contract.removeSupplement(supplement);
             supplement.setContract(null);
             return contract;
         }
@@ -118,7 +118,7 @@ public class ContractServiceImpl implements ContractService{
         Season season = seasonRepository.findById(seasonId).orElse(null);
 
         if(contract != null && season != null){
-            contract.addSeason(season);
+//            contract.addSeason(season);
             season.setContract(contract);
             return contract;
         }
@@ -133,7 +133,7 @@ public class ContractServiceImpl implements ContractService{
         Season season = seasonRepository.findById(seasonId).orElse(null);
 
         if(contract != null && season != null){
-            contract.removeSeason(season);
+//            contract.removeSeason(season);
             season.setContract(null);
             return contract;
         }
@@ -158,7 +158,7 @@ public class ContractServiceImpl implements ContractService{
         RoomType roomType = roomTypeRepository.findById(roomtypeId).orElse(null);
 
         if(contract != null && roomType != null){
-            contract.addRoomType(roomType);
+//            contract.addRoomType(roomType);
             roomType.setContract(contract);
             return contract;
         }
@@ -173,7 +173,7 @@ public class ContractServiceImpl implements ContractService{
         RoomType roomType = roomTypeRepository.findById(roomtypeId).orElse(null);
 
         if(contract != null && roomType != null){
-            contract.removeRoomType(roomType);
+//            contract.removeRoomType(roomType);
             roomType.setContract(null);
             return contract;
         }
@@ -198,7 +198,7 @@ public class ContractServiceImpl implements ContractService{
         Discount discount = discountRepository.findById(discountId).orElse(null);
 
         if(contract != null && discount != null){
-            contract.addDiscount(discount);
+//            contract.addDiscount(discount);
             discount.setContract(contract);
             return contract;
         }
@@ -213,7 +213,7 @@ public class ContractServiceImpl implements ContractService{
         Discount discount = discountRepository.findById(discountId).orElse(null);
 
         if(contract != null && discount != null){
-            contract.removeDiscount(discount);
+//            contract.removeDiscount(discount);
             discount.setContract(null);
             return contract;
         }

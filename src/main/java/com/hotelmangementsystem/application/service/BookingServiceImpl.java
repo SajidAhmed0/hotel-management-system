@@ -74,7 +74,7 @@ public class BookingServiceImpl implements BookingService{
         BookedPrice bookedPrice = bookedPriceRepository.findById(bookedPriceId).orElse(null);
 
         if(booking != null && bookedPrice != null){
-            booking.addBookedPrice(bookedPrice);
+//            booking.addBookedPrice(bookedPrice);
             bookedPrice.setBooking(booking);
 
             return booking;
@@ -89,7 +89,7 @@ public class BookingServiceImpl implements BookingService{
         BookedPrice bookedPrice = bookedPriceRepository.findById(bookedPriceId).orElse(null);
 
         if(booking != null && bookedPrice != null){
-            booking.removeBookedPrice(bookedPrice);
+//            booking.removeBookedPrice(bookedPrice);
             bookedPrice.setBooking(null);
 
             return booking;
@@ -113,7 +113,7 @@ public class BookingServiceImpl implements BookingService{
         Passenger passenger = passengerRepository.findById(passengerId).orElse(null);
 
         if(booking != null && passenger != null){
-            booking.addPassenger(passenger);
+//            booking.addPassenger(passenger);
             passenger.setBooking(booking);
 
             return booking;
@@ -128,7 +128,7 @@ public class BookingServiceImpl implements BookingService{
         Passenger passenger = passengerRepository.findById(passengerId).orElse(null);
 
         if(booking != null && passenger != null){
-            booking.removePassenger(passenger);
+//            booking.removePassenger(passenger);
             passenger.setBooking(null);
 
             return booking;
