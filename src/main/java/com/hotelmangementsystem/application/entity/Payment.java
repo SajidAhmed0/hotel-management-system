@@ -1,9 +1,7 @@
 package com.hotelmangementsystem.application.entity;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import jakarta.persistence.*;
 
 import java.sql.Date;
 
@@ -21,6 +19,15 @@ public class Payment {
     private String method;
 
     //TODO: create user
+    @JsonIgnore
+    @ManyToOne(
+            cascade = CascadeType.ALL
+    )
+    @JoinColumn(
+            name = "user_id",
+            referencedColumnName = "id"
+    )
+    private User user;
 
     public Payment() {
     }
@@ -68,5 +75,13 @@ public class Payment {
 
     public void setMethod(String method) {
         this.method = method;
+    }
+
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
     }
 }

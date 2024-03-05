@@ -1,9 +1,7 @@
 package com.hotelmangementsystem.application.entity;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import jakarta.persistence.*;
 
 @Entity
 public class Passenger {
@@ -17,7 +15,13 @@ public class Passenger {
     private String name;
 
     //TODO: create booking
-
+    @JsonIgnore
+    @ManyToOne
+    @JoinColumn(
+            name = "booking_id",
+            referencedColumnName = "id"
+    )
+    private Booking booking;
 
     public Passenger() {
     }
@@ -55,5 +59,13 @@ public class Passenger {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public Booking getBooking() {
+        return booking;
+    }
+
+    public void setBooking(Booking booking) {
+        this.booking = booking;
     }
 }

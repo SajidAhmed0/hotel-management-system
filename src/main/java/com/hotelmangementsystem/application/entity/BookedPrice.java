@@ -1,9 +1,8 @@
 package com.hotelmangementsystem.application.entity;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import jakarta.persistence.*;
+import org.springframework.jmx.export.annotation.ManagedAttribute;
 
 @Entity
 public class BookedPrice {
@@ -19,6 +18,16 @@ public class BookedPrice {
     private Double price;
 
     //TODO: create booking
+
+    @JsonIgnore
+    @ManyToOne(
+            cascade = CascadeType.ALL
+    )
+    @JoinColumn(
+            name = "booking_id",
+            referencedColumnName = "id"
+    )
+    private Booking booking;
 
     public BookedPrice() {
     }
@@ -66,5 +75,13 @@ public class BookedPrice {
 
     public void setPrice(Double price) {
         this.price = price;
+    }
+
+    public Booking getBooking() {
+        return booking;
+    }
+
+    public void setBooking(Booking booking) {
+        this.booking = booking;
     }
 }

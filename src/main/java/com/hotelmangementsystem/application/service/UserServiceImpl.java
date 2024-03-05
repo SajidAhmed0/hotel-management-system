@@ -1,8 +1,13 @@
 package com.hotelmangementsystem.application.service;
 
+import com.hotelmangementsystem.application.entity.Booking;
+import com.hotelmangementsystem.application.entity.Payment;
 import com.hotelmangementsystem.application.entity.User;
+import com.hotelmangementsystem.application.repository.BookingRepository;
+import com.hotelmangementsystem.application.repository.PaymentRepository;
 import com.hotelmangementsystem.application.repository.UserRepository;
 import jakarta.persistence.EntityNotFoundException;
+import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -15,6 +20,12 @@ public class UserServiceImpl implements UserService{
 
     @Autowired
     private UserRepository userRepository;
+
+    @Autowired
+    private BookingRepository bookingRepository;
+
+    @Autowired
+    private PaymentRepository paymentRepository;
 
     @Override
     public List<User> getAllUsers() {
@@ -63,5 +74,85 @@ public class UserServiceImpl implements UserService{
         }
         userRepository.deleteById(id);
         return "deleted";
+    }
+
+    @Transactional
+    @Override
+    public User addBookingToUser(Long userId, Long bookingId) {
+        User user = getUser(userId);
+        Booking booking = bookingRepository.findById(bookingId).orElse(null);
+
+        if(user != null && booking != null){
+            user.addBooking(booking);
+            booking.setUser(user);
+            return user;
+        }
+
+        return null;
+    }
+
+    @Transactional
+    @Override
+    public User removeBookingFromUser(Long userId, Long bookingId) {
+        User user = getUser(userId);
+        Booking booking = bookingRepository.findById(bookingId).orElse(null);
+
+        if(user != null && booking != null){
+            user.removeBooking(booking);
+            booking.setUser(null);
+            return user;
+        }
+
+        return null;
+    }
+
+    @Override
+    public List<Booking> getAllBookingsOfUser(Long userId) {
+        User user = getUser(userId);
+        if(user != null){
+            return user.getBookings();
+        }
+        return null;
+    }
+
+    @Transactional
+    @Override
+    public User addPaymentToUser(Long userId, Long paymentId) {
+        User user = getUser(userId);
+        Payment payment = paymentRepository.findById(paymentId).orElse(null);
+
+        if(user != null && payment != null){
+            user.addPayment(payment);
+            payment.setUser(user);
+
+            return user;
+        }
+
+        return  null;
+    }
+
+    @Transactional
+    @Override
+    public User removePaymentFromUser(Long userId, Long paymentId) {
+        User user = getUser(userId);
+        Payment payment = paymentRepository.findById(paymentId).orElse(null);
+
+        if(user != null && payment != null){
+            user.removePayment(payment);
+            payment.setUser(null);
+
+            return user;
+        }
+
+        return  null;
+    }
+
+    @Override
+    public List<Payment> getAllPaymentsOfUser(Long userId) {
+        User user = getUser(userId);
+        if (user != null) {
+            return user.getPayments();
+        }
+        return null;
     }
 }
