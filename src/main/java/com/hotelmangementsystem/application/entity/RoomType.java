@@ -28,7 +28,7 @@ public class RoomType {
             mappedBy = "roomType",
             orphanRemoval = true
     )
-    private List<RoomTypeFacility> roomTypeFacilities;
+    private List<RoomTypeFacility> roomTypeFacilities = new ArrayList<>();
 
     //TODO: create season and contract
 
@@ -49,13 +49,11 @@ public class RoomType {
     )
     private List<SeasonRoomTypePricing> seasonRoomTypePricings = new ArrayList<>();
 
-    @ManyToMany
-    @JoinTable(
-            name = "booked_roomtype",
-            joinColumns = @JoinColumn(name = "roomtype_id", referencedColumnName = "id"),
-            inverseJoinColumns = @JoinColumn(name = "booking_id", referencedColumnName = "id")
+    @JsonIgnore
+    @OneToMany(
+            mappedBy = "roomType"
     )
-    private List<Booking> bookings;
+    private List<Booking> bookings = new ArrayList<>();
 
     public RoomType() {
     }

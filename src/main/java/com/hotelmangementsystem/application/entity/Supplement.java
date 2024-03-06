@@ -18,8 +18,6 @@ public class Supplement {
 
     private String description;
 
-    private Double price;
-
     //TODO: create contract and season
 
     @JsonIgnore
@@ -42,17 +40,15 @@ public class Supplement {
     public Supplement() {
     }
 
-    public Supplement(String name, String description, Double price) {
+    public Supplement(String name, String description) {
         this.name = name;
         this.description = description;
-        this.price = price;
     }
 
-    public Supplement(Long id, String name, String description, Double price) {
+    public Supplement(Long id, String name, String description) {
         this.id = id;
         this.name = name;
         this.description = description;
-        this.price = price;
     }
 
     public Long getId() {
@@ -77,14 +73,6 @@ public class Supplement {
 
     public void setDescription(String description) {
         this.description = description;
-    }
-
-    public Double getPrice() {
-        return price;
-    }
-
-    public void setPrice(Double price) {
-        this.price = price;
     }
 
     public Contract getContract() {

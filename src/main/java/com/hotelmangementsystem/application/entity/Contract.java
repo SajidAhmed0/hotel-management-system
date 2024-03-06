@@ -22,8 +22,6 @@ public class Contract {
 
     private String paymentPolicy;
 
-    private Double markup;
-
     //TODO: hotel entity, discounts, roomTypes, seasons
 
     @JsonIgnore
@@ -64,21 +62,19 @@ public class Contract {
     public Contract() {
     }
 
-    public Contract(Date startDate, Date endDate, String cancellationPolicy, String paymentPolicy, Double markup) {
+    public Contract(Date startDate, Date endDate, String cancellationPolicy, String paymentPolicy) {
         this.startDate = startDate;
         this.endDate = endDate;
         this.cancellationPolicy = cancellationPolicy;
         this.paymentPolicy = paymentPolicy;
-        this.markup = markup;
     }
 
-    public Contract(Long id, Date startDate, Date endDate, String cancellationPolicy, String paymentPolicy, Double markup) {
+    public Contract(Long id, Date startDate, Date endDate, String cancellationPolicy, String paymentPolicy) {
         this.id = id;
         this.startDate = startDate;
         this.endDate = endDate;
         this.cancellationPolicy = cancellationPolicy;
         this.paymentPolicy = paymentPolicy;
-        this.markup = markup;
     }
 
     public Long getId() {
@@ -119,14 +115,6 @@ public class Contract {
 
     public void setPaymentPolicy(String paymentPolicy) {
         this.paymentPolicy = paymentPolicy;
-    }
-
-    public Double getMarkup() {
-        return markup;
-    }
-
-    public void setMarkup(Double markup) {
-        this.markup = markup;
     }
 
     public Hotel getHotel() {

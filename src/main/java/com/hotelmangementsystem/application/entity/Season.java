@@ -22,6 +22,8 @@ public class Season {
 
     private Date endDate;
 
+    private Double markup;
+
     //TODO: create supplements and contracts
 
     @JsonIgnore
@@ -47,17 +49,19 @@ public class Season {
     public Season() {
     }
 
-    public Season(String name, Date startDate, Date endDate) {
+    public Season(String name, Date startDate, Date endDate, Double markup) {
         this.name = name;
         this.startDate = startDate;
         this.endDate = endDate;
+        this.markup = markup;
     }
 
-    public Season(Long id, String name, Date startDate, Date endDate) {
+    public Season(Long id, String name, Date startDate, Date endDate, Double markup) {
         this.id = id;
         this.name = name;
         this.startDate = startDate;
         this.endDate = endDate;
+        this.markup = markup;
     }
 
     public Long getId() {
@@ -90,6 +94,14 @@ public class Season {
 
     public void setEndDate(Date endDate) {
         this.endDate = endDate;
+    }
+
+    public Double getMarkup() {
+        return markup;
+    }
+
+    public void setMarkup(Double markup) {
+        this.markup = markup;
     }
 
     public Contract getContract() {

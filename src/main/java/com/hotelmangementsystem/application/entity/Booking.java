@@ -22,6 +22,8 @@ public class Booking {
 
     private String Status;
 
+    private Integer noOfRooms;
+
     private Double total;
 
     //TODO: create discounts, bookedprices, and passengers
@@ -48,29 +50,33 @@ public class Booking {
     private User user;
 
     @JsonIgnore
-    @ManyToMany(
-            mappedBy = "bookings"
+    @ManyToOne
+    @JoinColumn(
+            name = "roomtype_id",
+            referencedColumnName = "id"
     )
-    private List<RoomType> roomTypes;
+    private RoomType roomType;
 
     public Booking() {
     }
 
-    public Booking(Date checkInDate, Date checkOutDate, Integer noOfAdult, String status, Double total) {
+    public Booking(Date checkInDate, Date checkOutDate, Integer noOfAdult, String status, Double total, Integer noOfRooms) {
         this.checkInDate = checkInDate;
         this.checkOutDate = checkOutDate;
         this.noOfAdult = noOfAdult;
         Status = status;
         this.total = total;
+        this.noOfRooms = noOfRooms;
     }
 
-    public Booking(Long id, Date checkInDate, Date checkOutDate, Integer noOfAdult, String status, Double total) {
+    public Booking(Long id, Date checkInDate, Date checkOutDate, Integer noOfAdult, String status, Double total, Integer noOfRooms) {
         this.id = id;
         this.checkInDate = checkInDate;
         this.checkOutDate = checkOutDate;
         this.noOfAdult = noOfAdult;
         Status = status;
         this.total = total;
+        this.noOfRooms = noOfRooms;
     }
 
     public Long getId() {
@@ -161,19 +167,19 @@ public class Booking {
         this.user = user;
     }
 
-    public List<RoomType> getRoomTypes() {
-        return roomTypes;
+    public Integer getNoOfRooms() {
+        return noOfRooms;
     }
 
-    public void setRoomTypes(List<RoomType> roomTypes) {
-        this.roomTypes = roomTypes;
+    public void setNoOfRooms(Integer noOfRooms) {
+        this.noOfRooms = noOfRooms;
     }
 
-    public void addRoomType(RoomType roomType){
-        this.roomTypes.add(roomType);
+    public RoomType getRoomType() {
+        return roomType;
     }
 
-    public void removeRoomType(RoomType roomType){
-        this.roomTypes.remove(roomType);
+    public void setRoomType(RoomType roomType) {
+        this.roomType = roomType;
     }
 }

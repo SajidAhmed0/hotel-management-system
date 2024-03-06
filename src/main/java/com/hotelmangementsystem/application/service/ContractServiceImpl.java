@@ -55,7 +55,6 @@ public class ContractServiceImpl implements ContractService{
             contractDB.setEndDate(contract.getEndDate());
             contractDB.setCancellationPolicy(contract.getCancellationPolicy());
             contractDB.setPaymentPolicy(contract.getPaymentPolicy());
-            contractDB.setMarkup(contract.getMarkup());
             return contractRepository.save(contractDB);
         }
         return null;

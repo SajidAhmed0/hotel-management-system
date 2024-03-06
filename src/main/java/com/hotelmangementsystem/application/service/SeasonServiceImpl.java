@@ -38,6 +38,7 @@ public class SeasonServiceImpl implements SeasonService{
             seasonDB.setName(season.getName());
             seasonDB.setStartDate(season.getStartDate());
             seasonDB.setEndDate(season.getEndDate());
+            seasonDB.setMarkup(season.getMarkup());
             return seasonRepository.save(seasonDB);
         }
         return null;

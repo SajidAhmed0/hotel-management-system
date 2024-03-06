@@ -74,7 +74,8 @@ public class RoomTypeServiceImpl implements RoomTypeService{
         Booking booking = bookingRepository.findById(bookingId).orElse(null);
 
         if(roomType != null && booking != null){
-            roomType.addBooking(booking);
+//            roomType.addBooking(booking);
+            booking.setRoomType(roomType);
             return roomType;
         }
 
@@ -88,7 +89,8 @@ public class RoomTypeServiceImpl implements RoomTypeService{
         Booking booking = bookingRepository.findById(bookingId).orElse(null);
 
         if(roomType != null && booking != null){
-            roomType.removeBooking(booking);
+//            roomType.removeBooking(booking);
+            booking.setRoomType(null);
             return roomType;
         }
 

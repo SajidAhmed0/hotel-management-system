@@ -37,7 +37,6 @@ public class SupplementServiceImpl implements SupplementService{
         if(supplement != null){
             supplementDB.setName(supplement.getName());
             supplementDB.setDescription(supplement.getDescription());
-            supplementDB.setPrice(supplement.getPrice());
             return supplementRepository.save(supplementDB);
         }
         return null;
