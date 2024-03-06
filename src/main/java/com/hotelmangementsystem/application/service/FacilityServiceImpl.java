@@ -1,6 +1,5 @@
 package com.hotelmangementsystem.application.service;
 
-import com.hotelmangementsystem.application.entity.Discount;
 import com.hotelmangementsystem.application.entity.Facility;
 import com.hotelmangementsystem.application.repository.FacilityRepository;
 import jakarta.persistence.EntityNotFoundException;

@@ -3,6 +3,7 @@ package com.hotelmangementsystem.application.entity;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.hotelmangementsystem.application.entity.pricing.SeasonRoomTypePricing;
 import com.hotelmangementsystem.application.entity.pricing.SeasonSupplementPricing;
+import com.hotelmangementsystem.application.service.RoomTypeFacilityService;
 import jakarta.persistence.*;
 
 import java.util.ArrayList;
@@ -23,9 +24,11 @@ public class RoomType {
 
     private String description;
 
-    private List<String> facilities;
-
-    private Double price;
+    @OneToMany(
+            mappedBy = "roomType",
+            orphanRemoval = true
+    )
+    private List<RoomTypeFacility> roomTypeFacilities;
 
     //TODO: create season and contract
 
@@ -57,24 +60,20 @@ public class RoomType {
     public RoomType() {
     }
 
-    public RoomType(String name, Integer noOfRooms, Integer maxAdult, String description, List<String> facilities, Double price) {
+    public RoomType(String name, Integer noOfRooms, Integer maxAdult, String description) {
         this.name = name;
         this.noOfRooms = noOfRooms;
         this.maxAdult = maxAdult;
         this.description = description;
-        this.facilities = facilities;
-        this.price = price;
 
     }
 
-    public RoomType(Long id, String name, Integer noOfRooms, Integer maxAdult, String description, List<String> facilities, Double price) {
+    public RoomType(Long id, String name, Integer noOfRooms, Integer maxAdult, String description) {
         this.id = id;
         this.name = name;
         this.noOfRooms = noOfRooms;
         this.maxAdult = maxAdult;
         this.description = description;
-        this.facilities = facilities;
-        this.price = price;
 
     }
 
@@ -118,22 +117,6 @@ public class RoomType {
         this.description = description;
     }
 
-    public List<String> getFacilities() {
-        return facilities;
-    }
-
-    public void setFacilities(List<String> facilities) {
-        this.facilities = facilities;
-    }
-
-    public Double getPrice() {
-        return price;
-    }
-
-    public void setPrice(Double price) {
-        this.price = price;
-    }
-
     public Contract getContract() {
         return contract;
     }
@@ -172,5 +155,21 @@ public class RoomType {
 
     public void removeBooking(Booking booking){
         this.bookings.remove(booking);
+    }
+
+    public List<RoomTypeFacility> getRoomTypeFacilities() {
+        return roomTypeFacilities;
+    }
+
+    public void setRoomTypeFacilities(List<RoomTypeFacility> roomTypeFacilities) {
+        this.roomTypeFacilities = roomTypeFacilities;
+    }
+
+    public void addRoomTypeFacility(RoomTypeFacility roomTypeFacility){
+        this.roomTypeFacilities.add(roomTypeFacility);
+    }
+
+    public void removeRoomTypeFacility(RoomTypeFacility roomTypeFacility){
+        this.roomTypeFacilities.remove(roomTypeFacility);
     }
 }

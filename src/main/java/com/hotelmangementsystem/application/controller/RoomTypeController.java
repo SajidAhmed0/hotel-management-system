@@ -1,8 +1,6 @@
 package com.hotelmangementsystem.application.controller;
 
-import com.hotelmangementsystem.application.entity.Booking;
-import com.hotelmangementsystem.application.entity.Passenger;
-import com.hotelmangementsystem.application.entity.RoomType;
+import com.hotelmangementsystem.application.entity.*;
 import com.hotelmangementsystem.application.service.RoomTypeService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -54,5 +52,20 @@ public class RoomTypeController {
     @GetMapping("/{id}/bookings")
     public List<Booking> getAllBookingsOfRoomType(@PathVariable("id") Long id) {
         return roomTypeService.getAllBookingsOfRoomType(id);
+    }
+
+    @PutMapping("/{roomtypeId}/roomtypefacilities/{roomtypefacilityId}")
+    public RoomType addRoomTypeFacilityToRoomType(@PathVariable("roomtypeId") Long roomtypeId, @PathVariable("roomtypefacilityId") Long roomtypefacilityId){
+        return roomTypeService.addRoomTypeFacilityToRoomType(roomtypeId, roomtypefacilityId);
+    }
+
+    @DeleteMapping("/{roomtypeId}/roomtypefacilities/{roomtypefacilityId}")
+    public RoomType removeRoomTypeFacilityFromRoomType(@PathVariable("roomtypeId") Long roomtypeId, @PathVariable("roomtypefacilityId") Long roomtypefacilityId){
+        return roomTypeService.removeRoomTypeFacilityFromRoomType(roomtypeId, roomtypefacilityId);
+    }
+
+    @GetMapping("/{id}/roomtypefacilities")
+    public List<RoomTypeFacility> getAllRoomTypeFacilitiesOfRoomType(@PathVariable("id") Long id) {
+        return roomTypeService.getAllRoomTypeFacilitiesOfRoomType(id);
     }
 }

@@ -1,7 +1,6 @@
 package com.hotelmangementsystem.application.service;
 
-import com.hotelmangementsystem.application.entity.Booking;
-import com.hotelmangementsystem.application.entity.RoomType;
+import com.hotelmangementsystem.application.entity.*;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -22,4 +21,10 @@ public interface RoomTypeService {
     public RoomType removeBookingFromRoomType(Long roomtypeId, Long bookingId);
 
     public List<Booking> getAllBookingsOfRoomType(Long id);
+
+    public RoomType addRoomTypeFacilityToRoomType(Long roomtypeId, Long roomTypeFacilityId);
+
+    public RoomType removeRoomTypeFacilityFromRoomType(Long roomtypeId, Long roomTypeFacilityId);
+
+    public List<RoomTypeFacility> getAllRoomTypeFacilitiesOfRoomType(Long id);
 }

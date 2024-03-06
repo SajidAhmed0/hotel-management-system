@@ -2,13 +2,16 @@ package com.hotelmangementsystem.application.service;
 
 import com.hotelmangementsystem.application.entity.Booking;
 import com.hotelmangementsystem.application.entity.RoomType;
+import com.hotelmangementsystem.application.entity.RoomTypeFacility;
 import com.hotelmangementsystem.application.repository.BookingRepository;
+import com.hotelmangementsystem.application.repository.RoomTypeFacilityRepository;
 import com.hotelmangementsystem.application.repository.RoomTypeRepository;
 import jakarta.persistence.EntityNotFoundException;
 import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.math.RoundingMode;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -20,6 +23,9 @@ public class RoomTypeServiceImpl implements RoomTypeService{
 
     @Autowired
     private BookingRepository bookingRepository;
+
+    @Autowired
+    private RoomTypeFacilityRepository roomTypeFacilityRepository;
 
     @Override
     public List<RoomType> getAllRoomTypes() {
@@ -45,8 +51,6 @@ public class RoomTypeServiceImpl implements RoomTypeService{
             roomTypeDB.setNoOfRooms(roomType.getNoOfRooms());
             roomTypeDB.setMaxAdult(roomType.getMaxAdult());
             roomTypeDB.setDescription(roomType.getDescription());
-            roomTypeDB.setFacilities(roomType.getFacilities());
-            roomTypeDB.setPrice(roomType.getPrice());
             return roomTypeRepository.save(roomTypeDB);
         }
         return null;
@@ -97,6 +101,42 @@ public class RoomTypeServiceImpl implements RoomTypeService{
 
         if(roomType != null){
             return roomType.getBookings();
+        }
+        return null;
+    }
+
+    @Transactional
+    @Override
+    public RoomType addRoomTypeFacilityToRoomType(Long roomtypeId, Long roomTypeFacilityId) {
+        RoomType roomType = getRoomType(roomtypeId);
+        RoomTypeFacility roomTypeFacility = roomTypeFacilityRepository.findById(roomTypeFacilityId).orElse(null);
+
+        if(roomType != null && roomTypeFacility != null){
+            roomTypeFacility.setRoomType(roomType);
+            return roomType;
+        }
+        return null;
+    }
+
+    @Transactional
+    @Override
+    public RoomType removeRoomTypeFacilityFromRoomType(Long roomtypeId, Long roomTypeFacilityId) {
+        RoomType roomType = getRoomType(roomtypeId);
+        RoomTypeFacility roomTypeFacility = roomTypeFacilityRepository.findById(roomTypeFacilityId).orElse(null);
+
+        if(roomType != null && roomTypeFacility != null){
+            roomTypeFacility.setRoomType(null);
+            return roomType;
+        }
+        return null;
+    }
+
+    @Override
+    public List<RoomTypeFacility> getAllRoomTypeFacilitiesOfRoomType(Long id) {
+        RoomType roomType = getRoomType(id);
+
+        if(roomType != null){
+            return roomType.getRoomTypeFacilities();
         }
         return null;
     }
