@@ -42,13 +42,6 @@ class HotelServiceTest {
 
     @BeforeEach
     void setUp() {
-        Hotel hotel = new Hotel(1l, "Hilton", "Sri lanka", "Colombo", "123 gallface road", "description", "0123456789");
-
-        List<Hotel> hotels = new ArrayList<>();
-        hotels.add(hotel);
-
-
-
 
     }
 
