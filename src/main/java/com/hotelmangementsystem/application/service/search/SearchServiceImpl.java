@@ -61,7 +61,7 @@ public class SearchServiceImpl implements SearchService {
                         List<Contract> contracts = hotel.getContracts();
                         for(Contract contract : contracts){
                             logger.info("five");
-
+                            available.set(false);
                             if(contract.getStartDate().before(checkInDate) && contract.getEndDate().after(checkOutDate)) {
                                 logger.info("six");
                                 contractService.getContract(contract.getId()).getRoomTypes().forEach(roomType -> {
