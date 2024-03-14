@@ -1,11 +1,7 @@
 package com.hotelmangementsystem.application.service;
 
-import com.hotelmangementsystem.application.entity.BookedPrice;
-import com.hotelmangementsystem.application.entity.Booking;
-import com.hotelmangementsystem.application.entity.Passenger;
-import com.hotelmangementsystem.application.repository.BookedPriceRepository;
-import com.hotelmangementsystem.application.repository.BookingRepository;
-import com.hotelmangementsystem.application.repository.PassengerRepository;
+import com.hotelmangementsystem.application.entity.*;
+import com.hotelmangementsystem.application.repository.*;
 import jakarta.persistence.EntityNotFoundException;
 import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,6 +18,15 @@ public class BookingServiceImpl implements BookingService{
 
     @Autowired
     private BookedPriceRepository bookedPriceRepository;
+
+    @Autowired
+    private BookedRoomTypeRepository bookedRoomTypeRepository;
+
+    @Autowired
+    private BookedDiscountRepository bookedDiscountRepository;
+
+    @Autowired
+    private BookedSupplementRepository bookedSupplementRepository;
 
     @Autowired
     private PassengerRepository passengerRepository;
@@ -142,6 +147,119 @@ public class BookingServiceImpl implements BookingService{
         Booking booking = getBooking(id);
         if(booking != null){
             return booking.getPassengers();
+        }
+        return null;
+    }
+
+    @Transactional
+    @Override
+    public Booking addBookedRoomTypeToBooking(Long bookingId, Long bookedRoomTypeId) {
+        Booking booking = getBooking(bookingId);
+        BookedRoomType bookedRoomType = bookedRoomTypeRepository.findById(bookedRoomTypeId).orElse(null);
+
+        if(booking != null && bookedRoomType != null){
+            bookedRoomType.setBooking(booking);
+            booking.setBookedRoomType(bookedRoomType);
+
+            return booking;
+        }
+        return null;
+    }
+
+    @Transactional
+    @Override
+    public Booking removeBookedRoomTypeFromBooking(Long bookingId, Long bookedRoomTypeId) {
+        Booking booking = getBooking(bookingId);
+        BookedRoomType bookedRoomType = bookedRoomTypeRepository.findById(bookedRoomTypeId).orElse(null);
+
+        if(booking != null && bookedRoomType != null){
+            bookedRoomType.setBooking(null);
+            booking.setBookedRoomType(null);
+
+            return booking;
+        }
+        return null;
+    }
+
+    @Override
+    public BookedRoomType getAllBookedRoomTypesOfBooking(Long id) {
+        Booking booking = getBooking(id);
+        if(booking != null){
+            return booking.getBookedRoomType();
+        }
+        return null;
+    }
+
+    @Transactional
+    @Override
+    public Booking addBookedDiscountToBooking(Long bookingId, Long bookedDiscountId) {
+        Booking booking = getBooking(bookingId);
+        BookedDiscount bookedDiscount = bookedDiscountRepository.findById(bookedDiscountId).orElse(null);
+
+        if(booking != null && bookedDiscount != null){
+            bookedDiscount.setBooking(booking);
+
+            return booking;
+        }
+        return null;
+    }
+
+    @Transactional
+    @Override
+    public Booking removeBookedDiscountFromBooking(Long bookingId, Long bookedDiscountId) {
+        Booking booking = getBooking(bookingId);
+        BookedDiscount bookedDiscount = bookedDiscountRepository.findById(bookedDiscountId).orElse(null);
+
+        if(booking != null && bookedDiscount != null){
+            bookedDiscount.setBooking(null);
+
+            return booking;
+        }
+        return null;
+    }
+
+    @Override
+    public List<BookedDiscount> getAllBookedDiscountsOfBooking(Long id) {
+        Booking booking = getBooking(id);
+        if(booking != null){
+            return booking.getBookedDiscounts();
+        }
+        return null;
+    }
+
+    @Transactional
+    @Override
+    public Booking addBookedSupplementToBooking(Long bookingId, Long bookedSupplementId) {
+        Booking booking = getBooking(bookingId);
+        BookedSupplement bookedSupplement = bookedSupplementRepository.findById(bookedSupplementId).orElse(null);
+
+        if(booking != null && bookedSupplement != null){
+            bookedSupplement.setBooking(booking);
+
+            return booking;
+        }
+        return null;
+    }
+
+    @Transactional
+    @Override
+    public Booking removeBookedSupplementFromBooking(Long bookingId, Long bookedSupplementId) {
+        Booking booking = getBooking(bookingId);
+        BookedSupplement bookedSupplement = bookedSupplementRepository.findById(bookedSupplementId).orElse(null);
+
+        if(booking != null && bookedSupplement != null){
+            bookedSupplement.setBooking(null);
+
+            return booking;
+        }
+        return null;
+    }
+
+    @Override
+    public List<BookedSupplement> getAllBookedSupplementsOfBooking(Long id) {
+        Booking booking = getBooking(id);
+        if(booking != null){
+            return booking.getBookedSupplements();
         }
         return null;
     }

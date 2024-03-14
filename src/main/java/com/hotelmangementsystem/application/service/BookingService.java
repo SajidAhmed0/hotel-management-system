@@ -1,8 +1,6 @@
 package com.hotelmangementsystem.application.service;
 
-import com.hotelmangementsystem.application.entity.BookedPrice;
-import com.hotelmangementsystem.application.entity.Booking;
-import com.hotelmangementsystem.application.entity.Passenger;
+import com.hotelmangementsystem.application.entity.*;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -29,4 +27,22 @@ public interface BookingService {
     public Booking removePassengerFromBooking(Long bookingId, Long passengerId);
 
     public List<Passenger> getAllPassengersOfBooking(Long id);
+
+    public Booking addBookedRoomTypeToBooking(Long bookingId, Long bookedRoomTypeId);
+
+    public Booking removeBookedRoomTypeFromBooking(Long bookingId, Long bookedRoomTypeId);
+
+    public BookedRoomType getAllBookedRoomTypesOfBooking(Long id);
+
+    public Booking addBookedDiscountToBooking(Long bookingId, Long bookedDiscountId);
+
+    public Booking removeBookedDiscountFromBooking(Long bookingId, Long bookedDiscountId);
+
+    public List<BookedDiscount> getAllBookedDiscountsOfBooking(Long id);
+
+    public Booking addBookedSupplementToBooking(Long bookingId, Long bookedSupplementId);
+
+    public Booking removeBookedSupplementFromBooking(Long bookingId, Long bookedSupplementId);
+
+    public List<BookedSupplement> getAllBookedSupplementsOfBooking(Long id);
 }

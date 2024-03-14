@@ -33,6 +33,24 @@ public class Booking {
     )
     private List<BookedPrice> bookedPrices = new ArrayList<>();
 
+    @OneToOne(
+            mappedBy = "booking",
+            fetch = FetchType.LAZY
+    )
+    private BookedRoomType bookedRoomType;
+
+    @OneToMany(
+            mappedBy = "booking",
+            fetch = FetchType.LAZY
+    )
+    private List<BookedDiscount> bookedDiscounts = new ArrayList<>();
+
+    @OneToMany(
+            mappedBy = "booking",
+            fetch = FetchType.LAZY
+    )
+    private List<BookedSupplement> bookedSupplements = new ArrayList<>();
+
     @OneToMany(
             mappedBy = "booking",
             fetch = FetchType.LAZY
@@ -181,5 +199,45 @@ public class Booking {
 
     public void setRoomType(RoomType roomType) {
         this.roomType = roomType;
+    }
+
+    public List<BookedSupplement> getBookedSupplements() {
+        return bookedSupplements;
+    }
+
+    public void setBookedSupplements(List<BookedSupplement> bookedSupplements) {
+        this.bookedSupplements = bookedSupplements;
+    }
+
+    public void addBookedSupplement(BookedSupplement bookedSupplement){
+        this.bookedSupplements.add(bookedSupplement);
+    }
+
+    public void removeBookedSupplement(BookedSupplement bookedSupplement){
+        this.bookedSupplements.remove(bookedSupplement);
+    }
+
+    public List<BookedDiscount> getBookedDiscounts() {
+        return bookedDiscounts;
+    }
+
+    public void setBookedDiscounts(List<BookedDiscount> bookedDiscounts) {
+        this.bookedDiscounts = bookedDiscounts;
+    }
+
+    public void addBookedDiscount(BookedDiscount bookedDiscount){
+        this.bookedDiscounts.add(bookedDiscount);
+    }
+
+    public void removeBookedDiscount(BookedDiscount bookedDiscount){
+        this.bookedDiscounts.remove(bookedDiscount);
+    }
+
+    public BookedRoomType getBookedRoomType() {
+        return bookedRoomType;
+    }
+
+    public void setBookedRoomType(BookedRoomType bookedRoomType) {
+        this.bookedRoomType = bookedRoomType;
     }
 }

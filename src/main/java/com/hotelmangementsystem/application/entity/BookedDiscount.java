@@ -1,9 +1,7 @@
 package com.hotelmangementsystem.application.entity;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import jakarta.persistence.*;
 
 @Entity
 public class BookedDiscount {
@@ -19,6 +17,16 @@ public class BookedDiscount {
     private Double percentage;
 
     private Long originalId;
+
+    @JsonIgnore
+    @ManyToOne(
+            cascade = CascadeType.ALL
+    )
+    @JoinColumn(
+            name = "booking_id",
+            referencedColumnName = "id"
+    )
+    private Booking booking;
 
     public BookedDiscount() {
     }
@@ -76,5 +84,13 @@ public class BookedDiscount {
 
     public void setOriginalId(Long originalId) {
         this.originalId = originalId;
+    }
+
+    public Booking getBooking() {
+        return booking;
+    }
+
+    public void setBooking(Booking booking) {
+        this.booking = booking;
     }
 }

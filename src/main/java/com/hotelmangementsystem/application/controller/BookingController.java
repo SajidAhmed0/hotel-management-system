@@ -67,4 +67,46 @@ public class BookingController {
     public List<Passenger> getAllPassengersOfBooking(@PathVariable("id") Long id) {
         return bookingService.getAllPassengersOfBooking(id);
     }
+
+    @PutMapping("/{bookingId}/bookedroomtypes/{bookedroomtypeId}")
+    public Booking addBookedRoomTypeToBooking(@PathVariable("bookingId") Long bookingId, @PathVariable("bookedroomtypeId") Long bookedroomtypeId){
+        return bookingService.addBookedRoomTypeToBooking(bookingId, bookedroomtypeId);
+    }
+    @DeleteMapping("/{bookingId}/bookedroomtypes/{bookedroomtypeId}")
+    public Booking removeBookedRoomTypeFromBooking(@PathVariable("bookingId") Long bookingId, @PathVariable("bookedroomtypeId") Long bookedroomtypeId){
+        return bookingService.removeBookedRoomTypeFromBooking(bookingId, bookedroomtypeId);
+    }
+
+    @GetMapping("/{id}/bookedroomtypes")
+    public BookedRoomType getAllBookedRoomTypesOfBooking(@PathVariable("id") Long id) {
+        return bookingService.getAllBookedRoomTypesOfBooking(id);
+    }
+
+    @PutMapping("/{bookingId}/bookeddiscounts/{bookeddiscountId}")
+    public Booking addBookedDiscountToBooking(@PathVariable("bookingId") Long bookingId, @PathVariable("bookeddiscountId") Long bookeddiscountId){
+        return bookingService.addBookedDiscountToBooking(bookingId, bookeddiscountId);
+    }
+    @DeleteMapping("/{bookingId}/bookeddiscounts/{bookeddiscountId}")
+    public Booking removeBookedDiscountFromBooking(@PathVariable("bookingId") Long bookingId, @PathVariable("bookeddiscountId") Long bookeddiscountId){
+        return bookingService.removeBookedDiscountFromBooking(bookingId, bookeddiscountId);
+    }
+
+    @GetMapping("/{id}/bookeddiscounts")
+    public List<BookedDiscount> getAllBookedDiscountsOfBooking(@PathVariable("id") Long id) {
+        return bookingService.getAllBookedDiscountsOfBooking(id);
+    }
+
+    @PutMapping("/{bookingId}/bookedsupplements/{bookedsupplementId}")
+    public Booking addBookedSupplementToBooking(@PathVariable("bookingId") Long bookingId, @PathVariable("bookedsupplementId") Long bookedsupplementId){
+        return bookingService.addBookedSupplementToBooking(bookingId, bookedsupplementId);
+    }
+    @DeleteMapping("/{bookingId}/bookedsupplements/{bookedsupplementId}")
+    public Booking removeBookedSupplementFromBooking(@PathVariable("bookingId") Long bookingId, @PathVariable("bookedsupplementId") Long bookedsupplementId){
+        return bookingService.removeBookedSupplementFromBooking(bookingId, bookedsupplementId);
+    }
+
+    @GetMapping("/{id}/bookedsupplements")
+    public List<BookedSupplement> getAllBookedSupplementsOfBooking(@PathVariable("id") Long id) {
+        return bookingService.getAllBookedSupplementsOfBooking(id);
+    }
 }
