@@ -35,7 +35,7 @@ public class Hotel {
     )
     private List<Image> images = new ArrayList<>();
 
-    //TODO: create contract, supplements
+    //TODO: create contract, supplements, and roomtypes
 
 
     @OneToMany(
@@ -44,6 +44,20 @@ public class Hotel {
 //            orphanRemoval = true
     )
     private List<Contract> contracts = new ArrayList<>();
+
+    @OneToMany(
+            cascade = CascadeType.ALL,
+            mappedBy = "hotel"
+//            orphanRemoval = true
+    )
+    private List<RoomType> roomTypes = new ArrayList<>();
+
+    @OneToMany(
+            cascade = CascadeType.ALL,
+            mappedBy = "hotel"
+//            orphanRemoval = true
+    )
+    private List<Supplement> supplements = new ArrayList<>();
 
     public Hotel() {
     }
@@ -169,5 +183,37 @@ public class Hotel {
 
     public void removeImage(Image image){
         this.images.remove(image);
+    }
+
+    public List<RoomType> getRoomTypes() {
+        return roomTypes;
+    }
+
+    public void setRoomTypes(List<RoomType> roomTypes) {
+        this.roomTypes = roomTypes;
+    }
+
+    public void addRoomType(RoomType roomType){
+        this.roomTypes.add(roomType);
+    }
+
+    public void removeRoomType(RoomType roomType){
+        this.roomTypes.remove(roomType);
+    }
+
+    public List<Supplement> getSupplements() {
+        return supplements;
+    }
+
+    public void setSupplements(List<Supplement> supplements) {
+        this.supplements = supplements;
+    }
+
+    public void addSupplement(Supplement supplement){
+        this.supplements.add(supplement);
+    }
+
+    public void removeSupplement(Supplement supplement){
+        this.supplements.remove(supplement);
     }
 }

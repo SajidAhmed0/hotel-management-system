@@ -30,7 +30,15 @@ public class RoomType {
     )
     private List<RoomTypeFacility> roomTypeFacilities = new ArrayList<>();
 
-    //TODO: create season and contract
+    //TODO: create season and contract, hotel
+
+    @JsonIgnore
+    @ManyToOne
+    @JoinColumn(
+            name = "hotel_id",
+            referencedColumnName = "id"
+    )
+    private Hotel hotel;
 
 
     @JsonIgnore
@@ -169,5 +177,13 @@ public class RoomType {
 
     public void removeRoomTypeFacility(RoomTypeFacility roomTypeFacility){
         this.roomTypeFacilities.remove(roomTypeFacility);
+    }
+
+    public Hotel getHotel() {
+        return hotel;
+    }
+
+    public void setHotel(Hotel hotel) {
+        this.hotel = hotel;
     }
 }

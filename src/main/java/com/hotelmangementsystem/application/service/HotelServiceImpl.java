@@ -1,13 +1,7 @@
 package com.hotelmangementsystem.application.service;
 
-import com.hotelmangementsystem.application.entity.Contract;
-import com.hotelmangementsystem.application.entity.Facility;
-import com.hotelmangementsystem.application.entity.Hotel;
-import com.hotelmangementsystem.application.entity.Image;
-import com.hotelmangementsystem.application.repository.ContractRepository;
-import com.hotelmangementsystem.application.repository.FacilityRepository;
-import com.hotelmangementsystem.application.repository.HotelRepository;
-import com.hotelmangementsystem.application.repository.ImageRepository;
+import com.hotelmangementsystem.application.entity.*;
+import com.hotelmangementsystem.application.repository.*;
 import jakarta.persistence.EntityNotFoundException;
 import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,6 +18,12 @@ public class HotelServiceImpl implements HotelService{
 
     @Autowired
     private ContractRepository contractRepository;
+
+    @Autowired
+    private RoomTypeRepository roomTypeRepository;
+
+    @Autowired
+    private SupplementRepository supplementRepository;
 
     @Autowired
     private FacilityRepository facilityRepository;
@@ -186,6 +186,76 @@ public class HotelServiceImpl implements HotelService{
         Hotel hotel = getHotel(id);
         if(hotel != null){
             return hotel.getImages();
+        }
+        return null;
+    }
+
+    @Transactional
+    @Override
+    public Hotel addRoomTypeToHotel(Long hotelId, Long roomTypeId) {
+        Hotel hotel = getHotel(hotelId);
+        RoomType roomType = roomTypeRepository.findById(roomTypeId).orElse(null);
+
+        if(hotel != null && roomType != null) {
+            roomType.setHotel(hotel);
+            return hotel;
+        }
+        return null;
+    }
+
+    @Transactional
+    @Override
+    public Hotel removeRoomTypeFromHotel(Long hotelId, Long roomTypeId) {
+        Hotel hotel = getHotel(hotelId);
+        RoomType roomType = roomTypeRepository.findById(roomTypeId).orElse(null);
+
+        if(hotel != null && roomType != null) {
+            roomType.setHotel(null);
+            return hotel;
+        }
+        return null;
+    }
+
+    @Override
+    public List<RoomType> getAllRoomTypesOfHotel(Long id) {
+        Hotel hotel = getHotel(id);
+        if(hotel != null){
+            return hotel.getRoomTypes();
+        }
+        return null;
+    }
+
+    @Transactional
+    @Override
+    public Hotel addSupplementToHotel(Long hotelId, Long supplementId) {
+        Hotel hotel = getHotel(hotelId);
+        Supplement supplement = supplementRepository.findById(supplementId).orElse(null);
+
+        if(hotel != null && supplement != null) {
+            supplement.setHotel(hotel);
+            return hotel;
+        }
+        return null;
+    }
+
+    @Transactional
+    @Override
+    public Hotel removeSupplementFromHotel(Long hotelId, Long supplementId) {
+        Hotel hotel = getHotel(hotelId);
+        Supplement supplement = supplementRepository.findById(supplementId).orElse(null);
+
+        if(hotel != null && supplement != null) {
+            supplement.setHotel(null);
+            return hotel;
+        }
+        return null;
+    }
+
+    @Override
+    public List<Supplement> getAllSupplementsOfHotel(Long id) {
+        Hotel hotel = getHotel(id);
+        if(hotel != null){
+            return hotel.getSupplements();
         }
         return null;
     }

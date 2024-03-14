@@ -1,9 +1,6 @@
 package com.hotelmangementsystem.application.service;
 
-import com.hotelmangementsystem.application.entity.Contract;
-import com.hotelmangementsystem.application.entity.Facility;
-import com.hotelmangementsystem.application.entity.Hotel;
-import com.hotelmangementsystem.application.entity.Image;
+import com.hotelmangementsystem.application.entity.*;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -36,4 +33,16 @@ public interface HotelService {
     public Hotel removeImageFromHotel(Long hotelId, Long imageId);
 
     public List<Image> getAllImagesOfHotel(Long id);
+
+    public Hotel addRoomTypeToHotel(Long hotelId, Long roomTypeId);
+
+    public Hotel removeRoomTypeFromHotel(Long hotelId, Long roomTypeId);
+
+    public List<RoomType> getAllRoomTypesOfHotel(Long id);
+
+    public Hotel addSupplementToHotel(Long hotelId, Long supplementId);
+
+    public Hotel removeSupplementFromHotel(Long hotelId, Long supplementId);
+
+    public List<Supplement> getAllSupplementsOfHotel(Long id);
 }

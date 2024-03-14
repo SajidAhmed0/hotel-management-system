@@ -1,9 +1,6 @@
 package com.hotelmangementsystem.application.controller;
 
-import com.hotelmangementsystem.application.entity.Contract;
-import com.hotelmangementsystem.application.entity.Facility;
-import com.hotelmangementsystem.application.entity.Hotel;
-import com.hotelmangementsystem.application.entity.Image;
+import com.hotelmangementsystem.application.entity.*;
 import com.hotelmangementsystem.application.service.HotelService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -86,5 +83,35 @@ public class HotelController {
     @GetMapping("/{id}/images")
     public List<Image> getAllImagesOfHotel(@PathVariable("id") Long id) {
         return hotelService.getAllImagesOfHotel(id);
+    }
+
+    @PutMapping("/{hotelId}/roomtypes/{roomtypeId}")
+    public Hotel addRoomTypeFromHotel(@PathVariable("hotelId") Long hotelId, @PathVariable("roomtypeId") Long roomtypeId){
+        return hotelService.addRoomTypeToHotel(hotelId, roomtypeId);
+    }
+
+    @DeleteMapping("/{hotelId}/roomtypes/{roomtypeId}")
+    public Hotel removeRoomTypeFromHotel(@PathVariable("hotelId") Long hotelId, @PathVariable("roomtypeId") Long roomtypeId){
+        return hotelService.removeRoomTypeFromHotel(hotelId, roomtypeId);
+    }
+
+    @GetMapping("/{id}/roomtypes")
+    public List<RoomType> getAllRoomTypesOfHotel(@PathVariable("id") Long id) {
+        return hotelService.getAllRoomTypesOfHotel(id);
+    }
+
+    @PutMapping("/{hotelId}/supplements/{supplementId}")
+    public Hotel addSupplementFromHotel(@PathVariable("hotelId") Long hotelId, @PathVariable("supplementId") Long supplementId){
+        return hotelService.addSupplementToHotel(hotelId, supplementId);
+    }
+
+    @DeleteMapping("/{hotelId}/supplements/{supplementId}")
+    public Hotel removeSupplementFromHotel(@PathVariable("hotelId") Long hotelId, @PathVariable("supplementId") Long supplementId){
+        return hotelService.removeSupplementFromHotel(hotelId, supplementId);
+    }
+
+    @GetMapping("/{id}/supplements")
+    public List<Supplement> getAllSupplementsOfHotel(@PathVariable("id") Long id) {
+        return hotelService.getAllSupplementsOfHotel(id);
     }
 }

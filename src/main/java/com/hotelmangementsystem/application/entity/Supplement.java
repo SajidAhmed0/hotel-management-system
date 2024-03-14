@@ -18,7 +18,15 @@ public class Supplement {
 
     private String description;
 
-    //TODO: create contract and season
+    //TODO: create contract and season, hotel
+
+    @JsonIgnore
+    @ManyToOne
+    @JoinColumn(
+            name = "hotel_id",
+            referencedColumnName = "id"
+    )
+    private Hotel hotel;
 
     @JsonIgnore
     @ManyToOne(
@@ -97,5 +105,13 @@ public class Supplement {
 
     public void removeSeasonSupplementPricing(SeasonSupplementPricing seasonSupplementPricing){
         this.seasonSupplementPricings.remove(seasonSupplementPricing);
+    }
+
+    public Hotel getHotel() {
+        return hotel;
+    }
+
+    public void setHotel(Hotel hotel) {
+        this.hotel = hotel;
     }
 }
