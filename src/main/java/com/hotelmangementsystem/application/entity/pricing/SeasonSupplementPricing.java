@@ -1,6 +1,7 @@
 package com.hotelmangementsystem.application.entity.pricing;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.hotelmangementsystem.application.entity.Contract;
 import com.hotelmangementsystem.application.entity.Season;
 import com.hotelmangementsystem.application.entity.Supplement;
 import com.hotelmangementsystem.application.key.SeasonSupplementKey;
@@ -23,22 +24,32 @@ public class SeasonSupplementPricing {
     @JoinColumn(name = "supplement_id")
     private Supplement supplement;
 
+    @JsonIgnore
+    @ManyToOne
+    @MapsId("contractId")
+    @JoinColumn(
+            name = "contract_id"
+    )
+    private Contract contract;
+
     private Double price;
 
     public SeasonSupplementPricing() {
     }
 
-    public SeasonSupplementPricing(Season season, Supplement supplement, Double price) {
+    public SeasonSupplementPricing(Season season, Supplement supplement, Contract contract, Double price) {
         this.season = season;
         this.supplement = supplement;
         this.price = price;
+        this.contract = contract;
     }
 
-    public SeasonSupplementPricing(SeasonSupplementKey id, Season season, Supplement supplement, Double price) {
+    public SeasonSupplementPricing(SeasonSupplementKey id, Season season, Supplement supplement, Contract contract, Double price) {
         this.id = id;
         this.season = season;
         this.supplement = supplement;
         this.price = price;
+        this.contract = contract;
     }
 
     public SeasonSupplementKey getId() {
@@ -71,5 +82,13 @@ public class SeasonSupplementPricing {
 
     public void setPrice(Double price) {
         this.price = price;
+    }
+
+    public Contract getContract() {
+        return contract;
+    }
+
+    public void setContract(Contract contract) {
+        this.contract = contract;
     }
 }

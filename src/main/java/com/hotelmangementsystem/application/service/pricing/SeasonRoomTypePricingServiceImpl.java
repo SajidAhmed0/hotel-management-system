@@ -102,33 +102,33 @@ public class SeasonRoomTypePricingServiceImpl implements SeasonRoomTypePricingSe
         Contract contract = contractRepository.findById(contractId).orElse(null);
         List<RoomType> roomTypes = new ArrayList<>();
 
-        List<SeasonRoomTypePricing> pricing = contract.getSeasonRoomTypePricings();
+        List<SeasonRoomTypePricing> pricings = contract.getSeasonRoomTypePricings();
 
-        pricing.forEach((v) -> {
+        pricings.forEach((v) -> {
             roomTypes.add(v.getRoomType());
         });
         return roomTypes;
     }
 
-    @Override
-    public List<Season> getAllSeasonsOfContract(Long contractId) {
-        Contract contract = contractRepository.findById(contractId).orElse(null);
-        List<Season> seasons = new ArrayList<>();
-
-        List<SeasonRoomTypePricing> pricing = contract.getSeasonRoomTypePricings();
-
-        pricing.forEach((v) -> {
-            seasons.add(v.getSeason());
-        });
-        return seasons;
-    }
+//    @Override
+//    public List<Season> getAllSeasonsOfContract(Long contractId) {
+//        Contract contract = contractRepository.findById(contractId).orElse(null);
+//        List<Season> seasons = new ArrayList<>();
+//
+//        List<SeasonRoomTypePricing> pricing = contract.getSeasonRoomTypePricings();
+//
+//        pricing.forEach((v) -> {
+//            seasons.add(v.getSeason());
+//        });
+//        return seasons;
+//    }
 
     @Override
     public List<SeasonRoomTypePricing> getAllSeasonRoomTypePricingOfContract(Long contractId) {
         Contract contract = contractRepository.findById(contractId).orElse(null);
 
-        List<SeasonRoomTypePricing> pricing = contract.getSeasonRoomTypePricings();
+        List<SeasonRoomTypePricing> pricings = contract.getSeasonRoomTypePricings();
 
-        return pricing;
+        return pricings;
     }
 }

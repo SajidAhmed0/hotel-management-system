@@ -28,15 +28,15 @@ public class Supplement {
     )
     private Hotel hotel;
 
-    @JsonIgnore
-    @ManyToOne(
-            cascade = CascadeType.ALL
-    )
-    @JoinColumn(
-            name = "contract_id",
-            referencedColumnName = "id"
-    )
-    private Contract contract;
+//    @JsonIgnore
+//    @ManyToOne(
+//            cascade = CascadeType.ALL
+//    )
+//    @JoinColumn(
+//            name = "contract_id",
+//            referencedColumnName = "id"
+//    )
+//    private Contract contract;
 
     @JsonIgnore
     @OneToMany(
@@ -81,14 +81,6 @@ public class Supplement {
 
     public void setDescription(String description) {
         this.description = description;
-    }
-
-    public Contract getContract() {
-        return contract;
-    }
-
-    public void setContract(Contract contract) {
-        this.contract = contract;
     }
 
     public List<SeasonSupplementPricing> getSeasonSupplementPricings() {

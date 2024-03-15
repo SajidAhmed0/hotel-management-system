@@ -20,7 +20,7 @@ public interface SeasonRoomTypePricingService {
 
     public List<RoomType> getAllRoomTypesOfContract(Long contractId);
 
-    public List<Season> getAllSeasonsOfContract(Long contractId);
+//    public List<Season> getAllSeasonsOfContract(Long contractId);
 
     public List<SeasonRoomTypePricing> getAllSeasonRoomTypePricingOfContract(Long contractId);
 }

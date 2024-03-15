@@ -56,11 +56,11 @@ public class SeasonRoomTypeKey implements Serializable {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         SeasonRoomTypeKey that = (SeasonRoomTypeKey) o;
-        return Objects.equals(seasonId, that.seasonId) && Objects.equals(roomTypeId, that.roomTypeId);
+        return Objects.equals(seasonId, that.seasonId) && Objects.equals(roomTypeId, that.roomTypeId) && Objects.equals(contractId, that.contractId);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(seasonId, roomTypeId);
+        return Objects.hash(seasonId, roomTypeId, contractId);
     }
 }

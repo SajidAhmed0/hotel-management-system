@@ -38,17 +38,19 @@ public class SeasonRoomTypePricing {
     public SeasonRoomTypePricing() {
     }
 
-    public SeasonRoomTypePricing(Season season, RoomType roomType, Double price) {
+    public SeasonRoomTypePricing(Season season, RoomType roomType, Contract contract, Double price) {
         this.season = season;
         this.roomType = roomType;
         this.price = price;
+        this.contract = contract;
     }
 
-    public SeasonRoomTypePricing(SeasonRoomTypeKey id, Season season, RoomType roomType, Double price) {
+    public SeasonRoomTypePricing(SeasonRoomTypeKey id, Season season, RoomType roomType, Contract contract, Double price) {
         this.id = id;
         this.season = season;
         this.roomType = roomType;
         this.price = price;
+        this.contract = contract;
     }
 
     public SeasonRoomTypeKey getId() {

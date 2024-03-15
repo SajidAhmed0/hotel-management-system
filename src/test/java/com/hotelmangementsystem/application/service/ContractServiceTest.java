@@ -134,62 +134,62 @@ class ContractServiceTest {
         assertEquals("deleted", result);
     }
 
-    @Test
-    void addSupplementToContract() {
-        long contractId = 1L;
-        long supplementId = 1L;
-        Contract contract = new Contract();
-        Supplement supplement = new Supplement();
+//    @Test
+//    void addSupplementToContract() {
+//        long contractId = 1L;
+//        long supplementId = 1L;
+//        Contract contract = new Contract();
+//        Supplement supplement = new Supplement();
+//
+//        when(contractRepository.findById(contractId)).thenReturn(Optional.of(contract));
+//        when(supplementRepository.findById(supplementId)).thenReturn(Optional.of(supplement));
+//
+//        // Test
+//        Contract result = contractService.addSupplementToContract(contractId, supplementId);
+//
+//        // Verify
+//        assertNotNull(result);
+//        assertEquals(contract, supplement.getContract());
+//    }
 
-        when(contractRepository.findById(contractId)).thenReturn(Optional.of(contract));
-        when(supplementRepository.findById(supplementId)).thenReturn(Optional.of(supplement));
+//    @Test
+//    void removeSupplementToContract() {
+//        long contractId = 1L;
+//        long supplementId = 1L;
+//        Contract contract = new Contract();
+//        Supplement supplement = new Supplement();
+//        supplement.setContract(contract);
+//
+//        when(contractRepository.findById(contractId)).thenReturn(Optional.of(contract));
+//        when(supplementRepository.findById(supplementId)).thenReturn(Optional.of(supplement));
+//
+//        // Test
+//        Contract result = contractService.removeSupplementToContract(contractId, supplementId);
+//
+//        // Verify
+//        assertNotNull(result);
+//        assertNull(supplement.getContract());
+//    }
 
-        // Test
-        Contract result = contractService.addSupplementToContract(contractId, supplementId);
-
-        // Verify
-        assertNotNull(result);
-        assertEquals(contract, supplement.getContract());
-    }
-
-    @Test
-    void removeSupplementToContract() {
-        long contractId = 1L;
-        long supplementId = 1L;
-        Contract contract = new Contract();
-        Supplement supplement = new Supplement();
-        supplement.setContract(contract);
-
-        when(contractRepository.findById(contractId)).thenReturn(Optional.of(contract));
-        when(supplementRepository.findById(supplementId)).thenReturn(Optional.of(supplement));
-
-        // Test
-        Contract result = contractService.removeSupplementToContract(contractId, supplementId);
-
-        // Verify
-        assertNotNull(result);
-        assertNull(supplement.getContract());
-    }
-
-    @Test
-    void getAllSupplementsOfContract() {
-        long contractId = 1L;
-        Contract contract = new Contract();
-        List<Supplement> supplements = new ArrayList<>();
-        supplements.add(new Supplement());
-        supplements.add(new Supplement());
-
-        contract.setSupplements(supplements);
-
-        when(contractRepository.findById(contractId)).thenReturn(Optional.of(contract));
-
-        // Test
-        List<Supplement> result = contractService.getAllSupplementsOfContract(contractId);
-
-        // Verify
-        assertNotNull(result);
-        assertEquals(2, result.size());
-    }
+//    @Test
+//    void getAllSupplementsOfContract() {
+//        long contractId = 1L;
+//        Contract contract = new Contract();
+//        List<Supplement> supplements = new ArrayList<>();
+//        supplements.add(new Supplement());
+//        supplements.add(new Supplement());
+//
+//        contract.setSupplements(supplements);
+//
+//        when(contractRepository.findById(contractId)).thenReturn(Optional.of(contract));
+//
+//        // Test
+//        List<Supplement> result = contractService.getAllSupplementsOfContract(contractId);
+//
+//        // Verify
+//        assertNotNull(result);
+//        assertEquals(2, result.size());
+//    }
 
     @Test
     void addSeasonToContract() {
@@ -248,62 +248,62 @@ class ContractServiceTest {
         assertEquals(2, result.size());
     }
 
-    @Test
-    void addRoomTypeToContract() {
-        long contractId = 1L;
-        long roomTypeId = 1L;
-        Contract contract = new Contract();
-        RoomType roomType = new RoomType();
+//    @Test
+//    void addRoomTypeToContract() {
+//        long contractId = 1L;
+//        long roomTypeId = 1L;
+//        Contract contract = new Contract();
+//        RoomType roomType = new RoomType();
+//
+//        when(contractRepository.findById(contractId)).thenReturn(Optional.of(contract));
+//        when(roomTypeRepository.findById(roomTypeId)).thenReturn(Optional.of(roomType));
+//
+//        // Test
+//        Contract result = contractService.addRoomTypeToContract(contractId, roomTypeId);
+//
+//        // Verify
+//        assertNotNull(result);
+//        assertEquals(contract, roomType.getContract());
+//    }
 
-        when(contractRepository.findById(contractId)).thenReturn(Optional.of(contract));
-        when(roomTypeRepository.findById(roomTypeId)).thenReturn(Optional.of(roomType));
+//    @Test
+//    void removeRoomTypeToContract() {
+//        long contractId = 1L;
+//        long roomTypeId = 1L;
+//        Contract contract = new Contract();
+//        RoomType roomType = new RoomType();
+//        roomType.setContract(contract);
+//
+//        when(contractRepository.findById(contractId)).thenReturn(Optional.of(contract));
+//        when(roomTypeRepository.findById(roomTypeId)).thenReturn(Optional.of(roomType));
+//
+//        // Test
+//        Contract result = contractService.removeRoomTypeToContract(contractId, roomTypeId);
+//
+//        // Verify
+//        assertNotNull(result);
+//        assertNull(roomType.getContract());
+//    }
 
-        // Test
-        Contract result = contractService.addRoomTypeToContract(contractId, roomTypeId);
-
-        // Verify
-        assertNotNull(result);
-        assertEquals(contract, roomType.getContract());
-    }
-
-    @Test
-    void removeRoomTypeToContract() {
-        long contractId = 1L;
-        long roomTypeId = 1L;
-        Contract contract = new Contract();
-        RoomType roomType = new RoomType();
-        roomType.setContract(contract);
-
-        when(contractRepository.findById(contractId)).thenReturn(Optional.of(contract));
-        when(roomTypeRepository.findById(roomTypeId)).thenReturn(Optional.of(roomType));
-
-        // Test
-        Contract result = contractService.removeRoomTypeToContract(contractId, roomTypeId);
-
-        // Verify
-        assertNotNull(result);
-        assertNull(roomType.getContract());
-    }
-
-    @Test
-    void getAllRoomTypesOfContract() {
-        long contractId = 1L;
-        Contract contract = new Contract();
-        List<RoomType> roomTypes = new ArrayList<>();
-        roomTypes.add(new RoomType());
-        roomTypes.add(new RoomType());
-
-        contract.setRoomTypes(roomTypes);
-
-        when(contractRepository.findById(contractId)).thenReturn(Optional.of(contract));
-
-        // Test
-        List<RoomType> result = contractService.getAllRoomTypesOfContract(contractId);
-
-        // Verify
-        assertNotNull(result);
-        assertEquals(2, result.size());
-    }
+//    @Test
+//    void getAllRoomTypesOfContract() {
+//        long contractId = 1L;
+//        Contract contract = new Contract();
+//        List<RoomType> roomTypes = new ArrayList<>();
+//        roomTypes.add(new RoomType());
+//        roomTypes.add(new RoomType());
+//
+//        contract.setRoomTypes(roomTypes);
+//
+//        when(contractRepository.findById(contractId)).thenReturn(Optional.of(contract));
+//
+//        // Test
+//        List<RoomType> result = contractService.getAllRoomTypesOfContract(contractId);
+//
+//        // Verify
+//        assertNotNull(result);
+//        assertEquals(2, result.size());
+//    }
 
     @Test
     void addDiscountToContract() {

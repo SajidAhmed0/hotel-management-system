@@ -2,6 +2,7 @@ package com.hotelmangementsystem.application.entity;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.hotelmangementsystem.application.entity.pricing.SeasonRoomTypePricing;
+import com.hotelmangementsystem.application.entity.pricing.SeasonSupplementPricing;
 import jakarta.persistence.*;
 
 import java.sql.Date;
@@ -23,7 +24,7 @@ public class Contract {
 
     private String paymentPolicy;
 
-    //TODO: hotel entity, discounts, roomTypes, seasons
+    //TODO: hotel entity, discounts, roomTypes, seasons, supplements
 
     @JsonIgnore
     @ManyToOne
@@ -44,6 +45,11 @@ public class Contract {
             mappedBy = "contract"
     )
     private List<SeasonRoomTypePricing> seasonRoomTypePricings = new ArrayList<>();
+
+    @OneToMany(
+            mappedBy = "contract"
+    )
+    private List<SeasonSupplementPricing> seasonSupplementPricings = new ArrayList<>();
 
 
     @OneToMany(
@@ -162,5 +168,21 @@ public class Contract {
 
     public void removeSeasonRoomTypePricing(SeasonRoomTypePricing seasonRoomTypePricing){
         this.seasonRoomTypePricings.remove(seasonRoomTypePricing);
+    }
+
+    public List<SeasonSupplementPricing> getSeasonSupplementPricings() {
+        return seasonSupplementPricings;
+    }
+
+    public void setSeasonSupplementPricings(List<SeasonSupplementPricing> seasonSupplementPricings) {
+        this.seasonSupplementPricings = seasonSupplementPricings;
+    }
+
+    public void addSeasonSupplementPricing(SeasonSupplementPricing seasonSupplementPricing){
+        this.seasonSupplementPricings.add(seasonSupplementPricing);
+    }
+
+    public void removeSeasonSupplementPricing(SeasonSupplementPricing seasonSupplementPricing){
+        this.seasonSupplementPricings.remove(seasonSupplementPricing);
     }
 }

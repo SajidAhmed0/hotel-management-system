@@ -21,11 +21,6 @@ public class SeasonController {
     @Autowired
     private SeasonService seasonService;
 
-    @Autowired
-    private SeasonSupplementPricingService seasonSupplementPricingService;
-
-
-
     @GetMapping
     public List<Season> getAllSeasons(){
         return seasonService.getAllSeasons();
@@ -50,28 +45,5 @@ public class SeasonController {
     public String deleteSeason(@PathVariable("id") Long id){
         return seasonService.deleteSeason(id);
     }
-
-
-    // FOR: pricing supplement
-    @PostMapping("/{seasonId}/supplements/{supplementId}")
-    public SeasonSupplementPricing addSeasonSupplementPricing(@PathVariable("seasonId") Long seasonId, @PathVariable("supplementId") Long supplementId, @RequestBody SeasonSupplementPricing price){
-        return seasonSupplementPricingService.addSeasonSupplementPricing(seasonId, supplementId, price.getPrice());
-    }
-
-    @PutMapping("/{seasonId}/supplements/{supplementId}")
-    public SeasonSupplementPricing updateSeasonSupplementPricing(@PathVariable("seasonId") Long seasonId, @PathVariable("supplementId") Long supplementId, @RequestBody SeasonSupplementPricing price){
-        return seasonSupplementPricingService.updateSupplementPricing(seasonId, supplementId, price.getPrice());
-    }
-
-    @DeleteMapping("/{seasonId}/supplements/{supplementId}")
-    public String deleteSeasonSupplementPricing(@PathVariable("seasonId") Long seasonId, @PathVariable("supplementId") Long supplementId){
-        return seasonSupplementPricingService.deleteSeasonSupplementPricing(seasonId, supplementId);
-    }
-
-    @GetMapping("/{seasonId}/supplements")
-    public List<Supplement> getAllSupplementsOfSeason(@PathVariable("seasonId") Long id){
-        return seasonSupplementPricingService.getAllSupplementsOfSeason(id);
-    }
-
 
 }

@@ -2,8 +2,10 @@ package com.hotelmangementsystem.application.controller;
 
 import com.hotelmangementsystem.application.entity.*;
 import com.hotelmangementsystem.application.entity.pricing.SeasonRoomTypePricing;
+import com.hotelmangementsystem.application.entity.pricing.SeasonSupplementPricing;
 import com.hotelmangementsystem.application.service.ContractService;
 import com.hotelmangementsystem.application.service.pricing.SeasonRoomTypePricingService;
+import com.hotelmangementsystem.application.service.pricing.SeasonSupplementPricingService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -18,6 +20,9 @@ public class ContractController {
 
     @Autowired
     private SeasonRoomTypePricingService seasonRoomTypePricingService;
+
+    @Autowired
+    private SeasonSupplementPricingService seasonSupplementPricingService;
 
     @GetMapping
     public List<Contract> getAllContracts(){
@@ -137,14 +142,45 @@ public class ContractController {
         return seasonRoomTypePricingService.getAllRoomTypesOfContract(contractId);
     }
 
-    @GetMapping("/{contractId}/seasonpricings")
-    public List<Season> getAllSeasonsPricingsOfContract(@PathVariable("contractId") Long contractId){
-        return seasonRoomTypePricingService.getAllSeasonsOfContract(contractId);
-    }
+//    @GetMapping("/{contractId}/seasonpricings")
+//    public List<Season> getAllSeasonsPricingsOfContract(@PathVariable("contractId") Long contractId){
+//        return seasonRoomTypePricingService.getAllSeasonsOfContract(contractId);
+//    }
 
     @GetMapping("/{contractId}/seasonroomtypepricings")
     public List<SeasonRoomTypePricing> getAllSeasonRoomTypePricingOfContract(@PathVariable("contractId") Long contractId){
         return seasonRoomTypePricingService.getAllSeasonRoomTypePricingOfContract(contractId);
+    }
+
+    // FOR: pricing supplement
+    @PostMapping("/{contractId}/seasons/{seasonId}/supplements/{supplementId}")
+    public SeasonSupplementPricing addSeasonSupplementPricing(@PathVariable("seasonId") Long seasonId, @PathVariable("supplementId") Long supplementId, @PathVariable("contractId") Long contractId, @RequestBody SeasonSupplementPricing price){
+        return seasonSupplementPricingService.addSeasonSupplementPricing(seasonId, supplementId, contractId, price.getPrice());
+    }
+
+    @PutMapping("/{contractId}/seasons/{seasonId}/supplements/{supplementId}")
+    public SeasonSupplementPricing updateSeasonSupplementPricing(@PathVariable("seasonId") Long seasonId, @PathVariable("supplementId") Long supplementId, @PathVariable("contractId") Long contractId, @RequestBody SeasonSupplementPricing price){
+        return seasonSupplementPricingService.updateSupplementPricing(seasonId, supplementId, contractId, price.getPrice());
+    }
+
+    @DeleteMapping("/{contractId}/seasons/{seasonId}/supplements/{supplementId}")
+    public String deleteSeasonSupplementPricing(@PathVariable("seasonId") Long seasonId, @PathVariable("supplementId") Long supplementId, @PathVariable("contractId") Long contractId){
+        return seasonSupplementPricingService.deleteSeasonSupplementPricing(seasonId, supplementId, contractId);
+    }
+
+    @GetMapping("/{contractId}/seasons/{seasonId}/supplements")
+    public List<Supplement> getAllSupplementsOfSeason(@PathVariable("seasonId") Long seasonId, @PathVariable("contractId") Long contractId){
+        return seasonSupplementPricingService.getAllSupplementsOfSeasonInContract(seasonId, contractId);
+    }
+
+    @GetMapping("/{contractId}/supplements")
+    public List<Supplement> getAllSupplementsOfContract(@PathVariable("contractId") Long contractId){
+        return seasonSupplementPricingService.getAllSupplementsOfContract(contractId);
+    }
+
+    @GetMapping("/{contractId}/seasonsupplementpricings")
+    public List<SeasonSupplementPricing> getAllSeasonSupplementPricingOfContract(@PathVariable("contractId") Long contractId){
+        return seasonSupplementPricingService.getAllSeasonSupplementPricingOfContract(contractId);
     }
 }
 
