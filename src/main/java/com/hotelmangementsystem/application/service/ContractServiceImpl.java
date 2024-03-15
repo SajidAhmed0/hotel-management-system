@@ -70,45 +70,45 @@ public class ContractServiceImpl implements ContractService{
         return "deleted";
     }
 
-    @Transactional
-    @Override
-    public Contract addSupplementToContract(Long contractId, Long supplementId) {
-        Contract contract = getContract(contractId);
-        Supplement supplement = supplementRepository.findById(supplementId).orElse(null);
+//    @Transactional
+//    @Override
+//    public Contract addSupplementToContract(Long contractId, Long supplementId) {
+//        Contract contract = getContract(contractId);
+//        Supplement supplement = supplementRepository.findById(supplementId).orElse(null);
+//
+//        if(contract != null && supplement != null){
+////            contract.addSupplement(supplement);
+//            supplement.setContract(contract);
+//            return contract;
+//        }
+//
+//        return null;
+//    }
 
-        if(contract != null && supplement != null){
-//            contract.addSupplement(supplement);
-            supplement.setContract(contract);
-            return contract;
-        }
+//    @Transactional
+//    @Override
+//    public Contract removeSupplementToContract(Long contractId, Long supplementId) {
+//        Contract contract = getContract(contractId);
+//        Supplement supplement = supplementRepository.findById(supplementId).orElse(null);
+//
+//        if(contract != null && supplement != null){
+////            contract.removeSupplement(supplement);
+//            supplement.setContract(null);
+//            return contract;
+//        }
+//
+//        return null;
+//    }
 
-        return null;
-    }
-
-    @Transactional
-    @Override
-    public Contract removeSupplementToContract(Long contractId, Long supplementId) {
-        Contract contract = getContract(contractId);
-        Supplement supplement = supplementRepository.findById(supplementId).orElse(null);
-
-        if(contract != null && supplement != null){
-//            contract.removeSupplement(supplement);
-            supplement.setContract(null);
-            return contract;
-        }
-
-        return null;
-    }
-
-    @Override
-    public List<Supplement> getAllSupplementsOfContract(Long id) {
-        Contract contract = getContract(id);
-
-        if(contract != null){
-            return contract.getSupplements();
-        }
-        return null;
-    }
+//    @Override
+//    public List<Supplement> getAllSupplementsOfContract(Long id) {
+//        Contract contract = getContract(id);
+//
+//        if(contract != null){
+//            return contract.getSupplements();
+//        }
+//        return null;
+//    }
 
     @Transactional
     @Override
@@ -150,45 +150,45 @@ public class ContractServiceImpl implements ContractService{
         return null;
     }
 
-    @Transactional
-    @Override
-    public Contract addRoomTypeToContract(Long contractId, Long roomtypeId) {
-        Contract contract = getContract(contractId);
-        RoomType roomType = roomTypeRepository.findById(roomtypeId).orElse(null);
+//    @Transactional
+//    @Override
+//    public Contract addRoomTypeToContract(Long contractId, Long roomtypeId) {
+//        Contract contract = getContract(contractId);
+//        RoomType roomType = roomTypeRepository.findById(roomtypeId).orElse(null);
+//
+//        if(contract != null && roomType != null){
+////            contract.addRoomType(roomType);
+//            roomType.setContract(contract);
+//            return contract;
+//        }
+//
+//        return null;
+//    }
 
-        if(contract != null && roomType != null){
-//            contract.addRoomType(roomType);
-            roomType.setContract(contract);
-            return contract;
-        }
+//    @Transactional
+//    @Override
+//    public Contract removeRoomTypeToContract(Long contractId, Long roomtypeId) {
+//        Contract contract = getContract(contractId);
+//        RoomType roomType = roomTypeRepository.findById(roomtypeId).orElse(null);
+//
+//        if(contract != null && roomType != null){
+////            contract.removeRoomType(roomType);
+//            roomType.setContract(null);
+//            return contract;
+//        }
+//
+//        return null;
+//    }
 
-        return null;
-    }
-
-    @Transactional
-    @Override
-    public Contract removeRoomTypeToContract(Long contractId, Long roomtypeId) {
-        Contract contract = getContract(contractId);
-        RoomType roomType = roomTypeRepository.findById(roomtypeId).orElse(null);
-
-        if(contract != null && roomType != null){
-//            contract.removeRoomType(roomType);
-            roomType.setContract(null);
-            return contract;
-        }
-
-        return null;
-    }
-
-    @Override
-    public List<RoomType> getAllRoomTypesOfContract(Long id) {
-        Contract contract = getContract(id);
-
-        if(contract != null){
-            return contract.getRoomTypes();
-        }
-        return null;
-    }
+//    @Override
+//    public List<RoomType> getAllRoomTypesOfContract(Long id) {
+//        Contract contract = getContract(id);
+//
+//        if(contract != null){
+//            return contract.getRoomTypes();
+//        }
+//        return null;
+//    }
 
     @Transactional
     @Override

@@ -1,6 +1,7 @@
 package com.hotelmangementsystem.application.entity.pricing;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.hotelmangementsystem.application.entity.Contract;
 import com.hotelmangementsystem.application.entity.RoomType;
 import com.hotelmangementsystem.application.entity.Season;
 import com.hotelmangementsystem.application.key.SeasonRoomTypeKey;
@@ -23,6 +24,14 @@ public class SeasonRoomTypePricing {
     @MapsId("roomTypeId")
     @JoinColumn(name = "roomtype_id")
     private RoomType roomType;
+
+    @JsonIgnore
+    @ManyToOne
+    @MapsId("contractId")
+    @JoinColumn(
+            name = "contract_id"
+    )
+    private Contract contract;
 
     private Double price;
 
@@ -72,5 +81,13 @@ public class SeasonRoomTypePricing {
 
     public void setPrice(Double price) {
         this.price = price;
+    }
+
+    public Contract getContract() {
+        return contract;
+    }
+
+    public void setContract(Contract contract) {
+        this.contract = contract;
     }
 }

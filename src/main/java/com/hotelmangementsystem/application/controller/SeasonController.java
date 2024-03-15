@@ -24,8 +24,7 @@ public class SeasonController {
     @Autowired
     private SeasonSupplementPricingService seasonSupplementPricingService;
 
-    @Autowired
-    private SeasonRoomTypePricingService seasonRoomTypePricingService;
+
 
     @GetMapping
     public List<Season> getAllSeasons(){
@@ -74,24 +73,5 @@ public class SeasonController {
         return seasonSupplementPricingService.getAllSupplementsOfSeason(id);
     }
 
-    // FOR: pricing roomtype
-    @PostMapping("/{seasonId}/roomtypes/{roomtypeId}")
-    public SeasonRoomTypePricing addSeasonRoomTypePricing(@PathVariable("seasonId") Long seasonId, @PathVariable("roomtypeId") Long roomtypeId, @RequestBody SeasonRoomTypePricing price){
-        return seasonRoomTypePricingService.addSeasonRoomTypePricing(seasonId, roomtypeId, price.getPrice());
-    }
 
-    @PutMapping("/{seasonId}/roomtypes/{roomtypeId}")
-    public SeasonRoomTypePricing updateSeasonRoomTypePricing(@PathVariable("seasonId") Long seasonId, @PathVariable("roomtypeId") Long roomtypeId, @RequestBody SeasonRoomTypePricing price){
-        return seasonRoomTypePricingService.updateRoomTypePricing(seasonId, roomtypeId, price.getPrice());
-    }
-
-    @DeleteMapping("/{seasonId}/roomtypes/{roomtypeId}")
-    public String deleteSeasonRoomTypePricing(@PathVariable("seasonId") Long seasonId, @PathVariable("roomtypeId") Long roomtypeId){
-        return seasonRoomTypePricingService.deleteSeasonRoomTypePricing(seasonId, roomtypeId);
-    }
-
-    @GetMapping("/{seasonId}/roomtypes")
-    public List<RoomType> getAllRoomTypesOfSeason(@PathVariable("seasonId") Long id){
-        return seasonRoomTypePricingService.getAllRoomTypesOfSeason(id);
-    }
 }

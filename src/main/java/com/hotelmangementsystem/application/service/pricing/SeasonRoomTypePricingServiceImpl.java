@@ -1,11 +1,13 @@
 package com.hotelmangementsystem.application.service.pricing;
 
+import com.hotelmangementsystem.application.entity.Contract;
 import com.hotelmangementsystem.application.entity.RoomType;
 import com.hotelmangementsystem.application.entity.Season;
 import com.hotelmangementsystem.application.entity.Supplement;
 import com.hotelmangementsystem.application.entity.pricing.SeasonRoomTypePricing;
 import com.hotelmangementsystem.application.entity.pricing.SeasonSupplementPricing;
 import com.hotelmangementsystem.application.key.SeasonRoomTypeKey;
+import com.hotelmangementsystem.application.repository.ContractRepository;
 import com.hotelmangementsystem.application.repository.RoomTypeRepository;
 import com.hotelmangementsystem.application.repository.SeasonRepository;
 import com.hotelmangementsystem.application.repository.SupplementRepository;
@@ -18,12 +20,16 @@ import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 public class SeasonRoomTypePricingServiceImpl implements SeasonRoomTypePricingService {
 
     @Autowired
     private SeasonRoomTypePricingRepository seasonRoomTypePricingRepository;
+
+    @Autowired
+    private ContractRepository contractRepository;
 
     @Autowired
     private SeasonRepository seasonRepository;
@@ -33,16 +39,18 @@ public class SeasonRoomTypePricingServiceImpl implements SeasonRoomTypePricingSe
 
     @Transactional
     @Override
-    public SeasonRoomTypePricing addSeasonRoomTypePricing(Long seasonId, Long roomtypeId, Double price) {
+    public SeasonRoomTypePricing addSeasonRoomTypePricing(Long seasonId, Long roomtypeId, Long contractId, Double price) {
         Season season = seasonRepository.findById(seasonId).orElse(null);
         RoomType roomType = roomTypeRepository.findById(roomtypeId).orElse(null);
+        Contract contract = contractRepository.findById(contractId).orElse(null);
 
-        if(season != null && roomType != null){
+        if(season != null && roomType != null && contract != null){
             SeasonRoomTypePricing seasonRoomTypePricing = new SeasonRoomTypePricing();
+            seasonRoomTypePricing.setContract(contract);
             seasonRoomTypePricing.setSeason(season);
             seasonRoomTypePricing.setRoomType(roomType);
             seasonRoomTypePricing.setPrice(price);
-            seasonRoomTypePricing.setId(new SeasonRoomTypeKey(seasonId, roomtypeId));
+            seasonRoomTypePricing.setId(new SeasonRoomTypeKey(seasonId, roomtypeId, contractId));
 
             return seasonRoomTypePricingRepository.save(seasonRoomTypePricing);
         }
@@ -51,8 +59,8 @@ public class SeasonRoomTypePricingServiceImpl implements SeasonRoomTypePricingSe
 
     @Transactional
     @Override
-    public SeasonRoomTypePricing updateRoomTypePricing(Long seasonId, Long roomtypeId, Double price) {
-        SeasonRoomTypeKey key = new SeasonRoomTypeKey(seasonId, roomtypeId);
+    public SeasonRoomTypePricing updateRoomTypePricing(Long seasonId, Long roomtypeId, Long contractId, Double price) {
+        SeasonRoomTypeKey key = new SeasonRoomTypeKey(seasonId, roomtypeId, contractId);
         SeasonRoomTypePricing seasonRoomTypePricing = seasonRoomTypePricingRepository.findById(key).orElse(null);
 
         if(seasonRoomTypePricing == null){
@@ -63,8 +71,8 @@ public class SeasonRoomTypePricingServiceImpl implements SeasonRoomTypePricingSe
     }
 
     @Override
-    public String deleteSeasonRoomTypePricing(Long seasonId, Long roomtypeId) {
-        SeasonRoomTypeKey key = new SeasonRoomTypeKey(seasonId, roomtypeId);
+    public String deleteSeasonRoomTypePricing(Long seasonId, Long roomtypeId,  Long contractId) {
+        SeasonRoomTypeKey key = new SeasonRoomTypeKey(seasonId, roomtypeId, contractId);
         boolean exists = seasonRoomTypePricingRepository.existsById(key);
 
         if(!exists){
@@ -75,13 +83,52 @@ public class SeasonRoomTypePricingServiceImpl implements SeasonRoomTypePricingSe
     }
 
     @Override
-    public List<RoomType> getAllRoomTypesOfSeason(Long seasonId) {
+    public List<RoomType> getAllRoomTypesOfSeasonInContract(Long seasonId, Long contractId) {
         Season season = seasonRepository.findById(seasonId).orElse(null);
         List<RoomType> roomTypes = new ArrayList<>();
         List<SeasonRoomTypePricing> pricing = season.getSeasonRoomTypePricings();
+
+        pricing = pricing.stream().filter((price) -> {
+            return price.getContract().getId() == contractId;
+        }).collect(Collectors.toList());
         pricing.forEach((v) -> {
             roomTypes.add(v.getRoomType());
         });
         return roomTypes;
+    }
+
+    @Override
+    public List<RoomType> getAllRoomTypesOfContract(Long contractId) {
+        Contract contract = contractRepository.findById(contractId).orElse(null);
+        List<RoomType> roomTypes = new ArrayList<>();
+
+        List<SeasonRoomTypePricing> pricing = contract.getSeasonRoomTypePricings();
+
+        pricing.forEach((v) -> {
+            roomTypes.add(v.getRoomType());
+        });
+        return roomTypes;
+    }
+
+    @Override
+    public List<Season> getAllSeasonsOfContract(Long contractId) {
+        Contract contract = contractRepository.findById(contractId).orElse(null);
+        List<Season> seasons = new ArrayList<>();
+
+        List<SeasonRoomTypePricing> pricing = contract.getSeasonRoomTypePricings();
+
+        pricing.forEach((v) -> {
+            seasons.add(v.getSeason());
+        });
+        return seasons;
+    }
+
+    @Override
+    public List<SeasonRoomTypePricing> getAllSeasonRoomTypePricingOfContract(Long contractId) {
+        Contract contract = contractRepository.findById(contractId).orElse(null);
+
+        List<SeasonRoomTypePricing> pricing = contract.getSeasonRoomTypePricings();
+
+        return pricing;
     }
 }

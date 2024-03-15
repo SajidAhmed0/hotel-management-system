@@ -1,6 +1,7 @@
 package com.hotelmangementsystem.application.entity;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.hotelmangementsystem.application.entity.pricing.SeasonRoomTypePricing;
 import jakarta.persistence.*;
 
 import java.sql.Date;
@@ -32,12 +33,6 @@ public class Contract {
     )
     private Hotel hotel;
 
-    @OneToMany(
-            mappedBy = "contract",
-            fetch = FetchType.LAZY
-    )
-    private List<Supplement> supplements = new ArrayList<>();
-
 
     @OneToMany(
             mappedBy = "contract",
@@ -45,12 +40,10 @@ public class Contract {
     )
     private List<Season> seasons = new ArrayList<>();
 
-
     @OneToMany(
-            mappedBy = "contract",
-            fetch = FetchType.LAZY
+            mappedBy = "contract"
     )
-    private List<RoomType> roomTypes = new ArrayList<>();
+    private List<SeasonRoomTypePricing> seasonRoomTypePricings = new ArrayList<>();
 
 
     @OneToMany(
@@ -125,28 +118,12 @@ public class Contract {
         this.hotel = hotel;
     }
 
-    public List<Supplement> getSupplements() {
-        return supplements;
-    }
-
-    public void setSupplements(List<Supplement> supplements) {
-        this.supplements = supplements;
-    }
-
     public List<Season> getSeasons() {
         return seasons;
     }
 
     public void setSeasons(List<Season> seasons) {
         this.seasons = seasons;
-    }
-
-    public List<RoomType> getRoomTypes() {
-        return roomTypes;
-    }
-
-    public void setRoomTypes(List<RoomType> roomTypes) {
-        this.roomTypes = roomTypes;
     }
 
     public List<Discount> getDiscounts() {
@@ -157,13 +134,6 @@ public class Contract {
         this.discounts = discounts;
     }
 
-    public void addSupplement(Supplement supplement){
-        this.supplements.add(supplement);
-    }
-    public void removeSupplement(Supplement supplement){
-        this.supplements.remove(supplement);
-    }
-
     public void addSeason(Season season){
         this.seasons.add(season);
     }
@@ -171,17 +141,26 @@ public class Contract {
         this.seasons.remove(season);
     }
 
-    public void addRoomType(RoomType roomType){
-        this.roomTypes.add(roomType);
-    }
-    public void removeRoomType(RoomType roomType){
-        this.roomTypes.remove(roomType);
-    }
-
     public void addDiscount(Discount discount){
         this.discounts.add(discount);
     }
     public void removeDiscount(Discount discount){
         this.discounts.remove(discount);
+    }
+
+    public List<SeasonRoomTypePricing> getSeasonRoomTypePricings() {
+        return seasonRoomTypePricings;
+    }
+
+    public void setSeasonRoomTypePricings(List<SeasonRoomTypePricing> seasonRoomTypePricings) {
+        this.seasonRoomTypePricings = seasonRoomTypePricings;
+    }
+
+    public void addSeasonRoomTypePricing(SeasonRoomTypePricing seasonRoomTypePricing){
+        this.seasonRoomTypePricings.add(seasonRoomTypePricing);
+    }
+
+    public void removeSeasonRoomTypePricing(SeasonRoomTypePricing seasonRoomTypePricing){
+        this.seasonRoomTypePricings.remove(seasonRoomTypePricing);
     }
 }

@@ -15,12 +15,16 @@ public class SeasonRoomTypeKey implements Serializable {
     @Column(name = "roomtype_id")
     private Long roomTypeId;
 
+    @Column(name = "contract_id")
+    private Long contractId;
+
     public SeasonRoomTypeKey() {
     }
 
-    public SeasonRoomTypeKey(Long seasonId, Long roomTypeId) {
+    public SeasonRoomTypeKey(Long seasonId, Long roomTypeId, Long contractId) {
         this.seasonId = seasonId;
         this.roomTypeId = roomTypeId;
+        this.contractId = contractId;
     }
 
     public Long getSeasonId() {
@@ -37,6 +41,14 @@ public class SeasonRoomTypeKey implements Serializable {
 
     public void setRoomTypeId(Long roomTypeId) {
         this.roomTypeId = roomTypeId;
+    }
+
+    public Long getContractId() {
+        return contractId;
+    }
+
+    public void setContractId(Long contractId) {
+        this.contractId = contractId;
     }
 
     @Override

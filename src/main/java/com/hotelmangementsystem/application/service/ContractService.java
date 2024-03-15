@@ -19,11 +19,11 @@ public interface ContractService {
 //
 //    public Hotel removeContractToHotel(Long contractId, Long hotelId);
 
-    public Contract addSupplementToContract(Long contractId, Long supplementId);
+//    public Contract addSupplementToContract(Long contractId, Long supplementId);
 
-    public Contract removeSupplementToContract(Long contractId, Long supplementId);
+//    public Contract removeSupplementToContract(Long contractId, Long supplementId);
 
-    public List<Supplement> getAllSupplementsOfContract(Long id);
+//    public List<Supplement> getAllSupplementsOfContract(Long id);
 
     public Contract addSeasonToContract(Long contractId, Long seasonId);
 
@@ -31,11 +31,11 @@ public interface ContractService {
 
     public List<Season> getAllSeasonsOfContract(Long id);
 
-    public Contract addRoomTypeToContract(Long contractId, Long roomtypeId);
+//    public Contract addRoomTypeToContract(Long contractId, Long roomtypeId);
 
-    public Contract removeRoomTypeToContract(Long contractId, Long roomtypeId);
+//    public Contract removeRoomTypeToContract(Long contractId, Long roomtypeId);
 
-    public List<RoomType> getAllRoomTypesOfContract(Long id);
+//    public List<RoomType> getAllRoomTypesOfContract(Long id);
 
     public Contract addDiscountToContract(Long contractId, Long discountId);
 

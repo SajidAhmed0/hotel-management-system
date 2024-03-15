@@ -1,7 +1,9 @@
 package com.hotelmangementsystem.application.controller;
 
 import com.hotelmangementsystem.application.entity.*;
+import com.hotelmangementsystem.application.entity.pricing.SeasonRoomTypePricing;
 import com.hotelmangementsystem.application.service.ContractService;
+import com.hotelmangementsystem.application.service.pricing.SeasonRoomTypePricingService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -13,6 +15,9 @@ public class ContractController {
 
     @Autowired
     private ContractService contractService;
+
+    @Autowired
+    private SeasonRoomTypePricingService seasonRoomTypePricingService;
 
     @GetMapping
     public List<Contract> getAllContracts(){
@@ -50,14 +55,14 @@ public class ContractController {
     }
 
 
-    @PutMapping("/{contractId}/supplements/{supplementId}")
-    public Contract addSupplementToContract(@PathVariable("contractId") Long contractId, @PathVariable("supplementId") Long supplementId){
-        return contractService.addSupplementToContract(contractId, supplementId);
-    }
-    @DeleteMapping("/{contractId}/supplements/{supplementId}")
-    public Contract removeSupplementFromContract(@PathVariable("contractId") Long contractId, @PathVariable("supplementId") Long supplementId){
-        return contractService.removeSupplementToContract(contractId, supplementId);
-    }
+//    @PutMapping("/{contractId}/supplements/{supplementId}")
+//    public Contract addSupplementToContract(@PathVariable("contractId") Long contractId, @PathVariable("supplementId") Long supplementId){
+//        return contractService.addSupplementToContract(contractId, supplementId);
+//    }
+//    @DeleteMapping("/{contractId}/supplements/{supplementId}")
+//    public Contract removeSupplementFromContract(@PathVariable("contractId") Long contractId, @PathVariable("supplementId") Long supplementId){
+//        return contractService.removeSupplementToContract(contractId, supplementId);
+//    }
 
     @PutMapping("/{contractId}/seasons/{seasonId}")
     public Contract addSeasonToContract(@PathVariable("contractId") Long contractId, @PathVariable("seasonId") Long seasonId){
@@ -68,14 +73,14 @@ public class ContractController {
         return contractService.removeSeasonToContract(contractId, seasonId);
     }
 
-    @PutMapping("/{contractId}/roomtypes/{roomtypeId}")
-    public Contract addRoomTypeToContract(@PathVariable("contractId") Long contractId, @PathVariable("roomtypeId") Long roomtypeId){
-        return contractService.addRoomTypeToContract(contractId, roomtypeId);
-    }
-    @DeleteMapping("/{contractId}/roomtypes/{roomtypeId}")
-    public Contract removeRoomTypeFromContract(@PathVariable("contractId") Long contractId, @PathVariable("roomtypeId") Long roomtypeId){
-        return contractService.removeRoomTypeToContract(contractId, roomtypeId);
-    }
+//    @PutMapping("/{contractId}/roomtypes/{roomtypeId}")
+//    public Contract addRoomTypeToContract(@PathVariable("contractId") Long contractId, @PathVariable("roomtypeId") Long roomtypeId){
+//        return contractService.addRoomTypeToContract(contractId, roomtypeId);
+//    }
+//    @DeleteMapping("/{contractId}/roomtypes/{roomtypeId}")
+//    public Contract removeRoomTypeFromContract(@PathVariable("contractId") Long contractId, @PathVariable("roomtypeId") Long roomtypeId){
+//        return contractService.removeRoomTypeToContract(contractId, roomtypeId);
+//    }
 
     @PutMapping("/{contractId}/discounts/{discountId}")
     public Contract addDiscountToContract(@PathVariable("contractId") Long contractId, @PathVariable("discountId") Long discountId){
@@ -86,26 +91,61 @@ public class ContractController {
         return contractService.removeDiscountToContract(contractId, discountId);
     }
 
-    @GetMapping("/{id}/supplements")
-    public List<Supplement> getAllSupplementsOfContract(@PathVariable("id") Long id) {
-        return contractService.getAllSupplementsOfContract(id);
-    }
+//    @GetMapping("/{id}/supplements")
+//    public List<Supplement> getAllSupplementsOfContract(@PathVariable("id") Long id) {
+//        return contractService.getAllSupplementsOfContract(id);
+//    }
 
     @GetMapping("/{id}/seasons")
     public List<Season> getAllSeasonsOfContract(@PathVariable("id") Long id) {
         return contractService.getAllSeasonsOfContract(id);
     }
 
-    @GetMapping("/{id}/roomtypes")
-    public List<RoomType> getAllRoomTypesOfContract(@PathVariable("id") Long id) {
-        return contractService.getAllRoomTypesOfContract(id);
-    }
+//    @GetMapping("/{id}/roomtypes")
+//    public List<RoomType> getAllRoomTypesOfContract(@PathVariable("id") Long id) {
+//        return contractService.getAllRoomTypesOfContract(id);
+//    }
 
     @GetMapping("/{id}/discounts")
     public List<Discount> getAllDisocuntsOfContract(@PathVariable("id") Long id) {
         return contractService.getAllDiscountsOfContract(id);
     }
 
+    // FOR: pricing roomtype
+    @PostMapping("/{contractId}/seasons/{seasonId}/roomtypes/{roomtypeId}")
+    public SeasonRoomTypePricing addSeasonRoomTypePricing(@PathVariable("seasonId") Long seasonId, @PathVariable("roomtypeId") Long roomtypeId, @PathVariable("contractId") Long contractId, @RequestBody SeasonRoomTypePricing price){
+        return seasonRoomTypePricingService.addSeasonRoomTypePricing(seasonId, roomtypeId, contractId, price.getPrice());
+    }
+
+    @PutMapping("/{contractId}/seasons/{seasonId}/roomtypes/{roomtypeId}")
+    public SeasonRoomTypePricing updateSeasonRoomTypePricing(@PathVariable("seasonId") Long seasonId, @PathVariable("roomtypeId") Long roomtypeId, @PathVariable("contractId") Long contractId, @RequestBody SeasonRoomTypePricing price){
+        return seasonRoomTypePricingService.updateRoomTypePricing(seasonId, roomtypeId, contractId, price.getPrice());
+    }
+
+    @DeleteMapping("/{contractId}/seasons/{seasonId}/roomtypes/{roomtypeId}")
+    public String deleteSeasonRoomTypePricing(@PathVariable("seasonId") Long seasonId, @PathVariable("roomtypeId") Long roomtypeId, @PathVariable("contractId") Long contractId){
+        return seasonRoomTypePricingService.deleteSeasonRoomTypePricing(seasonId, roomtypeId, contractId);
+    }
+
+    @GetMapping("/{contractId}/seasons/{seasonId}/roomtypes")
+    public List<RoomType> getAllRoomTypesOfSeasonInContract(@PathVariable("seasonId") Long seasonId, @PathVariable("contractId") Long contractId){
+        return seasonRoomTypePricingService.getAllRoomTypesOfSeasonInContract(seasonId, contractId);
+    }
+
+    @GetMapping("/{contractId}/roomtypes")
+    public List<RoomType> getAllRoomTypesOfContract(@PathVariable("contractId") Long contractId){
+        return seasonRoomTypePricingService.getAllRoomTypesOfContract(contractId);
+    }
+
+    @GetMapping("/{contractId}/seasonpricings")
+    public List<Season> getAllSeasonsPricingsOfContract(@PathVariable("contractId") Long contractId){
+        return seasonRoomTypePricingService.getAllSeasonsOfContract(contractId);
+    }
+
+    @GetMapping("/{contractId}/seasonroomtypepricings")
+    public List<SeasonRoomTypePricing> getAllSeasonRoomTypePricingOfContract(@PathVariable("contractId") Long contractId){
+        return seasonRoomTypePricingService.getAllSeasonRoomTypePricingOfContract(contractId);
+    }
 }
 
 
