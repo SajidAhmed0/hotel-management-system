@@ -152,6 +152,11 @@ public class ContractController {
         return seasonRoomTypePricingService.getAllSeasonRoomTypePricingOfContract(contractId);
     }
 
+    @GetMapping("/{contractId}/seasons/{seasonId}/roomtypes/{roomtypeId}")
+    public SeasonRoomTypePricing getAllSeasonsPricingsOfContract(@PathVariable("seasonId") Long seasonId, @PathVariable("roomtypeId") Long roomtypeId, @PathVariable("contractId") Long contractId){
+        return seasonRoomTypePricingService.getRoomTypePricing(seasonId, roomtypeId, contractId);
+    }
+
     // FOR: pricing supplement
     @PostMapping("/{contractId}/seasons/{seasonId}/supplements/{supplementId}")
     public SeasonSupplementPricing addSeasonSupplementPricing(@PathVariable("seasonId") Long seasonId, @PathVariable("supplementId") Long supplementId, @PathVariable("contractId") Long contractId, @RequestBody SeasonSupplementPricing price){

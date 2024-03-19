@@ -133,4 +133,15 @@ public class SeasonRoomTypePricingServiceImpl implements SeasonRoomTypePricingSe
 
         return pricings;
     }
+
+    @Override
+    public SeasonRoomTypePricing getRoomTypePricing(Long seasonId, Long roomtypeId, Long contractId) {
+        SeasonRoomTypeKey key = new SeasonRoomTypeKey(seasonId, roomtypeId, contractId);
+        SeasonRoomTypePricing seasonRoomTypePricing = seasonRoomTypePricingRepository.findById(key).orElse(null);
+
+        if(seasonRoomTypePricing == null){
+            throw new EntityNotFoundException("SeasonRoomTypePricing with id " + key + " does not exists");
+        }
+        return seasonRoomTypePricing;
+    }
 }

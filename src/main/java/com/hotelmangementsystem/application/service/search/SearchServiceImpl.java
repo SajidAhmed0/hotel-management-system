@@ -4,11 +4,13 @@ import com.hotelmangementsystem.application.entity.Booking;
 import com.hotelmangementsystem.application.entity.Contract;
 import com.hotelmangementsystem.application.entity.Hotel;
 import com.hotelmangementsystem.application.entity.RoomType;
+import com.hotelmangementsystem.application.entity.pricing.SeasonRoomTypePricing;
 import com.hotelmangementsystem.application.entity.search.HotelSearch;
 import com.hotelmangementsystem.application.repository.HotelRepository;
 import com.hotelmangementsystem.application.service.ContractService;
 import com.hotelmangementsystem.application.service.RoomTypeService;
 import com.hotelmangementsystem.application.service.pricing.SeasonRoomTypePricingService;
+import jakarta.persistence.EntityNotFoundException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -93,11 +95,19 @@ public class SearchServiceImpl implements SearchService {
                                         roomTypes.forEach((roomType -> {
                                             int bookedRoomCount = getBookedRoomsCount(roomType.getId(), checkInDate, checkOutDate);
                                             logger.info("booked: " + bookedRoomCount);
+                                            SeasonRoomTypePricing roomTypePricing;
+                                            try{
+                                                roomTypePricing = seasonRoomTypePricingService.getRoomTypePricing(season.getId(), contract.getId(), roomType.getId());
+                                            }catch (EntityNotFoundException e){
+                                                roomTypePricing = null;
+                                            }
+                                            if(roomTypePricing != null){
+                                                if((roomTypePricing.getNoOfRooms() - bookedRoomCount) >= noOfRooms){
 
-//                                            if((roomType.getNoOfRooms() - bookedRoomCount) >= noOfRooms){
-//
-//                                                available.set(true);
-//                                            }
+                                                    available.set(true);
+                                                }
+                                            }
+
                                         }));
                                     }
 
