@@ -119,12 +119,12 @@ public class ContractController {
     // FOR: pricing roomtype
     @PostMapping("/{contractId}/seasons/{seasonId}/roomtypes/{roomtypeId}")
     public SeasonRoomTypePricing addSeasonRoomTypePricing(@PathVariable("seasonId") Long seasonId, @PathVariable("roomtypeId") Long roomtypeId, @PathVariable("contractId") Long contractId, @RequestBody SeasonRoomTypePricing price){
-        return seasonRoomTypePricingService.addSeasonRoomTypePricing(seasonId, roomtypeId, contractId, price.getPrice());
+        return seasonRoomTypePricingService.addSeasonRoomTypePricing(seasonId, roomtypeId, contractId, price.getPrice(), price.getNoOfRooms());
     }
 
     @PutMapping("/{contractId}/seasons/{seasonId}/roomtypes/{roomtypeId}")
     public SeasonRoomTypePricing updateSeasonRoomTypePricing(@PathVariable("seasonId") Long seasonId, @PathVariable("roomtypeId") Long roomtypeId, @PathVariable("contractId") Long contractId, @RequestBody SeasonRoomTypePricing price){
-        return seasonRoomTypePricingService.updateRoomTypePricing(seasonId, roomtypeId, contractId, price.getPrice());
+        return seasonRoomTypePricingService.updateRoomTypePricing(seasonId, roomtypeId, contractId, price.getPrice(), price.getNoOfRooms());
     }
 
     @DeleteMapping("/{contractId}/seasons/{seasonId}/roomtypes/{roomtypeId}")

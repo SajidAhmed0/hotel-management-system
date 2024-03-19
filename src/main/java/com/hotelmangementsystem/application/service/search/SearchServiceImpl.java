@@ -94,10 +94,10 @@ public class SearchServiceImpl implements SearchService {
                                             int bookedRoomCount = getBookedRoomsCount(roomType.getId(), checkInDate, checkOutDate);
                                             logger.info("booked: " + bookedRoomCount);
 
-                                            if((roomType.getNoOfRooms() - bookedRoomCount) >= noOfRooms){
-
-                                                available.set(true);
-                                            }
+//                                            if((roomType.getNoOfRooms() - bookedRoomCount) >= noOfRooms){
+//
+//                                                available.set(true);
+//                                            }
                                         }));
                                     }
 

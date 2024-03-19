@@ -39,7 +39,7 @@ public class SeasonRoomTypePricingServiceImpl implements SeasonRoomTypePricingSe
 
     @Transactional
     @Override
-    public SeasonRoomTypePricing addSeasonRoomTypePricing(Long seasonId, Long roomtypeId, Long contractId, Double price) {
+    public SeasonRoomTypePricing addSeasonRoomTypePricing(Long seasonId, Long roomtypeId, Long contractId, Double price, Integer noOfRooms) {
         Season season = seasonRepository.findById(seasonId).orElse(null);
         RoomType roomType = roomTypeRepository.findById(roomtypeId).orElse(null);
         Contract contract = contractRepository.findById(contractId).orElse(null);
@@ -50,6 +50,7 @@ public class SeasonRoomTypePricingServiceImpl implements SeasonRoomTypePricingSe
             seasonRoomTypePricing.setSeason(season);
             seasonRoomTypePricing.setRoomType(roomType);
             seasonRoomTypePricing.setPrice(price);
+            seasonRoomTypePricing.setNoOfRooms(noOfRooms);
             seasonRoomTypePricing.setId(new SeasonRoomTypeKey(seasonId, roomtypeId, contractId));
 
             return seasonRoomTypePricingRepository.save(seasonRoomTypePricing);
@@ -59,7 +60,7 @@ public class SeasonRoomTypePricingServiceImpl implements SeasonRoomTypePricingSe
 
     @Transactional
     @Override
-    public SeasonRoomTypePricing updateRoomTypePricing(Long seasonId, Long roomtypeId, Long contractId, Double price) {
+    public SeasonRoomTypePricing updateRoomTypePricing(Long seasonId, Long roomtypeId, Long contractId, Double price, Integer noOfRooms) {
         SeasonRoomTypeKey key = new SeasonRoomTypeKey(seasonId, roomtypeId, contractId);
         SeasonRoomTypePricing seasonRoomTypePricing = seasonRoomTypePricingRepository.findById(key).orElse(null);
 
@@ -67,6 +68,7 @@ public class SeasonRoomTypePricingServiceImpl implements SeasonRoomTypePricingSe
             throw new EntityNotFoundException("SeasonRoomTypePricing with id " + key + " does not exists");
         }
         seasonRoomTypePricing.setPrice(price);
+        seasonRoomTypePricing.setNoOfRooms(noOfRooms);
         return seasonRoomTypePricing;
     }
 

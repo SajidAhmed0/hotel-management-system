@@ -48,7 +48,6 @@ public class RoomTypeServiceImpl implements RoomTypeService{
 
         if(roomType != null){
             roomTypeDB.setName(roomType.getName());
-            roomTypeDB.setNoOfRooms(roomType.getNoOfRooms());
             roomTypeDB.setMaxAdult(roomType.getMaxAdult());
             roomTypeDB.setDescription(roomType.getDescription());
             return roomTypeRepository.save(roomTypeDB);

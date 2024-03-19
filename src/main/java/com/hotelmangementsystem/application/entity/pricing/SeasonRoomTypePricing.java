@@ -35,22 +35,26 @@ public class SeasonRoomTypePricing {
 
     private Double price;
 
+    private Integer noOfRooms;
+
     public SeasonRoomTypePricing() {
     }
 
-    public SeasonRoomTypePricing(Season season, RoomType roomType, Contract contract, Double price) {
+    public SeasonRoomTypePricing(Season season, RoomType roomType, Contract contract, Double price, Integer noOfRooms) {
         this.season = season;
         this.roomType = roomType;
         this.price = price;
         this.contract = contract;
+        this.noOfRooms = noOfRooms;
     }
 
-    public SeasonRoomTypePricing(SeasonRoomTypeKey id, Season season, RoomType roomType, Contract contract, Double price) {
+    public SeasonRoomTypePricing(SeasonRoomTypeKey id, Season season, RoomType roomType, Contract contract, Double price, Integer noOfRooms) {
         this.id = id;
         this.season = season;
         this.roomType = roomType;
         this.price = price;
         this.contract = contract;
+        this.noOfRooms = noOfRooms;
     }
 
     public SeasonRoomTypeKey getId() {
@@ -83,6 +87,14 @@ public class SeasonRoomTypePricing {
 
     public void setPrice(Double price) {
         this.price = price;
+    }
+
+    public Integer getNoOfRooms() {
+        return noOfRooms;
+    }
+
+    public void setNoOfRooms(Integer noOfRooms) {
+        this.noOfRooms = noOfRooms;
     }
 
     public Contract getContract() {

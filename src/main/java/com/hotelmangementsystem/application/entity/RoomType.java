@@ -18,8 +18,6 @@ public class RoomType {
 
     private String name;
 
-    private Integer noOfRooms;
-
     private Integer maxAdult;
 
     private String description;
@@ -66,18 +64,16 @@ public class RoomType {
     public RoomType() {
     }
 
-    public RoomType(String name, Integer noOfRooms, Integer maxAdult, String description) {
+    public RoomType(String name, Integer maxAdult, String description) {
         this.name = name;
-        this.noOfRooms = noOfRooms;
         this.maxAdult = maxAdult;
         this.description = description;
 
     }
 
-    public RoomType(Long id, String name, Integer noOfRooms, Integer maxAdult, String description) {
+    public RoomType(Long id, String name, Integer maxAdult, String description) {
         this.id = id;
         this.name = name;
-        this.noOfRooms = noOfRooms;
         this.maxAdult = maxAdult;
         this.description = description;
 
@@ -97,14 +93,6 @@ public class RoomType {
 
     public void setName(String name) {
         this.name = name;
-    }
-
-    public Integer getNoOfRooms() {
-        return noOfRooms;
-    }
-
-    public void setNoOfRooms(Integer noOfRooms) {
-        this.noOfRooms = noOfRooms;
     }
 
     public Integer getMaxAdult() {

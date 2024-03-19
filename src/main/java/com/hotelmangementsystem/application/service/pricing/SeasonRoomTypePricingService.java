@@ -10,9 +10,9 @@ import org.springframework.stereotype.Repository;
 import java.util.List;
 
 public interface SeasonRoomTypePricingService {
-    public SeasonRoomTypePricing addSeasonRoomTypePricing(Long seasonId, Long roomtypeId, Long contractId, Double price);
+    public SeasonRoomTypePricing addSeasonRoomTypePricing(Long seasonId, Long roomtypeId, Long contractId, Double price, Integer noOfRooms);
 
-    public SeasonRoomTypePricing updateRoomTypePricing(Long seasonId, Long roomtypeId, Long contractId, Double price);
+    public SeasonRoomTypePricing updateRoomTypePricing(Long seasonId, Long roomtypeId, Long contractId, Double price, Integer noOfRooms);
 
     public String deleteSeasonRoomTypePricing(Long seasonId, Long roomtypeId,  Long contractId);
 
