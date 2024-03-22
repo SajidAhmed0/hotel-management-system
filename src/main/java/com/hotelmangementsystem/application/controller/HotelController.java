@@ -3,6 +3,7 @@ package com.hotelmangementsystem.application.controller;
 import com.hotelmangementsystem.application.entity.*;
 import com.hotelmangementsystem.application.service.HotelService;
 import com.hotelmangementsystem.application.service.pricing.SeasonRoomTypePricingService;
+import com.hotelmangementsystem.application.service.pricing.SeasonSupplementPricingService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -18,6 +19,9 @@ public class HotelController {
 
     @Autowired
     private SeasonRoomTypePricingService seasonRoomTypePricingService;
+
+    @Autowired
+    private SeasonSupplementPricingService seasonSupplementPricingService;
 
     @GetMapping
     public List<Hotel> getAllHotels(){
@@ -122,5 +126,10 @@ public class HotelController {
     @GetMapping("/{id}/contracts/{contractId}/seasons/{seasonId}/roomtypes")
     public List<RoomType> getUnPricedRoomTypes(@PathVariable("id") Long id, @PathVariable("contractId") Long contractId, @PathVariable("seasonId") Long seasonId) {
         return seasonRoomTypePricingService.getUnPricedRoomTypes(id, contractId, seasonId);
+    }
+
+    @GetMapping("/{id}/contracts/{contractId}/seasons/{seasonId}/supplements")
+    public List<Supplement> getUnPricedSupplements(@PathVariable("id") Long id, @PathVariable("contractId") Long contractId, @PathVariable("seasonId") Long seasonId) {
+        return seasonSupplementPricingService.getUnPricedSupplements(id, contractId, seasonId);
     }
 }

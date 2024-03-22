@@ -112,4 +112,9 @@ public class SeasonSupplementPricingServiceImpl implements SeasonSupplementPrici
         List<SeasonSupplementPricing> pricings = contract.getSeasonSupplementPricings();
         return pricings;
     }
+
+    @Override
+    public List<Supplement> getUnPricedSupplements(Long hotelId, Long contractId, Long seasonId) {
+        return seasonSupplementPricingRepository.getUnPricedSupplements(hotelId,contractId, seasonId);
+    }
 }

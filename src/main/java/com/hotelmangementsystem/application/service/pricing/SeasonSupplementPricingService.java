@@ -24,4 +24,6 @@ public interface SeasonSupplementPricingService {
 //    public List<Season> getAllSeasonsOfContract(Long contractId);
 
     public List<SeasonSupplementPricing> getAllSeasonSupplementPricingOfContract(Long contractId);
+
+    public List<Supplement> getUnPricedSupplements(Long hotelId, Long contractId, Long seasonId);
 }
