@@ -144,4 +144,9 @@ public class SeasonRoomTypePricingServiceImpl implements SeasonRoomTypePricingSe
         }
         return seasonRoomTypePricing;
     }
+
+    @Override
+    public List<RoomType> getUnPricedRoomTypes(Long hotelId, Long contractId, Long seasonId) {
+        return seasonRoomTypePricingRepository.getUnPricedRoomTypes(hotelId, contractId, seasonId);
+    }
 }

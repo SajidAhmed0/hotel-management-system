@@ -25,4 +25,6 @@ public interface SeasonRoomTypePricingService {
     public List<SeasonRoomTypePricing> getAllSeasonRoomTypePricingOfContract(Long contractId);
 
     public SeasonRoomTypePricing getRoomTypePricing(Long seasonId, Long roomtypeId, Long contractId);
+
+    public List<RoomType> getUnPricedRoomTypes(Long hotelId, Long contractId, Long seasonId);
 }
