@@ -3,7 +3,9 @@ package com.hotelmangementsystem.application.service.pricing;
 import com.hotelmangementsystem.application.entity.Contract;
 import com.hotelmangementsystem.application.entity.Season;
 import com.hotelmangementsystem.application.entity.Supplement;
+import com.hotelmangementsystem.application.entity.pricing.SeasonRoomTypePricing;
 import com.hotelmangementsystem.application.entity.pricing.SeasonSupplementPricing;
+import com.hotelmangementsystem.application.key.SeasonRoomTypeKey;
 import com.hotelmangementsystem.application.key.SeasonSupplementKey;
 import com.hotelmangementsystem.application.repository.ContractRepository;
 import com.hotelmangementsystem.application.repository.SeasonRepository;
@@ -111,6 +113,17 @@ public class SeasonSupplementPricingServiceImpl implements SeasonSupplementPrici
         Contract contract = contractRepository.findById(contractId).orElse(null);
         List<SeasonSupplementPricing> pricings = contract.getSeasonSupplementPricings();
         return pricings;
+    }
+
+    @Override
+    public SeasonSupplementPricing getSupplementPricing(Long seasonId, Long supplementId, Long contractId) {
+        SeasonSupplementKey key = new SeasonSupplementKey(seasonId, supplementId, contractId);
+        SeasonSupplementPricing seasonSupplementPricing = seasonSupplementPricingRepository.findById(key).orElse(null);
+
+        if(seasonSupplementPricing == null){
+            throw new EntityNotFoundException("SeasonSupplementPricing with id " + key + " does not exists");
+        }
+        return seasonSupplementPricing;
     }
 
     @Override
