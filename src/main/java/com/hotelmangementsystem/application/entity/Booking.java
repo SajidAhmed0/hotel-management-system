@@ -26,6 +26,8 @@ public class Booking {
 
     private Double total;
 
+    private Date bookingDate;
+
     //TODO: create discounts, bookedprices, and passengers
     @OneToMany(
             mappedBy = "booking",
@@ -78,16 +80,17 @@ public class Booking {
     public Booking() {
     }
 
-    public Booking(Date checkInDate, Date checkOutDate, Integer noOfAdult, String status, Double total, Integer noOfRooms) {
+    public Booking(Date checkInDate, Date checkOutDate, Integer noOfAdult, String status, Double total, Integer noOfRooms, Date bookingDate) {
         this.checkInDate = checkInDate;
         this.checkOutDate = checkOutDate;
         this.noOfAdult = noOfAdult;
         Status = status;
         this.total = total;
         this.noOfRooms = noOfRooms;
+        this.bookingDate = bookingDate;
     }
 
-    public Booking(Long id, Date checkInDate, Date checkOutDate, Integer noOfAdult, String status, Double total, Integer noOfRooms) {
+    public Booking(Long id, Date checkInDate, Date checkOutDate, Integer noOfAdult, String status, Double total, Integer noOfRooms, Date bookingDate) {
         this.id = id;
         this.checkInDate = checkInDate;
         this.checkOutDate = checkOutDate;
@@ -95,6 +98,7 @@ public class Booking {
         Status = status;
         this.total = total;
         this.noOfRooms = noOfRooms;
+        this.bookingDate = bookingDate;
     }
 
     public Long getId() {
@@ -239,5 +243,13 @@ public class Booking {
 
     public void setBookedRoomType(BookedRoomType bookedRoomType) {
         this.bookedRoomType = bookedRoomType;
+    }
+
+    public Date getBookingDate() {
+        return bookingDate;
+    }
+
+    public void setBookingDate(Date bookingDate) {
+        this.bookingDate = bookingDate;
     }
 }
