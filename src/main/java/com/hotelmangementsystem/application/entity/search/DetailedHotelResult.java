@@ -1,6 +1,7 @@
 package com.hotelmangementsystem.application.entity.search;
 
 import com.hotelmangementsystem.application.entity.Contract;
+import com.hotelmangementsystem.application.entity.Discount;
 import com.hotelmangementsystem.application.entity.Hotel;
 import com.hotelmangementsystem.application.entity.Season;
 
@@ -18,15 +19,18 @@ public class DetailedHotelResult {
 
     private List<SupplementWithPricing> supplementWithPricings;
 
+    private Discount discount;
+
     public DetailedHotelResult() {
     }
 
-    public DetailedHotelResult(Hotel hotel, Contract contract, Season season, List<RoomTypeWithPricing> roomTypeWithPricings, List<SupplementWithPricing> supplementWithPricings) {
+    public DetailedHotelResult(Hotel hotel, Contract contract, Season season, List<RoomTypeWithPricing> roomTypeWithPricings, List<SupplementWithPricing> supplementWithPricings, Discount discount) {
         this.hotel = hotel;
         this.contract = contract;
         this.season = season;
         this.roomTypeWithPricings = roomTypeWithPricings;
         this.supplementWithPricings = supplementWithPricings;
+        this.discount = discount;
     }
 
     public Hotel getHotel() {
@@ -83,5 +87,13 @@ public class DetailedHotelResult {
 
     public void removeSupplementWithPricing(SupplementWithPricing supplementWithPricing){
         this.supplementWithPricings.remove(supplementWithPricing);
+    }
+
+    public Discount getDiscount() {
+        return discount;
+    }
+
+    public void setDiscount(Discount discount) {
+        this.discount = discount;
     }
 }

@@ -137,7 +137,12 @@ public class SearchServiceImpl implements SearchService {
             contracts = contractService.getAllContracts();
             logger.info("one");
             for(Contract contract : contracts){
-                if(contract.getStartDate().before(checkInDate) && contract.getEndDate().after(checkOutDate)) {
+                LocalDate contractStartDateMinusOne = contract.getStartDate().toLocalDate().minusDays(1);
+                LocalDate contractEndDatePlusOne = contract.getEndDate().toLocalDate().plusDays(1);
+//                if(contract.getStartDate().before(checkInDate) && contract.getEndDate().after(checkOutDate)) {
+
+
+                if(contractStartDateMinusOne.isBefore(checkInDate.toLocalDate()) && contractEndDatePlusOne.isAfter(checkOutDate.toLocalDate())) {
                     List<Season> seasons = contract.getSeasons();
                     for (Season season : seasons){
                         logger.info(season.getName());
@@ -215,7 +220,22 @@ public class SearchServiceImpl implements SearchService {
         if(hotel != null){
             List<Contract> contracts = hotel.getContracts();
             for (Contract contract : contracts){
-                if(contract.getStartDate().before(checkInDate) && contract.getEndDate().after(checkOutDate)) {
+                LocalDate contractStartDateMinusOne = contract.getStartDate().toLocalDate().minusDays(1);
+                LocalDate contractEndDatePlusOne = contract.getEndDate().toLocalDate().plusDays(1);
+                if(contractStartDateMinusOne.isBefore(checkInDate.toLocalDate()) && contractEndDatePlusOne.isAfter(checkOutDate.toLocalDate())) {
+                    Discount discount = new Discount();
+                    discount.setPercentage(0.0);
+                    if(contract.getDiscounts().size() > 0){
+                        LocalDate currentDate = LocalDate.now();
+                        for(Discount discount1 : contract.getDiscounts()){
+                            Long daysDifference = ChronoUnit.DAYS.between(currentDate, checkInDate.toLocalDate());
+                            logger.info("days difference: " + daysDifference);
+                            if(daysDifference >= discount1.getDaysPriorToArrival()){
+                                discount = discount1;
+                            }
+                        }
+                    }
+
                     List<Season> seasons = contract.getSeasons();
                     for (Season season : seasons){
                         LocalDate seasonStartDateMinusOne = season.getStartDate().toLocalDate().minusDays(1);
@@ -266,6 +286,7 @@ public class SearchServiceImpl implements SearchService {
                             detailedHotelResult.setSeason(season);
                             detailedHotelResult.setRoomTypeWithPricings(roomTypeWithPricings);
                             detailedHotelResult.setSupplementWithPricings(supplementWithPricings);
+                            detailedHotelResult.setDiscount(discount);
                             return detailedHotelResult;
                         }
                     }
