@@ -18,6 +18,8 @@ public class BookedDiscount {
 
     private Long originalId;
 
+    private Integer daysPriorToArrival;
+
     @JsonIgnore
     @ManyToOne(
             cascade = CascadeType.ALL
@@ -31,19 +33,21 @@ public class BookedDiscount {
     public BookedDiscount() {
     }
 
-    public BookedDiscount(String name, String description, Double percentage, Long originalId) {
+    public BookedDiscount(String name, String description, Double percentage, Long originalId, Integer daysPriorToArrival) {
         this.name = name;
         this.description = description;
         this.percentage = percentage;
         this.originalId = originalId;
+        this.daysPriorToArrival = daysPriorToArrival;
     }
 
-    public BookedDiscount(Long id, String name, String description, Double percentage, Long originalId) {
+    public BookedDiscount(Long id, String name, String description, Double percentage, Long originalId, Integer daysPriorToArrival) {
         this.id = id;
         this.name = name;
         this.description = description;
         this.percentage = percentage;
         this.originalId = originalId;
+        this.daysPriorToArrival = daysPriorToArrival;
     }
 
     public Long getId() {
@@ -92,5 +96,13 @@ public class BookedDiscount {
 
     public void setBooking(Booking booking) {
         this.booking = booking;
+    }
+
+    public Integer getDaysPriorToArrival() {
+        return daysPriorToArrival;
+    }
+
+    public void setDaysPriorToArrival(Integer daysPriorToArrival) {
+        this.daysPriorToArrival = daysPriorToArrival;
     }
 }

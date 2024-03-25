@@ -16,6 +16,8 @@ public class Discount {
 
     private Double percentage;
 
+    private Integer daysPriorToArrival;
+
     //TODO: create contract and bookings
 
     @JsonIgnore
@@ -31,17 +33,19 @@ public class Discount {
     public Discount() {
     }
 
-    public Discount(String name, String description, Double percentage) {
+    public Discount(String name, String description, Double percentage, Integer daysPriorToArrival) {
         this.name = name;
         this.description = description;
         this.percentage = percentage;
+        this.daysPriorToArrival = daysPriorToArrival;
     }
 
-    public Discount(Long id, String name, String description, Double percentage) {
+    public Discount(Long id, String name, String description, Double percentage, Integer daysPriorToArrival) {
         this.id = id;
         this.name = name;
         this.description = description;
         this.percentage = percentage;
+        this.daysPriorToArrival = daysPriorToArrival;
     }
 
     public Long getId() {
@@ -82,5 +86,13 @@ public class Discount {
 
     public void setContract(Contract contract) {
         this.contract = contract;
+    }
+
+    public Integer getDaysPriorToArrival() {
+        return daysPriorToArrival;
+    }
+
+    public void setDaysPriorToArrival(Integer daysPriorToArrival) {
+        this.daysPriorToArrival = daysPriorToArrival;
     }
 }

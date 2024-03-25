@@ -38,6 +38,7 @@ public class DiscountServiceImpl implements DiscountService{
             discountDB.setName(discount.getName());
             discountDB.setDescription(discount.getDescription());
             discountDB.setPercentage(discount.getPercentage());
+            discountDB.setDaysPriorToArrival(discount.getDaysPriorToArrival());
             return discountRepository.save(discountDB);
         }
         return null;

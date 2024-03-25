@@ -38,6 +38,7 @@ public class BookedDiscountServiceImpl implements BookedDiscountService {
             bookedDiscountDB.setDescription(bookedDiscount.getDescription());
             bookedDiscountDB.setPercentage(bookedDiscount.getPercentage());
             bookedDiscountDB.setOriginalId(bookedDiscount.getOriginalId());
+            bookedDiscountDB.setDaysPriorToArrival(bookedDiscount.getDaysPriorToArrival());
             return bookedDiscountRepository.save(bookedDiscountDB);
         }
 
