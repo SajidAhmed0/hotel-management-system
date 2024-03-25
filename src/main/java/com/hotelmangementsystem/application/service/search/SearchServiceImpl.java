@@ -16,6 +16,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.sql.Date;
+import java.time.LocalDate;
+import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.atomic.AtomicBoolean;
@@ -139,7 +141,12 @@ public class SearchServiceImpl implements SearchService {
                     List<Season> seasons = contract.getSeasons();
                     for (Season season : seasons){
                         logger.info(season.getName());
-                        if(season.getStartDate().before(checkInDate) && season.getEndDate().after(checkInDate)){
+//                        if(season.getStartDate().before(checkInDate) && season.getEndDate().after(checkInDate)){
+                        LocalDate seasonStartDateMinusOne = season.getStartDate().toLocalDate().minusDays(1);
+                        LocalDate seasonEndDatePlusOne = season.getEndDate().toLocalDate().plusDays(1);
+//                        seasonStartDateMinusOne.isBefore(checkInDate.toLocalDate());
+//                        seasonEndDatePlusOne.isAfter(checkInDate.toLocalDate());
+                        if(seasonStartDateMinusOne.isBefore(checkInDate.toLocalDate()) && seasonEndDatePlusOne.isAfter(checkInDate.toLocalDate())){
                             List<RoomType> roomTypes = seasonRoomTypePricingService.getAllRoomTypesOfSeasonInContract(season.getId(), contract.getId());
 
                             for (RoomType roomType : roomTypes){
@@ -161,12 +168,21 @@ public class SearchServiceImpl implements SearchService {
                                     if(avialableRooms >= noOfRooms && contract.getHotel().getDistrict().equalsIgnoreCase(location)){
                                         Hotel hotel = contract.getHotel();
                                         Image image = null;
-                                        Discount discount = null;
+                                        Discount discount = new Discount();
+                                        discount.setPercentage(0.0);
                                         if(hotel.getImages().size() > 0){
                                             image = hotel.getImages().get(0);
                                         }
                                         if(contract.getDiscounts().size() > 0){
-                                            discount = contract.getDiscounts().get(0);
+                                            LocalDate currentDate = LocalDate.now();
+                                            for(Discount discount1 : contract.getDiscounts()){
+                                                Long daysDifference = ChronoUnit.DAYS.between(currentDate, checkInDate.toLocalDate());
+                                                logger.info("days difference: " + daysDifference);
+                                                if(daysDifference >= discount1.getDaysPriorToArrival()){
+                                                    discount = discount1;
+                                                }
+                                            }
+//                                            discount = contract.getDiscounts().get(0);
                                         }
                                         SummaryResult summaryResult = new SummaryResult(hotel.getId(), hotel.getName(), image, hotel.getDistrict(), roomTypePricing.getPrice(), discount.getPercentage(), season.getMarkup());
                                         summaryResults.add(summaryResult);
@@ -202,7 +218,9 @@ public class SearchServiceImpl implements SearchService {
                 if(contract.getStartDate().before(checkInDate) && contract.getEndDate().after(checkOutDate)) {
                     List<Season> seasons = contract.getSeasons();
                     for (Season season : seasons){
-                        if(season.getStartDate().before(checkInDate) && season.getEndDate().after(checkInDate)){
+                        LocalDate seasonStartDateMinusOne = season.getStartDate().toLocalDate().minusDays(1);
+                        LocalDate seasonEndDatePlusOne = season.getEndDate().toLocalDate().plusDays(1);
+                        if(seasonStartDateMinusOne.isBefore(checkInDate.toLocalDate()) && seasonEndDatePlusOne.isAfter(checkInDate.toLocalDate())){
                             List<RoomTypeWithPricing> roomTypeWithPricings = new ArrayList<>();
                             List<SupplementWithPricing> supplementWithPricings = new ArrayList<>();
                             List<RoomType> roomTypes = seasonRoomTypePricingService.getAllRoomTypesOfSeasonInContract(season.getId(), contract.getId());
