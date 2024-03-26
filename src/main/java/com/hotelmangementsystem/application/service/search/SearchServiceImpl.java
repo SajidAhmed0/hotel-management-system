@@ -223,8 +223,7 @@ public class SearchServiceImpl implements SearchService {
                 LocalDate contractStartDateMinusOne = contract.getStartDate().toLocalDate().minusDays(1);
                 LocalDate contractEndDatePlusOne = contract.getEndDate().toLocalDate().plusDays(1);
                 if(contractStartDateMinusOne.isBefore(checkInDate.toLocalDate()) && contractEndDatePlusOne.isAfter(checkOutDate.toLocalDate())) {
-                    Discount discount = new Discount();
-                    discount.setPercentage(0.0);
+                    Discount discount = null;
                     if(contract.getDiscounts().size() > 0){
                         LocalDate currentDate = LocalDate.now();
                         for(Discount discount1 : contract.getDiscounts()){
@@ -287,6 +286,7 @@ public class SearchServiceImpl implements SearchService {
                             detailedHotelResult.setRoomTypeWithPricings(roomTypeWithPricings);
                             detailedHotelResult.setSupplementWithPricings(supplementWithPricings);
                             detailedHotelResult.setDiscount(discount);
+                            detailedHotelResult.setMarkup(season.getMarkup());
                             return detailedHotelResult;
                         }
                     }

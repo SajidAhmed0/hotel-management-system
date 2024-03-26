@@ -21,16 +21,19 @@ public class DetailedHotelResult {
 
     private Discount discount;
 
+    private Double markup;
+
     public DetailedHotelResult() {
     }
 
-    public DetailedHotelResult(Hotel hotel, Contract contract, Season season, List<RoomTypeWithPricing> roomTypeWithPricings, List<SupplementWithPricing> supplementWithPricings, Discount discount) {
+    public DetailedHotelResult(Hotel hotel, Contract contract, Season season, List<RoomTypeWithPricing> roomTypeWithPricings, List<SupplementWithPricing> supplementWithPricings, Discount discount, Double markup) {
         this.hotel = hotel;
         this.contract = contract;
         this.season = season;
         this.roomTypeWithPricings = roomTypeWithPricings;
         this.supplementWithPricings = supplementWithPricings;
         this.discount = discount;
+        this.markup = markup;
     }
 
     public Hotel getHotel() {
@@ -95,5 +98,13 @@ public class DetailedHotelResult {
 
     public void setDiscount(Discount discount) {
         this.discount = discount;
+    }
+
+    public Double getMarkup() {
+        return markup;
+    }
+
+    public void setMarkup(Double markup) {
+        this.markup = markup;
     }
 }
