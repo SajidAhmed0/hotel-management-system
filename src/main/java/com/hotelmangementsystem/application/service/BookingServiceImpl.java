@@ -58,6 +58,9 @@ public class BookingServiceImpl implements BookingService{
             bookingDB.setTotal(booking.getTotal());
             bookingDB.setNoOfRooms(booking.getNoOfRooms());
             bookingDB.setBookingDate(booking.getBookingDate());
+            bookingDB.setMarkup(booking.getMarkup());
+            bookingDB.setHotelName(booking.getHotelName());
+            bookingDB.setHotelId(booking.getHotelId());
             return bookingRepository.save(bookingDB);
         }
         return null;

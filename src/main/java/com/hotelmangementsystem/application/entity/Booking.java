@@ -28,6 +28,12 @@ public class Booking {
 
     private Date bookingDate;
 
+    private Double markup;
+
+    private String hotelName;
+
+    private Long hotelId;
+
     //TODO: create discounts, bookedprices, and passengers
     @OneToMany(
             mappedBy = "booking",
@@ -80,7 +86,7 @@ public class Booking {
     public Booking() {
     }
 
-    public Booking(Date checkInDate, Date checkOutDate, Integer noOfAdult, String status, Double total, Integer noOfRooms, Date bookingDate) {
+    public Booking(Date checkInDate, Date checkOutDate, Integer noOfAdult, String status, Double total, Integer noOfRooms, Date bookingDate, Double markup, String hotelName, Long hotelId) {
         this.checkInDate = checkInDate;
         this.checkOutDate = checkOutDate;
         this.noOfAdult = noOfAdult;
@@ -88,9 +94,12 @@ public class Booking {
         this.total = total;
         this.noOfRooms = noOfRooms;
         this.bookingDate = bookingDate;
+        this.markup = markup;
+        this.hotelName = hotelName;
+        this.hotelId = hotelId;
     }
 
-    public Booking(Long id, Date checkInDate, Date checkOutDate, Integer noOfAdult, String status, Double total, Integer noOfRooms, Date bookingDate) {
+    public Booking(Long id, Date checkInDate, Date checkOutDate, Integer noOfAdult, String status, Double total, Integer noOfRooms, Date bookingDate, Double markup, String hotelName, Long hotelId) {
         this.id = id;
         this.checkInDate = checkInDate;
         this.checkOutDate = checkOutDate;
@@ -99,6 +108,9 @@ public class Booking {
         this.total = total;
         this.noOfRooms = noOfRooms;
         this.bookingDate = bookingDate;
+        this.markup = markup;
+        this.hotelName = hotelName;
+        this.hotelId = hotelId;
     }
 
     public Long getId() {
@@ -251,5 +263,29 @@ public class Booking {
 
     public void setBookingDate(Date bookingDate) {
         this.bookingDate = bookingDate;
+    }
+
+    public Double getMarkup() {
+        return markup;
+    }
+
+    public void setMarkup(Double markup) {
+        this.markup = markup;
+    }
+
+    public String getHotelName() {
+        return hotelName;
+    }
+
+    public void setHotelName(String hotelName) {
+        this.hotelName = hotelName;
+    }
+
+    public Long getHotelId() {
+        return hotelId;
+    }
+
+    public void setHotelId(Long hotelId) {
+        this.hotelId = hotelId;
     }
 }

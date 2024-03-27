@@ -55,7 +55,7 @@ public class RoomType {
     )
     private List<SeasonRoomTypePricing> seasonRoomTypePricings = new ArrayList<>();
 
-    @JsonIgnore
+
     @OneToMany(
             mappedBy = "roomType"
     )
