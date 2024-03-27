@@ -20,7 +20,7 @@ public class Booking {
 
     private Integer noOfAdult;
 
-    private String Status;
+    private String status;
 
     private Integer noOfRooms;
 
@@ -90,7 +90,7 @@ public class Booking {
         this.checkInDate = checkInDate;
         this.checkOutDate = checkOutDate;
         this.noOfAdult = noOfAdult;
-        Status = status;
+        this.status = status;
         this.total = total;
         this.noOfRooms = noOfRooms;
         this.bookingDate = bookingDate;
@@ -104,7 +104,7 @@ public class Booking {
         this.checkInDate = checkInDate;
         this.checkOutDate = checkOutDate;
         this.noOfAdult = noOfAdult;
-        Status = status;
+        this.status = status;
         this.total = total;
         this.noOfRooms = noOfRooms;
         this.bookingDate = bookingDate;
@@ -146,11 +146,11 @@ public class Booking {
     }
 
     public String getStatus() {
-        return Status;
+        return status;
     }
 
     public void setStatus(String status) {
-        Status = status;
+        this.status = status;
     }
 
     public Double getTotal() {
