@@ -38,6 +38,12 @@ public class PaymentServiceImpl implements PaymentService{
             paymentDB.setDate(payment.getDate());
             paymentDB.setAmount(payment.getAmount());
             paymentDB.setMethod(payment.getMethod());
+            paymentDB.setCardNumber(payment.getCardNumber());
+            paymentDB.setExpiration(payment.getExpiration());
+            paymentDB.setCvv(payment.getCvv());
+            paymentDB.setStreetAddress(payment.getStreetAddress());
+            paymentDB.setCity(payment.getCity());
+            paymentDB.setZipCode(payment.getZipCode());
             return paymentRepository.save(paymentDB);
         }
         return null;

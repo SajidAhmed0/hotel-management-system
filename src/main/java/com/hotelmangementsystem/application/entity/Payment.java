@@ -18,6 +18,18 @@ public class Payment {
 
     private String method;
 
+    private String cardNumber;
+
+    private String expiration;
+
+    private Integer cvv;
+
+    private String streetAddress;
+
+    private String city;
+
+    private String zipCode;
+
     //TODO: create user
     @JsonIgnore
     @ManyToOne(
@@ -32,17 +44,29 @@ public class Payment {
     public Payment() {
     }
 
-    public Payment(Date date, Double amount, String method) {
+    public Payment(Date date, Double amount, String method, String cardNumber, String expiration, Integer cvv, String streetAddress, String city, String zipCode) {
         this.date = date;
         this.amount = amount;
         this.method = method;
+        this.cardNumber = cardNumber;
+        this.expiration = expiration;
+        this.cvv = cvv;
+        this.streetAddress = streetAddress;
+        this.city = city;
+        this.zipCode = zipCode;
     }
 
-    public Payment(Long id, Date date, Double amount, String method) {
+    public Payment(Long id, Date date, Double amount, String method, String cardNumber, String expiration, Integer cvv, String streetAddress, String city, String zipCode) {
         this.id = id;
         this.date = date;
         this.amount = amount;
         this.method = method;
+        this.cardNumber = cardNumber;
+        this.expiration = expiration;
+        this.cvv = cvv;
+        this.streetAddress = streetAddress;
+        this.city = city;
+        this.zipCode = zipCode;
     }
 
     public Long getId() {
@@ -83,5 +107,53 @@ public class Payment {
 
     public void setUser(User user) {
         this.user = user;
+    }
+
+    public String getCardNumber() {
+        return cardNumber;
+    }
+
+    public void setCardNumber(String cardNumber) {
+        this.cardNumber = cardNumber;
+    }
+
+    public String getExpiration() {
+        return expiration;
+    }
+
+    public void setExpiration(String expiration) {
+        this.expiration = expiration;
+    }
+
+    public Integer getCvv() {
+        return cvv;
+    }
+
+    public void setCvv(Integer cvv) {
+        this.cvv = cvv;
+    }
+
+    public String getStreetAddress() {
+        return streetAddress;
+    }
+
+    public void setStreetAddress(String streetAddress) {
+        this.streetAddress = streetAddress;
+    }
+
+    public String getCity() {
+        return city;
+    }
+
+    public void setCity(String city) {
+        this.city = city;
+    }
+
+    public String getZipCode() {
+        return zipCode;
+    }
+
+    public void setZipCode(String zipCode) {
+        this.zipCode = zipCode;
     }
 }
