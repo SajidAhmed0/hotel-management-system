@@ -16,7 +16,7 @@ public class Image {
 
     @JsonIgnore
     @ManyToOne(
-            cascade = CascadeType.ALL
+//            cascade = CascadeType.ALL
     )
     @JoinColumn(
             name = "hotel_id",
