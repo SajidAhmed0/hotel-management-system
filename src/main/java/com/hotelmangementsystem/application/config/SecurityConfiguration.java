@@ -36,7 +36,6 @@ public class SecurityConfiguration {
                 .authorizeHttpRequests(request -> request.requestMatchers("/auth/**")
                         .permitAll()
                         .requestMatchers("/searches/**").permitAll()
-                        .requestMatchers("/**").hasAuthority(Role.ADMIN.name())
                         .requestMatchers("/bookings/**").hasAuthority(Role.USER.name())
                         .requestMatchers("/passengers/**").hasAuthority(Role.USER.name())
                         .requestMatchers("/payments/**").hasAuthority(Role.USER.name())
@@ -44,7 +43,8 @@ public class SecurityConfiguration {
                         .requestMatchers("/bookedsupplements/**").hasAuthority(Role.USER.name())
                         .requestMatchers("/bookeddiscounts/**").hasAuthority(Role.USER.name())
                         .requestMatchers("/users/**").hasAuthority(Role.USER.name())
-                        .requestMatchers("/roomtypes/**/bookings/**").hasAuthority(Role.USER.name())
+                        .requestMatchers("/roomtypes/**").hasAuthority(Role.USER.name())
+                        .requestMatchers("/**").hasAuthority(Role.ADMIN.name())
                         .anyRequest().authenticated())
                 .sessionManagement(manager -> manager.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
                 .authenticationProvider(authenticationProvider()).addFilterBefore(
