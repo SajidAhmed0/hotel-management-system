@@ -260,8 +260,11 @@ public class SearchServiceImpl implements SearchService {
                                 logger.info("pricing: " + roomTypePricing.getPrice());
                                 if(roomTypePricing != null){
                                     Integer avialableRooms = roomTypePricing.getNoOfRooms() - bookedRoomCount;
-                                    RoomTypeWithPricing roomTypeWithPricing = new RoomTypeWithPricing(roomType, roomTypePricing, avialableRooms);
-                                    roomTypeWithPricings.add(roomTypeWithPricing);
+                                    if(avialableRooms >= noOfRooms){
+                                        RoomTypeWithPricing roomTypeWithPricing = new RoomTypeWithPricing(roomType, roomTypePricing, avialableRooms);
+                                        roomTypeWithPricings.add(roomTypeWithPricing);
+                                    }
+
                                 }
                             }
                             List<Supplement> supplements = seasonSupplementPricingService.getAllSupplementsOfSeasonInContract(season.getId(), contract.getId());
