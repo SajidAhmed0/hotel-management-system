@@ -3,11 +3,14 @@ package com.hotelmangementsystem.application.service;
 import com.hotelmangementsystem.application.entity.Booking;
 import com.hotelmangementsystem.application.entity.Payment;
 import com.hotelmangementsystem.application.entity.User;
+import org.springframework.security.core.userdetails.UserDetailsService;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public interface UserService {
+    public UserDetailsService userDetailsService();
+
     public List<User> getAllUsers();
 
     public User getUser(Long id);
