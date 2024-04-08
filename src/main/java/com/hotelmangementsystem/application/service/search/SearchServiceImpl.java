@@ -170,7 +170,9 @@ public class SearchServiceImpl implements SearchService {
                                 if(roomTypePricing != null){
                                     Integer avialableRooms = roomTypePricing.getNoOfRooms() - bookedRoomCount;
                                     logger.info(avialableRooms.toString());
-                                    if(avialableRooms >= noOfRooms && contract.getHotel().getDistrict().equalsIgnoreCase(location)){
+
+//                                    if(avialableRooms >= noOfRooms && contract.getHotel().getDistrict().equalsIgnoreCase(location)){
+                                    if(avialableRooms >= noOfRooms && contract.getHotel().getDistrict().equalsIgnoreCase(location) && noOfAdults <= (noOfRooms * roomTypePricing.getRoomType().getMaxAdult())){
                                         Hotel hotel = contract.getHotel();
                                         Image image = null;
                                         Discount discount = new Discount();
