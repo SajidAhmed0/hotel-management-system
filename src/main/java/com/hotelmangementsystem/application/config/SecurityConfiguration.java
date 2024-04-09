@@ -7,6 +7,8 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.AuthenticationProvider;
 import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
+import org.springframework.security.authorization.AuthorityAuthorizationManager;
+import org.springframework.security.authorization.AuthorizationManagers;
 import org.springframework.security.config.annotation.authentication.configuration.AuthenticationConfiguration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
@@ -16,6 +18,9 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
+
+import static org.springframework.http.HttpMethod.PUT;
+import static org.springframework.security.authorization.AuthorityReactiveAuthorizationManager.hasAuthority;
 
 @Configuration
 @EnableWebSecurity
@@ -43,7 +48,7 @@ public class SecurityConfiguration {
                         .requestMatchers("/bookedsupplements/**").hasAuthority(Role.USER.name())
                         .requestMatchers("/bookeddiscounts/**").hasAuthority(Role.USER.name())
                         .requestMatchers("/users/**").hasAuthority(Role.USER.name())
-                        .requestMatchers("/roomtypes/**").hasAuthority(Role.USER.name())
+                        .requestMatchers(PUT, "/roomtypes/*/bookings/*").hasAuthority(Role.USER.name())
                         .requestMatchers("/**").hasAuthority(Role.ADMIN.name())
                         .anyRequest().authenticated())
                 .sessionManagement(manager -> manager.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
