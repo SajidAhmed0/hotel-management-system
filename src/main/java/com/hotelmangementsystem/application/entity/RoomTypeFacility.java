@@ -16,7 +16,7 @@ public class RoomTypeFacility {
 
     @JsonIgnore
     @ManyToOne(
-            cascade = CascadeType.ALL
+//            cascade = CascadeType.ALL
     )
     @JoinColumn(
             name = "roomtype_id",

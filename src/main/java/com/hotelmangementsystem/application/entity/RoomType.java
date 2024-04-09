@@ -23,8 +23,8 @@ public class RoomType {
     private String description;
 
     @OneToMany(
-            mappedBy = "roomType",
-            orphanRemoval = true
+            mappedBy = "roomType"
+//            orphanRemoval = true
     )
     private List<RoomTypeFacility> roomTypeFacilities = new ArrayList<>();
 

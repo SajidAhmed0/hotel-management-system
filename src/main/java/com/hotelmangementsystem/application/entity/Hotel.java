@@ -23,15 +23,15 @@ public class Hotel {
 
     //TODO: create facility class
     @OneToMany(
-            mappedBy = "hotel",
-            orphanRemoval = true
+            mappedBy = "hotel"
+//            orphanRemoval = true
     )
     private List<Facility> facilities = new ArrayList<>();
 
     //TODO: create image class
     @OneToMany(
-            mappedBy = "hotel",
-            orphanRemoval = true
+            mappedBy = "hotel"
+//            orphanRemoval = true
     )
     private List<Image> images = new ArrayList<>();
 
@@ -39,21 +39,21 @@ public class Hotel {
 
 
     @OneToMany(
-            cascade = CascadeType.ALL,
+//            cascade = CascadeType.ALL,
             mappedBy = "hotel"
 //            orphanRemoval = true
     )
     private List<Contract> contracts = new ArrayList<>();
 
     @OneToMany(
-            cascade = CascadeType.ALL,
+//            cascade = CascadeType.ALL,
             mappedBy = "hotel"
 //            orphanRemoval = true
     )
     private List<RoomType> roomTypes = new ArrayList<>();
 
     @OneToMany(
-            cascade = CascadeType.ALL,
+//            cascade = CascadeType.ALL,
             mappedBy = "hotel"
 //            orphanRemoval = true
     )

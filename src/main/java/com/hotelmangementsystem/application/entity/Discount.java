@@ -22,7 +22,7 @@ public class Discount {
 
     @JsonIgnore
     @ManyToOne(
-            cascade = CascadeType.ALL
+//            cascade = CascadeType.ALL
     )
     @JoinColumn(
             name = "contract_id",
