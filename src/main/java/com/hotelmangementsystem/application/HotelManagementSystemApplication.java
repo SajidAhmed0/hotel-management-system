@@ -3,6 +3,8 @@ package com.hotelmangementsystem.application;
 import com.hotelmangementsystem.application.entity.Role;
 import com.hotelmangementsystem.application.entity.User;
 import com.hotelmangementsystem.application.repository.UserRepository;
+import io.swagger.v3.oas.annotations.OpenAPIDefinition;
+import io.swagger.v3.oas.annotations.info.Info;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
@@ -10,6 +12,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
 @SpringBootApplication
+@OpenAPIDefinition(info = @Info(title = "HMS APIS", version = "1.0", description = "Hotel Management System Apis."))
 public class HotelManagementSystemApplication implements CommandLineRunner {
 
 	@Autowired

@@ -41,6 +41,7 @@ public class SecurityConfiguration {
                 .authorizeHttpRequests(request -> request.requestMatchers("/auth/**")
                         .permitAll()
                         .requestMatchers("/searches/**").permitAll()
+                        .requestMatchers(AW).permitAll()
                         .requestMatchers("/bookings/**").hasAuthority(Role.USER.name())
                         .requestMatchers("/passengers/**").hasAuthority(Role.USER.name())
                         .requestMatchers("/payments/**").hasAuthority(Role.USER.name())
@@ -57,6 +58,10 @@ public class SecurityConfiguration {
                 );
         return http.build();
     }
+
+    private static final String[] AW ={
+        "/api/v1/auth/**", "/v3/api-docs/**", "/v3/api-docs.yaml", "/swagger-ui/**", "/swagger-ui.html"
+    };
 
     @Bean
     public AuthenticationProvider authenticationProvider(){
