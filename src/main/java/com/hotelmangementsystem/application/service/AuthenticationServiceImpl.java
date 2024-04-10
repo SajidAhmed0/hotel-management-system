@@ -11,6 +11,8 @@ import org.springframework.security.authentication.UsernamePasswordAuthenticatio
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import java.util.Optional;
+
 @Service
 public class AuthenticationServiceImpl implements AuthenticationService {
 
@@ -30,6 +32,11 @@ public class AuthenticationServiceImpl implements AuthenticationService {
     }
 
     public User signup(SignUpRequest signUpRequest){
+
+        Optional<User> userByEmail = userRepository.findUserByEmail(signUpRequest.getEmail());
+        if(userByEmail.isPresent()){
+            throw new IllegalStateException("Email exists");
+        }
         User user = new User();
 
         user.setId(signUpRequest.getId());
