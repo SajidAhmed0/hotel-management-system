@@ -406,11 +406,19 @@ public class SearchServiceImpl implements SearchService {
 
         RoomType roomType = roomTypeService.getRoomType(roomTypeId);
         logger.info(roomType.getName());
+//        List<Booking> bookings = roomType.getBookings().stream().filter(booking ->
+//                (ci.after(booking.getCheckInDate()) && ci.before(booking.getCheckOutDate())) || (co.before(booking.getCheckOutDate()) && co.after(booking.getCheckInDate()))
+//                || ci.equals(booking.getCheckOutDate()) || ci.equals(booking.getCheckInDate())
+//                || co.equals(booking.getCheckOutDate()) || co.equals(booking.getCheckInDate())).collect(Collectors.toList());
+        LocalDate checkInDateMinusOne = ci.toLocalDate().minusDays(1);
+        LocalDate checkOutDatePlusOne = co.toLocalDate().plusDays(1);
         List<Booking> bookings = roomType.getBookings().stream().filter(booking ->
-                (ci.after(booking.getCheckInDate()) && ci.before(booking.getCheckOutDate())) || (co.before(booking.getCheckOutDate()) && co.after(booking.getCheckInDate()))
-                || ci.equals(booking.getCheckOutDate()) || ci.equals(booking.getCheckInDate())
-                || co.equals(booking.getCheckOutDate()) || co.equals(booking.getCheckInDate())).collect(Collectors.toList());
+                (checkInDateMinusOne.isBefore(booking.getCheckInDate().toLocalDate()) && checkOutDatePlusOne.isAfter(booking.getCheckInDate().toLocalDate())) ||
+                        checkInDateMinusOne.isBefore(booking.getCheckOutDate().toLocalDate()) && checkOutDatePlusOne.isAfter(booking.getCheckOutDate().toLocalDate()) ||
+                        booking.getCheckInDate().toLocalDate().minusDays(1).isBefore(ci.toLocalDate()) && booking.getCheckOutDate().toLocalDate().isAfter(ci.toLocalDate()) ||
+                        booking.getCheckInDate().toLocalDate().minusDays(1).isBefore(co.toLocalDate()) && booking.getCheckOutDate().toLocalDate().isAfter(co.toLocalDate())
 
+                ).collect(Collectors.toList());
 
 
 
